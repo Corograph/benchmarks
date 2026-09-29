@@ -1,3 +1,21 @@
 User-agent: *
 Allow: /
+
+# AI crawlers and fetchers are welcome: the site ships /llms.txt, /llms-full.txt
+# and /files/<repository path> specifically for them.
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://benchmarks.corograph.com/sitemap-index.xml
