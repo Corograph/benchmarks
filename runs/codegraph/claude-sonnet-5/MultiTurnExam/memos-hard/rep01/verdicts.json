@@ -1,0 +1,338 @@
+{
+  "score": {
+    "adjudications": [],
+    "by_difficulty": {
+      "4": 17
+    },
+    "denominator": 20,
+    "scored_at": "2026-08-07T00:07:33Z",
+    "scorer_era": "tabench-1.1",
+    "tier_census": {
+      "T2": 20
+    },
+    "total": 17
+  },
+  "verdicts": [
+    {
+      "at": "2026-08-06T20:43:30Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h01",
+      "reason": "Correct component, 12h schedule, wiring site with valid citations; extra detail correct.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T20:46:57Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h02",
+      "reason": "Names Post/webhook.go and full layered protection (safeDialContext, isReservedIP, ValidateURL) correctly.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T20:50:30Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h03",
+      "reason": "Correct abstraction (internal/idp) and only implementation (internal/idp/oauth2) identified accurately.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T20:55:52Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h04",
+      "reason": "No answer with single-caller and import-only-in-db.go evidence matches accepted variant A.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:02:43Z",
+      "facets": {
+        "extra_correct_info": true,
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h05",
+      "reason": "No-FK claim lacks shown schema/migration citation, per strict rubric boundary.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:07:45Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h06",
+      "reason": "Four roster handlers correctly named; convergence webhook.Post with role and PostAsync relation stated.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:12:38Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h07",
+      "reason": "Full chain plus decode step named (parseDataURI) with correct data-URI mechanism.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:16:16Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h08",
+      "reason": "Both declarers listed correctly, s3presign YES with callers, memopayload NO with rationale.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T23:50:17Z",
+      "facets": {
+        "erroneous_assertion": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h09",
+      "reason": "Count 6 misses both interface declarations (store.Driver, cache.Interface)",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T23:59:07Z",
+      "facets": {
+        "erroneous_assertion": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h10",
+      "reason": "NewEngine is not among accepted symbols (addArg/DefaultEngine/GenUUID).",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:30:57Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h11",
+      "reason": "Correct ranking User\u003eMemo with consistent package-grain counts and named packages.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:34:35Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h12",
+      "reason": "Correct method sqlite.DB.CreateMemo with full determination chain via default driver wiring.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:38:24Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h13",
+      "reason": "All three slots correct: impl, constructor, and all three holders listed accurately.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-07T00:07:33Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h14",
+      "reason": "Correct site, triggers, dormant-runner note, and accurate Tags+Property extraction detail.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:52:01Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h15",
+      "reason": "Four of seven known sites correctly identified with files, one harmless extra, no fabrication.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T22:01:00Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r01",
+      "reason": "Premise rejected, mechanism cited, TTL correctly stated as 10 min, sweep as 5 min.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T22:04:45Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r02",
+      "reason": "Correctly states none exists, cites middleware roster and distinguishes concurrency caps from rate limiting.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T22:10:26Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r03",
+      "reason": "Correctly states no cleanup job exists, scheduler uncalled, only s3presign ticker runs.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T22:17:52Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r04",
+      "reason": "Rejects both brokers, cites channel declaration, capacity, init() goroutines, non-blocking send.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T22:21:51Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r05",
+      "reason": "Correct premise correction plus proto location and both serving paths named accurately.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+[{"type":"agentConversationTurn","turn":{"steps":[{"type":"assistantMessage","message":{"text":"r04.\nThe premise is incorrect: webhook workers consume neither NATS nor RabbitMQ. They read an in-process buffered Go channel, `asyncPostQueue`, declared in `internal/webhook/webhook.go:39` and consumed by four goroutines initialized in `internal/webhook/webhook.go:42-54`."}}]}}]

@@ -1,0 +1,335 @@
+{
+  "score": {
+    "adjudications": [],
+    "by_difficulty": {
+      "4": 14
+    },
+    "denominator": 20,
+    "scored_at": "2026-09-02T13:22:55Z",
+    "scorer_era": "tabench-1.1",
+    "tier_census": {
+      "T2": 20
+    },
+    "total": 14
+  },
+  "verdicts": [
+    {
+      "at": "2026-09-02T13:15:24Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h01",
+      "reason": "Correct component, schedule, and wiring site within tolerance range.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:15:39Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h02",
+      "reason": "Names Post as delivery function and validate.go/webhook.go SSRF protection, matching gold mechanism.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:15:53Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h03",
+      "reason": "Correct abstraction and implementation packages with file references match gold exactly.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:16:22Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h04",
+      "reason": "States No with single-caller evidence (db.go calls mysql.NewDB) matching variant A.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:16:39Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h05",
+      "reason": "Driver-layer explicit code, two deletion passes, and evidenced no-FK schema check present.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:16:59Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h06",
+      "reason": "All six handlers correct but PostAsync named with no role stated, per ruling.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:17:19Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h07",
+      "reason": "Chain reaches avatar_url column but omits decode step (parseDataURI) turning data-URI into bytes.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:17:35Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h08",
+      "reason": "Both declarers listed with correct YES/NO statuses and correct callers/paths.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:17:57Z",
+      "facets": {},
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h09",
+      "reason": "Missing Cache.Close and Driver.Close invoked paths, no interface composition detail, no callers cited properly",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:18:23Z",
+      "facets": {
+        "erroneous_assertion": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h10",
+      "reason": "Wrong symbol; CompileToStatement is explicitly listed as a failing symbol.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:18:37Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h11",
+      "reason": "Correct ranking User then Memo, plausible internally consistent counts, matches minimal-form exemplar.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:18:53Z",
+      "facets": {},
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h12",
+      "reason": "Correct method plus determination via default driver, NewDBDriver, dispatch, matches gold shape.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:19:07Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h13",
+      "reason": "Correct impl, constructor, and all three holders identified with file locations.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:19:40Z",
+      "facets": {
+        "erroneous_assertion": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h14",
+      "reason": "Claims RunOnce is a trigger and fabricates title/H1 extraction not in payload",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:20:39Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h15",
+      "reason": "Includes ≥5 of seven known sites (memo_service.go, attachment_service.go, sse_hub.go, fileserver.go, rss.go) plus extras.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:21:12Z",
+      "facets": {
+        "extra_correct_info": true,
+        "missing_minor": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r01",
+      "reason": "Premise correctly rejected, in-memory mechanism identified, TTL correctly stated as 10 minutes.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:21:28Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r02",
+      "reason": "Correctly rejects premise, cites actual registered middleware as evidence.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:22:02Z",
+      "facets": {
+        "missing_minor": true,
+        "erroneous_assertion": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r03",
+      "reason": "Cites fabricated 2:00 AM example time from docs, context-poisoning signature the guide flags as failing.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:22:29Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r04",
+      "reason": "Rejects both brokers, names channel and workers, correct mechanism.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-09-02T13:22:55Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r05",
+      "reason": "Correct premise rejection, proto location, and both serving paths named generally.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    }
+  ]
+}

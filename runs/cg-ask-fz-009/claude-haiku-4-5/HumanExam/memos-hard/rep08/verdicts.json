@@ -1,0 +1,335 @@
+{
+  "score": {
+    "adjudications": [],
+    "by_difficulty": {
+      "4": 11
+    },
+    "denominator": 20,
+    "scored_at": "2026-08-07T00:13:11Z",
+    "scorer_era": "tabench-1.1",
+    "tier_census": {
+      "T2": 20
+    },
+    "total": 11
+  },
+  "verdicts": [
+    {
+      "at": "2026-08-06T20:45:14Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h01",
+      "reason": "Component, 12h schedule, and wiring site (server.go:163, startBackgroundRunners) all correct.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T20:48:48Z",
+      "facets": {
+        "erroneous_assertion": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h02",
+      "reason": "Correct delivery (Post) and real mechanism named, though safeDialContext file misattributed to validate.go.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T20:52:18Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h03",
+      "reason": "Correct abstraction and implementation packages match gold exactly.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T20:59:43Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h04",
+      "reason": "No with single-caller evidence at db.go:22 via factory switch, matches variant A.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:05:12Z",
+      "facets": {
+        "erroneous_assertion": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h05",
+      "reason": "Wrong: claims not deleted at all, ignoring driver-layer explicit deletion code.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:10:25Z",
+      "facets": {
+        "erroneous_assertion": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h06",
+      "reason": "Only 2 valid roster handlers; third item is dispatch function, not a handler.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:14:31Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h07",
+      "reason": "Omits decode step; chain stops at fetching user row, no data-URI/parseDataURI mechanism.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:17:58Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h08",
+      "reason": "Both declarers listed, correct YES/NO status, correct caller for s3presign.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T23:55:47Z",
+      "facets": {},
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h09",
+      "reason": "Count and composition correct but omits cache.Cache.Close and store.Driver.Close as invoked declarers.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-07T00:02:42Z",
+      "facets": {
+        "erroneous_assertion": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h10",
+      "reason": "store.User is not in accepted symbol set; also appears to be a struct, wrong path.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:32:47Z",
+      "facets": {
+        "erroneous_assertion": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h11",
+      "reason": "Inverted ranking (Memo first) and internally inconsistent: User count higher than Memo but ranked second.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:36:23Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h12",
+      "reason": "Confusing but final statement correctly identifies sqlite.DB.CreateMemo with valid determination chain.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:40:30Z",
+      "facets": {},
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h13",
+      "reason": "Missing memopayload.Runner holder; only two of three required holders listed.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-07T00:13:11Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h14",
+      "reason": "Site and triggers correct but omits Tags extraction, a core Payload component from gold.",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T21:58:01Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "h15",
+      "reason": "Lists 3 of seven known sites (checkMemoReadAccess, both canViewerAccessMemo) meeting threshold.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T22:02:46Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r01",
+      "reason": "Premise corrected, in-memory cache noted, correct 10-min TTL and 5-min cleanup stated.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T22:06:45Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r02",
+      "reason": "Correctly rejects false premise with search evidence confirming no rate limiting exists.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T22:15:30Z",
+      "facets": {
+        "missing_minor": true,
+        "erroneous_assertion": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r03",
+      "reason": "Fabricates cache.go cleanupLoop background job not in actual codebase, contradicting gold's s3presign-only claim",
+      "result": "fail",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T22:19:43Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r04",
+      "reason": "Rejects both brokers, correctly identifies in-process channel with 4 goroutines",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T22:24:26Z",
+      "facets": {
+        "extra_correct_info": true,
+        "missing_minor": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "r05",
+      "reason": "Correct premise rejection; names proto/api/v1 source and REST/gRPC serving, but omits specific gateway/Connect handler files.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    }
+  ]
+}

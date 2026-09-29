@@ -1,0 +1,416 @@
+{
+  "score": {
+    "adjudications": [],
+    "by_difficulty": {
+      "1": 10,
+      "2": 10,
+      "3": 10
+    },
+    "denominator": 30,
+    "scored_at": "2026-08-06T17:06:45Z",
+    "scorer_era": "tabench-1.1",
+    "tier_census": {
+      "T1": 12,
+      "T2": 18
+    },
+    "total": 30
+  },
+  "verdicts": [
+    {
+      "at": "2026-08-06T13:30:46Z",
+      "gold_rev": 1,
+      "qid": "q01",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T13:32:53Z",
+      "gold_rev": 1,
+      "qid": "q02",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T14:59:10Z",
+      "gold_rev": 1,
+      "qid": "q03",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T15:09:34Z",
+      "gold_rev": 1,
+      "qid": "q04",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T15:32:39Z",
+      "gold_rev": 1,
+      "qid": "q05",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T15:38:07Z",
+      "gold_rev": 1,
+      "qid": "q06",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T15:39:17Z",
+      "gold_rev": 1,
+      "qid": "q07",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T15:40:07Z",
+      "gold_rev": 1,
+      "qid": "q08",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T15:41:20Z",
+      "gold_rev": 1,
+      "qid": "q09",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T15:41:57Z",
+      "gold_rev": 1,
+      "qid": "q10",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T15:44:48Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q11",
+      "reason": "Correct direct caller identified, indirect callers properly labeled as indirect.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T15:53:06Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q12",
+      "reason": "All six hops correct: hook, client, proto rpc, handler, store, sqlite dialect.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T15:59:49Z",
+      "facets": {
+        "missing_minor": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q13",
+      "reason": "Includes api/v1, all 3 dialects, memopayload, plus rss and email; no fabrications.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:08:02Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q14",
+      "reason": "All five RPCs listed with correct implementing file and proto reference.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:12:22Z",
+      "gold_rev": 1,
+      "qid": "q15",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T16:13:47Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q16",
+      "reason": "Correctly lists memo_relation (both directions) and attachment deletions with proper store citation.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:17:38Z",
+      "gold_rev": 1,
+      "qid": "q17",
+      "reason": "mechanical match",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T1"
+    },
+    {
+      "at": "2026-08-06T16:18:25Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q18",
+      "reason": "All three entry files correct; factory NewDBDriver in db.go matches gold exactly.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:20:32Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q19",
+      "reason": "Both protocols with correct registration files and anchors matching gold exactly.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:23:50Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q20",
+      "reason": "SSE, correct hub file, six of eight roster sites with accurate labeling, no fabrication.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:27:38Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q21",
+      "reason": "All twelve sites present, zero misattributions, distractors correctly excluded.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:36:16Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q22",
+      "reason": "All three slots correct: dispatcher file, internal/webhook delivery, HMAC-SHA256 signing detail.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:39:51Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 2,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q23",
+      "reason": "All four layers correctly identified, matching gold answer exactly.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:43:03Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q24",
+      "reason": "All six hops correct, matches primary chain exemplar exactly.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:47:20Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q25",
+      "reason": "Matches gold: CEL engine in internal/filter, dialect-specific rendering via AppendConditions.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:50:30Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q26",
+      "reason": "Correctly lists memo, memo_relation, attachment; explicitly excludes reaction.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:52:49Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q27",
+      "reason": "Correct mechanism (go:embed) and exact file matching gold answer.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T16:54:52Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q28",
+      "reason": "s3presign-only, both traps explicitly disarmed, matches full-credit exemplar shape.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T17:01:55Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q29",
+      "reason": "All three slots correct: connect.ts interceptor, JWT access/refresh + PAT extra, server/auth.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    },
+    {
+      "at": "2026-08-06T17:06:45Z",
+      "facets": {
+        "extra_correct_info": true
+      },
+      "gold_rev": 1,
+      "judge": {
+        "model": "claude-sonnet-5",
+        "transport": "cc_oauth"
+      },
+      "qid": "q30",
+      "reason": "All four dispatchers correct; correctly identifies PostAsync as true convergence for all paths.",
+      "result": "pass",
+      "scorer_era": "tabench-1.1",
+      "tier": "T2"
+    }
+  ]
+}

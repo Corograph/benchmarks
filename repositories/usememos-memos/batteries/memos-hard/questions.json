@@ -1,0 +1,202 @@
+[
+  {
+    "qid": "h01",
+    "position": 1,
+    "prompt": "Something in the server keeps links to externally-stored attachment content from going stale. What component does this, on what schedule, and where is it wired into server startup?",
+    "output_structure": "component — schedule — wiring site (path:line)",
+    "difficulty": 4,
+    "categories": [
+      "nameless-entry"
+    ]
+  },
+  {
+    "qid": "h02",
+    "position": 2,
+    "prompt": "The server can notify external systems over HTTP when content changes. Where does the outbound delivery actually execute, and what protects it from being pointed at internal network addresses?",
+    "output_structure": "delivery function — path; protection mechanism — path",
+    "difficulty": 4,
+    "categories": [
+      "nameless-entry"
+    ]
+  },
+  {
+    "qid": "h03",
+    "position": 3,
+    "prompt": "Users can authenticate through third-party identity providers. Which package defines the provider abstraction and which concrete protocol implementation ships?",
+    "output_structure": "abstraction package; implementation package",
+    "difficulty": 4,
+    "categories": [
+      "nameless-entry"
+    ]
+  },
+  {
+    "qid": "h04",
+    "position": 4,
+    "prompt": "Outside the driver-selection factory, is the MySQL driver ever constructed directly anywhere in the codebase? State your evidence.",
+    "output_structure": "yes/no; evidence",
+    "difficulty": 4,
+    "categories": [
+      "absence-proof"
+    ]
+  },
+  {
+    "qid": "h05",
+    "position": 5,
+    "prompt": "When a user is deleted, are their emoji reactions removed by explicit Go code, by a database-level rule, or not at all? Show what you checked.",
+    "output_structure": "mechanism; evidence locations",
+    "difficulty": 4,
+    "categories": [
+      "absence-proof"
+    ]
+  },
+  {
+    "qid": "h06",
+    "position": 6,
+    "prompt": "Which RPC handler methods can transitively cause an outbound HTTP request to a user-configured URL? Name at least three, and the single function where those paths converge before delivery.",
+    "output_structure": "handlers (≥3); convergence function — path",
+    "difficulty": 4,
+    "categories": [
+      "multi-hop"
+    ]
+  },
+  {
+    "qid": "h07",
+    "position": 7,
+    "prompt": "Trace how a browser's request for another user's profile image reaches stored data: the serving handler and each hop to the data layer, with files.",
+    "output_structure": "hop per line: symbol — path",
+    "difficulty": 4,
+    "categories": [
+      "multi-hop"
+    ]
+  },
+  {
+    "qid": "h08",
+    "position": 8,
+    "prompt": "More than one type declares a method named RunOnce. List every declarer, and state which declarations are invoked from production (non-test) code, with the caller.",
+    "output_structure": "declarer — invoked? — caller(path)",
+    "difficulty": 4,
+    "categories": [
+      "collision"
+    ]
+  },
+  {
+    "qid": "h09",
+    "position": 9,
+    "prompt": "How many distinct declarations of a method named Close exist across the backend, and which types' Close is actually called by non-test server code? Cite callers.",
+    "output_structure": "count; invoked declarers with caller paths",
+    "difficulty": 4,
+    "categories": [
+      "collision"
+    ]
+  },
+  {
+    "qid": "h10",
+    "position": 10,
+    "prompt": "Which single function or method declared under internal/ has the highest inbound-call count (fan-in), and roughly how many callers?",
+    "output_structure": "symbol — path — approx fan-in",
+    "difficulty": 4,
+    "categories": [
+      "aggregation"
+    ]
+  },
+  {
+    "qid": "h11",
+    "position": 11,
+    "prompt": "Of the persistent entity types defined in the data layer, which one is referenced from the largest number of packages outside that layer? Rank the top two.",
+    "output_structure": "1st: Type; 2nd: Type (with rough package counts)",
+    "difficulty": 4,
+    "categories": [
+      "aggregation"
+    ]
+  },
+  {
+    "qid": "h12",
+    "position": 12,
+    "prompt": "With a default installation (no database flags), which concrete code executes the SQL INSERT when a memo is saved — and how did you determine which of the multiple candidates actually runs?",
+    "output_structure": "concrete method — path; determination method",
+    "difficulty": 4,
+    "categories": [
+      "dispatch"
+    ]
+  },
+  {
+    "qid": "h13",
+    "position": 13,
+    "prompt": "Markdown processing sits behind an interface. Which concrete implementation(s) execute at runtime, who constructs them, and which components hold the interface?",
+    "output_structure": "impl — construction — holders",
+    "difficulty": 4,
+    "categories": [
+      "dispatch"
+    ]
+  },
+  {
+    "qid": "h14",
+    "position": 14,
+    "prompt": "Each memo carries derived metadata computed from its content rather than set by the user (used for lists/previews). Where is it computed, which operations trigger recomputation, and what does the computation extract?",
+    "output_structure": "computation site; triggers; extracted properties",
+    "difficulty": 4,
+    "categories": [
+      "field-grain"
+    ]
+  },
+  {
+    "qid": "h15",
+    "position": 15,
+    "prompt": "Memo visibility (who may view a memo) is enforced in more than one server surface. List every distinct enforcement site (there are at least three) with files.",
+    "output_structure": "enforcement site — path, one per line",
+    "difficulty": 4,
+    "categories": [
+      "field-grain"
+    ]
+  },
+  {
+    "qid": "r01",
+    "position": 16,
+    "prompt": "Where is the Redis connection for the cache layer configured, and what TTL applies to user entries?",
+    "output_structure": "premise correction + actual mechanism",
+    "difficulty": 4,
+    "categories": [
+      "reality-check"
+    ]
+  },
+  {
+    "qid": "r02",
+    "position": 17,
+    "prompt": "Where is the per-user API rate-limiting middleware registered, and what are its request limits?",
+    "output_structure": "premise correction",
+    "difficulty": 4,
+    "categories": [
+      "reality-check"
+    ]
+  },
+  {
+    "qid": "r03",
+    "position": 18,
+    "prompt": "What time is the nightly database-cleanup job scheduled to run in the cron scheduler?",
+    "output_structure": "premise correction",
+    "difficulty": 4,
+    "categories": [
+      "reality-check"
+    ]
+  },
+  {
+    "qid": "r04",
+    "position": 19,
+    "prompt": "Which message broker do the webhook delivery workers consume from — NATS or RabbitMQ — and where is the queue declared?",
+    "output_structure": "premise correction + actual mechanism",
+    "difficulty": 4,
+    "categories": [
+      "reality-check"
+    ]
+  },
+  {
+    "qid": "r05",
+    "position": 20,
+    "prompt": "Where is the GraphQL schema for the public API defined?",
+    "output_structure": "premise correction + actual API surface",
+    "difficulty": 4,
+    "categories": [
+      "reality-check"
+    ]
+  }
+]

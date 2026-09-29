@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro'
+import FigureIsland from '../../charts/FigureIsland'
+import { COMPARISONS } from '../../lib/comparisons'
+import { FIGURES } from '../../lib/figures'
+import { loadRuns, loadManifest, loadPerQuestion, loadQuestions, loadAdoption, latestEpoch, epochName } from '../../lib/data'
+import { packRows } from '../../lib/measures'
+import { buildHeat, packHeat, HEAT_ROSTERS } from '../../lib/heat'
+import { armInfo, armOrder, modelLabel, modelOrder, vendorOf, EXAMS } from '../../lib/roster'
+import EarlyAccessCTA from '../../components/EarlyAccessCTA.astro'
+
+export function getStaticPaths() {
+  return COMPARISONS.map(c => ({ params: { slug: c.slug } }))
+}
+const { slug } = Astro.params
+const cmp = COMPARISONS.find(c => c.slug === slug)!
+const epoch = latestEpoch()
+const manifest = loadManifest(epoch)
+const runs = loadRuns(epoch).filter(r => cmp.arms(r.arm) && cmp.models(r.model))
+const arms = [...new Set(runs.map(r => r.arm))].sort(armOrder).map(armInfo)
+const models = [...new Set(runs.filter(r => r.validity_ok && r.score != null).map(r => r.model))].sort(modelOrder)
+const figs = cmp.figures.map(s => FIGURES.find(f => f.slug === s)!)
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+// Figure 16 over THIS comparison's arms and models only
+const adoption = figs.some(f => f.kind === 'lines') ? loadAdoption(epoch).rows.filter(r => cmp.arms(r.arm) && cmp.models(r.model)) : undefined
+// the roster table: valid scored runs per arm × model in this comparison
+const scored = runs.filter(r => r.validity_ok && r.score != null)
+const count = (arm: string, model: string) => scored.filter(r => r.arm === arm && r.model === model).length
+const armTotal = (arm: string) => scored.filter(r => r.arm === arm).length
+// the category grid over THIS comparison's arms and models only
+let heat: ReturnType<typeof packHeat>[] | undefined
+if (figs.some(f => f.kind === 'heatmap')) {
+  const pq = loadPerQuestion(epoch).filter(r => cmp.arms(r.arm) && cmp.models(r.model))
+  const repo = Object.keys(manifest.repositories)[0]
+  const qs: Record<string, any[]> = {}
+  for (const b of manifest.repositories[repo].batteries) qs[b.battery_key] = loadQuestions(repo, b.battery_key)
+  const heatModels = ['all', ...HEAT_ROSTERS.filter(v => pq.some(r => vendorOf(r.model) === v)), ...new Set(pq.map(r => r.model))]
+  heat = []
+  for (const e of EXAMS) for (const b of ['memos-hard', 'memos', 'both'] as const) for (const m of heatModels) heat.push(packHeat(buildHeat(pq, qs, e, b, m)))
+}
+---
+<Base title={cmp.title} description={cmp.intro[0]}>
+  <div class="prose">
+    <div class="kicker">Comparison · {epochName(manifest.epoch.id)}</div>
+    <h1>{cmp.title}</h1>
+    {cmp.intro.map(p => <p class="lede">{p}</p>)}
+    <table class="roster">
+      <thead>
+        <tr>
+          <th>arm</th>
+          <th>harness</th>
+          <th>codebase index</th>
+          {models.map(m => <th class="num">{modelLabel(m)}</th>)}
+          <th class="num">runs</th>
+        </tr>
+      </thead>
+      <tbody>
+        {arms.map(a => (
+          <tr>
+            <td><span class="arm-name"><span class="swatch" style={`background:${a.color}`} />{a.short}</span></td>
+            <td>{a.harness}</td>
+            <td class={a.index === 'none' ? 'muted' : ''}>{a.index}</td>
+            {models.map(m => { const n = count(a.id, m); return <td class={'num' + (n ? '' : ' muted')}>{n || '—'}</td> })}
+            <td class="num">{armTotal(a.id)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="muted roster-note">
+      Cells are valid scored runs at that model; {scored.length} in all. The indexing tools are not harnesses: each is installed on Claude Code, which stays the harness.
+      Figures open with one column per arm (pooled models, each protocol × battery × model cell one vote); the Columns control switches every figure to one column per model
+      for like-for-like reads at a fixed model, and the choice is remembered site-wide. The arm and model set is fixed to this comparison.
+      {cmp.note && <span> {cmp.note}</span>}
+    </p>
+  </div>
+
+  {figs.map(fig => (
+    <section class="cmp-figure">
+      <div class="prose">
+        <h2 id={fig.slug}><span class="fig-no-inline">Figure {fig.number}</span> {fig.title}</h2>
+      </div>
+      <FigureIsland client:load fig={fig} data={fig.kind === 'heatmap' || fig.kind === 'lines' ? [] : packRows(runs, fig.measure.key)} heat={fig.kind === 'heatmap' ? heat : undefined} adoption={fig.kind === 'lines' ? adoption : undefined} controls table />
+      <div class="prose">
+        <p class="caption">{fig.caption[0]} {fig.caption[1]} <a href={`${base}/results/${fig.slug}/`}>Full figure, definition and disclosures →</a></p>
+        {fig.slug === 'cost-per-correct' && <EarlyAccessCTA variant="inline" page={`compare/${cmp.slug}`} />}
+      </div>
+    </section>
+  ))}
+</Base>

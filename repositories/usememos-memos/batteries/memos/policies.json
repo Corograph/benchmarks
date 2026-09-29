@@ -1,0 +1,18 @@
+[
+  {
+    "policy_key": "S1",
+    "rule": "Paths src/* and web/src/* are EQUIVALENT everywhere — the frontend IR is extracted at web/ root, so graph arms cite src/connect.ts where file arms cite web/src/connect.ts. Same file, both score. Never fail an answer on this prefix difference."
+  },
+  {
+    "policy_key": "S2",
+    "rule": "Line numbers are EVIDENCE, not scored content. Call-site lines and function-start lines both identify the same caller and both score. Lines matter only where answer_format explicitly says path:line — and even there, either line form of the same declaration passes."
+  },
+  {
+    "policy_key": "S3",
+    "rule": "The wire contract has FOUR renderings: the source .proto file OR any generated twin (*_pb.go / *.connect.go / *_pb.ts). Any passes for a proto/rpc hop IF the service identity is right; naming the source .proto is the full form. (Mirrors h10's self-consistency principle.)"
+  },
+  {
+    "policy_key": "S4",
+    "rule": "Generated wrapper or indirect callers (e.g. ConnectServiceHandler.X delegating to APIV1Service.X) are acceptable WHEN LABELED as wrapper/indirect. Presented-as-direct = the misattribution the scoring already penalizes. Wrapper cited with the real implementation omitted = partial, not full credit."
+  }
+]

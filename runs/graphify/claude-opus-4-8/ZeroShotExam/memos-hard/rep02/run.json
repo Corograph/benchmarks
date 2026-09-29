@@ -1,0 +1,141 @@
+{
+  "economics": {
+    "completed_at": "2026-08-05T21:05:40Z",
+    "cost_basis": "vendor_reported",
+    "cost_reported_usd": 0.732944,
+    "duration_ms": null,
+    "history_replay_delta": null,
+    "llm_calls_main_thread": 10,
+    "llm_calls_recorded": 12,
+    "main_turns": null,
+    "per_question": [
+      {
+        "cost_reported": 0.5782285,
+        "duration_ms": 49124,
+        "main_turns": 5,
+        "qid": "h01",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 141722,
+        "tokens_cache_write": 48423,
+        "tokens_input": 18,
+        "tokens_output": 2205
+      },
+      {
+        "cost_reported": 0.1547155,
+        "duration_ms": 20990,
+        "main_turns": 5,
+        "qid": "h02",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 85871,
+        "tokens_cache_write": 7039,
+        "tokens_input": 1658,
+        "tokens_output": 1324
+      }
+    ],
+    "rate_table_version": null,
+    "started_at": "2026-08-05T20:25:29Z",
+    "token_source": "transcript_all_threads",
+    "tokens_cache_read": 227593,
+    "tokens_cache_write": 55462,
+    "tokens_input": 1676,
+    "tokens_output": 3529,
+    "tool_calls": {
+      "by_class": {
+        "cc_builtin": 12,
+        "subagent": 2
+      },
+      "by_tool": {
+        "Agent": 1,
+        "Bash": 6,
+        "Read": 6,
+        "TaskOutput": 1
+      },
+      "total": 14
+    }
+  },
+  "files": {
+    "answers/h01.md": "b1c5902ee8493232e6b4740b213c9ada4025d308a37d59010dd7960ca9aae418",
+    "answers/h02.md": "363369a91d9cf4ad285267820493ea781936b99451361e7484d7e5a69689f5ce",
+    "transcript/h01/claude-version.txt": "e39fc8236ad0907572f1dfab029c4136283c1af59014019536fab08f484496cc",
+    "transcript/h01/envelope.h01.json": "c555123757fb5c3c938a06b8147c9ce79627bd3c59fa6f3f639e5ab769729989",
+    "transcript/h01/prestage.log": "d256f1f2e557d8944cbad9ceac672a6271c86511156332920c8a49012e26ec04",
+    "transcript/h01/prestage.time.txt": "d6b41a02d9e39ea15439a6f7a1a11fa8e2fab225e7cdf708d347109cd487cfc9",
+    "transcript/h01/prompt.h01.txt": "431cca0b4170a4356d54b36407dedcddad70c4169ed8fd9c8b319460e01d8db8",
+    "transcript/h01/transcripts/56864017-9106-4fe5-8b42-9e13c0995fdf.jsonl": "2c54ffacfde77f610d99d0e66f977aa535787c73057693599b1573dd69c72412",
+    "transcript/h01/transcripts/agent-a350e01e032e58e5c.jsonl": "ea180adf8dc4dc06f3a7a10a4603e93dd638b031c11e750816a8f4a11b7cfaac",
+    "transcript/h02/claude-version.txt": "e39fc8236ad0907572f1dfab029c4136283c1af59014019536fab08f484496cc",
+    "transcript/h02/envelope.h02.json": "5300c6df909dc24ea504a53a01f5a047daf5900254c720e8e0a4bd6be070ff87",
+    "transcript/h02/prestage.log": "d256f1f2e557d8944cbad9ceac672a6271c86511156332920c8a49012e26ec04",
+    "transcript/h02/prestage.time.txt": "493ee21b4059e535b79e4232f7cac2a84457112d6cc7b585584e7f4833ffea6a",
+    "transcript/h02/prompt.h02.txt": "803c7ab722092e57bf1a7d27fa387555dd0b4a36cb01423cb8512e8e19b57a97",
+    "transcript/h02/transcripts/cbf506df-d5aa-46c8-9225-7933304f667a.jsonl": "244c2d9465ce1dac6d578f3c5860e14c206ec9e590b3ad545a500678cddfbc24",
+    "verdicts.json": "df77fe0846ce884ba4fb3ac13a56668d053f30527d943371411ed8c425f45086"
+  },
+  "identity": {
+    "arm": "graphify",
+    "arm_label": "CC+Graphify",
+    "battery": "memos-hard",
+    "commit_sha": "2d01420c23372d5708904ec78e03485edb44d49b",
+    "denominator": 20,
+    "exam": "ZeroShotExam",
+    "exam_epoch": null,
+    "family": "cc_competitor",
+    "model": "claude-opus-4-8",
+    "rep": 2,
+    "repo": "memos",
+    "repo_public": "usememos-memos",
+    "run_key": "ef773dfc921e2e957e945faf5ffc8679|graphify|claude-opus-4-8|ZeroShotExam|ffc82068051276c8ecade67885ff45af|2",
+    "side": "comparison"
+  },
+  "provenance": {
+    "captured_first": "2026-08-05T20:25:29Z",
+    "captured_last": "2026-08-05T21:05:40Z",
+    "cell_records": 2,
+    "docker_image": "bench-graphify:latest@sha256:e6cfefa3a9719bac693e87a1dd120007be0b29d2a23141d5bdedefd3f29f38c4",
+    "exam_queue": "exq-20260805-152807-8620f5",
+    "hostname": "Mini-M4-48GB",
+    "record_shape": "cc_perquestion",
+    "units": 2
+  },
+  "redaction": {
+    "fences": 0,
+    "envelope_lines": 0,
+    "selectors": 0,
+    "macros": 0,
+    "attrs": 0,
+    "names": 0,
+    "paths": 0
+  },
+  "schema_version": "public-run/1",
+  "scoring": {
+    "adjudications": [],
+    "note": "no score — the run is DNF or unscored; never a mean contributor",
+    "total": null
+  },
+  "transcript": {
+    "lane": "docker",
+    "source": "tree",
+    "units": [
+      {
+        "files": 7,
+        "path": "transcript/h01",
+        "unit": "h01"
+      },
+      {
+        "files": 6,
+        "path": "transcript/h02",
+        "unit": "h02"
+      }
+    ]
+  },
+  "validity": {
+    "detail": "missing/failed: h03,h04,h05,h06,h07,h08,h09,h10,h11,h12,h13,h14,h15,r01,r02,r03,r04,r05",
+    "ok": false,
+    "reason": "partial_exam",
+    "status": "captured"
+  }
+}

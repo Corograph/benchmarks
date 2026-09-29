@@ -1,0 +1,75 @@
+You are evaluating a codebase located in the current working directory.
+Answer ALL of the questions listed below about this codebase.
+
+Rules:
+- Answer each question in a numbered list matching the question ids (h01, h02, ...
+  and r01, r02, ...).
+- Cite file paths and line numbers (path:line) for every claim where applicable.
+- Use only the codebase and the tools available to you. You have no web access.
+- If you cannot determine an answer from the available evidence, write exactly
+  "cannot determine" for that question rather than guessing.
+- Follow each question's answer_format when one is given.
+- Keep each answer concise: the facts requested, no essays.
+
+Questions follow.
+---
+
+h01. Something in the server keeps links to externally-stored attachment content from going stale. What component does this, on what schedule, and where is it wired into server startup?
+answer_format: component — schedule — wiring site (path:line)
+
+h02. The server can notify external systems over HTTP when content changes. Where does the outbound delivery actually execute, and what protects it from being pointed at internal network addresses?
+answer_format: delivery function — path; protection mechanism — path
+
+h03. Users can authenticate through third-party identity providers. Which package defines the provider abstraction and which concrete protocol implementation ships?
+answer_format: abstraction package; implementation package
+
+h04. Outside the driver-selection factory, is the MySQL driver ever constructed directly anywhere in the codebase? State your evidence.
+answer_format: yes/no; evidence
+
+h05. When a user is deleted, are their emoji reactions removed by explicit Go code, by a database-level rule, or not at all? Show what you checked.
+answer_format: mechanism; evidence locations
+
+h06. Which RPC handler methods can transitively cause an outbound HTTP request to a user-configured URL? Name at least three, and the single function where those paths converge before delivery.
+answer_format: handlers (≥3); convergence function — path
+
+h07. Trace how a browser's request for another user's profile image reaches stored data: the serving handler and each hop to the data layer, with files.
+answer_format: hop per line: symbol — path
+
+h08. More than one type declares a method named RunOnce. List every declarer, and state which declarations are invoked from production (non-test) code, with the caller.
+answer_format: declarer — invoked? — caller(path)
+
+h09. How many distinct declarations of a method named Close exist across the backend, and which types' Close is actually called by non-test server code? Cite callers.
+answer_format: count; invoked declarers with caller paths
+
+h10. Which single function or method declared under internal/ has the highest inbound-call count (fan-in), and roughly how many callers?
+answer_format: symbol — path — approx fan-in
+
+h11. Of the persistent entity types defined in the data layer, which one is referenced from the largest number of packages outside that layer? Rank the top two.
+answer_format: 1st: Type; 2nd: Type (with rough package counts)
+
+h12. With a default installation (no database flags), which concrete code executes the SQL INSERT when a memo is saved — and how did you determine which of the multiple candidates actually runs?
+answer_format: concrete method — path; determination method
+
+h13. Markdown processing sits behind an interface. Which concrete implementation(s) execute at runtime, who constructs them, and which components hold the interface?
+answer_format: impl — construction — holders
+
+h14. Each memo carries derived metadata computed from its content rather than set by the user (used for lists/previews). Where is it computed, which operations trigger recomputation, and what does the computation extract?
+answer_format: computation site; triggers; extracted properties
+
+h15. Memo visibility (who may view a memo) is enforced in more than one server surface. List every distinct enforcement site (there are at least three) with files.
+answer_format: enforcement site — path, one per line
+
+r01. Where is the Redis connection for the cache layer configured, and what TTL applies to user entries?
+answer_format: premise correction + actual mechanism
+
+r02. Where is the per-user API rate-limiting middleware registered, and what are its request limits?
+answer_format: premise correction
+
+r03. What time is the nightly database-cleanup job scheduled to run in the cron scheduler?
+answer_format: premise correction
+
+r04. Which message broker do the webhook delivery workers consume from — NATS or RabbitMQ — and where is the queue declared?
+answer_format: premise correction + actual mechanism
+
+r05. Where is the GraphQL schema for the public API defined?
+answer_format: premise correction + actual API surface

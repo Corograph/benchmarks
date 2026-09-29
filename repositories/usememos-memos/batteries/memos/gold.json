@@ -1,0 +1,286 @@
+[
+  {
+    "qid": "q01",
+    "gold_rev": 1,
+    "answer_gold": "POST /api/v1/memos",
+    "answer_gold_variants": [
+      "POST /api/v1/memos"
+    ],
+    "facet_guide": "Mechanical token-gold: POST /api/v1/memos (proto/api/v1/memo_service.proto:21-25, google.api.http post binding). Markdown wrapping, trailing proto citations, and stray formatting tokens (leading '**') are all fine — T1 catches most. The one real trap seen in the bank: '/v1/memos' without the '/api' prefix is a DIFFERENT path and fails (the gateway serves under /api/v1). Wrong method (PUT/GET) fails. Connect-protocol paths (/memos.api.v1.MemoService/CreateMemo) are a different surface — not the REST gateway mapping — and fail this question."
+  },
+  {
+    "qid": "q02",
+    "gold_rev": 1,
+    "answer_gold": "sqlite, mysql, postgres",
+    "answer_gold_variants": [
+      "SQLite, MySQL, PostgreSQL (any order)"
+    ],
+    "facet_guide": "Mechanical token-gold: sqlite, mysql, postgres — any order, any casing (SQLite/MySQL/PostgreSQL), with or without the store/migration/{sqlite,mysql,postgres}/ path evidence. 'Postgres' and 'PostgreSQL' are the same answer. FAILS: adding dialects that do not ship (mssql, oracle, mariadb-as-separate), or listing fewer than the three."
+  },
+  {
+    "qid": "q03",
+    "gold_rev": 1,
+    "answer_gold": "DB — store/db/postgres/postgres.go",
+    "answer_gold_variants": [
+      "postgres.DB",
+      "DB struct in store/db/postgres/postgres.go:16"
+    ],
+    "facet_guide": "Answer: the DB struct in store/db/postgres/postgres.go (:16). Acceptable namings: 'DB', 'postgres.DB', '(*DB)' — with the postgres.go path; line number optional. The ONLY observed failure class is wrong-dialect substitution: sqlite.go or mysql.go with their (identically-named) DB structs — all three dialects name their struct DB, so the FILE is the discriminating fact. Wrong file = fail regardless of the struct name being 'DB'. Sandbox path prefixes fine."
+  },
+  {
+    "qid": "q04",
+    "gold_rev": 1,
+    "answer_gold": "APIV1Service.SignIn — server/router/api/v1/auth_service.go",
+    "answer_gold_variants": [
+      "SignIn in auth_service.go (line ~51)",
+      "S4 (2026-07-21): ConnectServiceHandler.SignIn acceptable when LABELED as the generated wrapper delegating to APIV1Service.SignIn; presented-as-direct = misattribution; wrapper-only = partial"
+    ],
+    "facet_guide": "Answer: APIV1Service.SignIn — server/router/api/v1/auth_service.go (~:51). S4 ruling (2026-07-21): ConnectServiceHandler.SignIn is acceptable ONLY when LABELED as the generated wrapper delegating to APIV1Service.SignIn; presenting the wrapper AS the handler is misattribution; wrapper-only without the label is partial/fail. Fails: other Type.Method inventions (Router.SignIn — no such type), wrong RPC entirely (CreateMemo), wrong file."
+  },
+  {
+    "qid": "q05",
+    "gold_rev": 1,
+    "answer_gold": "8 — MemoService, AuthService, UserService, AttachmentService, InstanceService, IdentityProviderService, AIService, ShortcutService",
+    "answer_gold_variants": [
+      "8 with the names in any order"
+    ],
+    "facet_guide": "Answer: 8 — MemoService, AuthService, UserService, AttachmentService, InstanceService, IdentityProviderService, AIService, ShortcutService (any order; per-proto file citations are fine extras). The observed failure class: count 7 by omitting IdentityProviderService (it lives in idp_service.proto — the filename doesn't contain the service name, which is why it gets missed). Count and names must be consistent (a count of 8 with 7 names is internally broken)."
+  },
+  {
+    "qid": "q06",
+    "gold_rev": 1,
+    "answer_gold": "memo_relation",
+    "answer_gold_variants": [],
+    "facet_guide": "Mechanical token-gold: memo_relation (schema in every dialect's LATEST.sql; sqlite :47). Schema citations are fine extras. Fails: memo_share (the sharing table), memo_organizer, or invented join-table names."
+  },
+  {
+    "qid": "q07",
+    "gold_rev": 1,
+    "answer_gold": "web/src/connect.ts",
+    "answer_gold_variants": [],
+    "facet_guide": "Mechanical token-gold: web/src/connect.ts (the createClient(Service, transport) calls, ~:192-203). Line extras fine. The observed failure class: web/src/hooks/useMemoQueries.ts — the file that USES a client, not where clients are CREATED. Usage-site substitution fails."
+  },
+  {
+    "qid": "q08",
+    "gold_rev": 1,
+    "answer_gold": "Driver — store/driver.go",
+    "answer_gold_variants": [
+      "store.Driver, store/driver.go:9",
+      "S6 (2026-07-21): line :9 or :10 both fine (comment-vs-type line; S2 applies)"
+    ],
+    "facet_guide": "Answer: Driver (store.Driver) — store/driver.go; S6 ruling: line :9 or :10 both fine (comment vs type line). Range citations (:10-86) fine. Fails: cache.Interface (a different interface), sql.DB/database-sql confusion, wrong file."
+  },
+  {
+    "qid": "q09",
+    "gold_rev": 1,
+    "answer_gold": "AIService",
+    "answer_gold_variants": [],
+    "facet_guide": "Mechanical token-gold: AIService (proto/api/v1/ai_service.proto:11-13). Anchored variants fine. Fails: other services (MemoService etc.), or invented TranscriptionService."
+  },
+  {
+    "qid": "q10",
+    "gold_rev": 1,
+    "answer_gold": "store/migration/sqlite/LATEST.sql",
+    "answer_gold_variants": [],
+    "facet_guide": "Mechanical token-gold: store/migration/sqlite/LATEST.sql — the consolidated current schema a fresh install executes. Observed failure classes, all real: (a) store/seed/sqlite/01__dump.sql — a SEED/demo-data file, not the schema; (b) invented paths (store/db/sqlite/migrations/ — no such dir; migrations live under store/migration/); (c) code files (sqlite.go) instead of the schema file. Sandbox prefixes fine."
+  },
+  {
+    "qid": "q11",
+    "gold_rev": 1,
+    "answer_gold": "APIV1Service.CreateMemo — server/router/api/v1/memo_service.go:115 — the ONLY direct caller of Store.CreateMemo in production code",
+    "answer_gold_variants": [
+      "also acceptable: noting CreateMemoComment reaches it INDIRECTLY via the RPC-layer s.CreateMemo (memo_service_comments.go:56) — but claiming CreateMemoComment calls Store.CreateMemo DIRECTLY is wrong",
+      "S4 (2026-07-21): ConnectServiceHandler.CreateMemo acceptable when LABELED as the generated wrapper (indirect); presented-as-direct = the same misattribution class"
+    ],
+    "facet_guide": "Answer: APIV1Service.CreateMemo — server/router/api/v1/memo_service.go (handler at :70, the Store.CreateMemo call at :115; either line locates it) — the ONLY direct production caller. Acceptable extras: noting CreateMemoComment reaches Store.CreateMemo INDIRECTLY via the RPC-layer s.CreateMemo (memo_service_comments.go:56) — but claiming CreateMemoComment calls it DIRECTLY is the flagged wrong claim and fails. S4: ConnectServiceHandler.CreateMemo acceptable only when LABELED as the generated wrapper (indirect); presented-as-direct = misattribution, fails. Wrong-file mixups (APIV1Service.CreateMemo — connect_services.go) fail: right name, wrong location."
+  },
+  {
+    "qid": "q12",
+    "gold_rev": 1,
+    "answer_gold": "hook — web/src/hooks/useMemoQueries.ts\nclient — web/src/connect.ts\nrpc — proto/api/v1/memo_service.proto (ListMemos)\nhandler — server/router/api/v1/memo_service.go\nstore — store/memo.go\ndialect — store/db/sqlite/memo.go (mysql/postgres variants accepted)",
+    "answer_gold_variants": [
+      "S3 (2026-07-21): the rpc/proto hop accepts any of the four wire-contract renderings (memo_service.proto OR memo_service.pb.go / .connect.go / _pb.ts) with the service identity right; source .proto = full form"
+    ],
+    "facet_guide": "Six hops, all required: hook — web/src/hooks/useMemoQueries.ts (useMemos :112 and/or useInfiniteMemos :122; either function name, same file); client — web/src/connect.ts (memoServiceClient, :197); rpc — S3 ruling: any of the four wire-contract renderings (proto/api/v1/memo_service.proto [full form] OR memo_service.pb.go / .connect.go / _pb.ts) with the MemoService.ListMemos identity right; handler — server/router/api/v1/memo_service.go (APIV1Service.ListMemos :178; the generated ConnectServiceHandler/connect_services.go is acceptable ONLY labeled as the wrapper alongside the real handler); store — store/memo.go (Store.ListMemos :116) — THE DOMINANT FAIL is substituting store/driver.go (the interface declaration) for this hop: the interface is not the store method file; dialect — store/db/{sqlite|mysql|postgres}/memo.go, any one. Line numbers unscored (S2). Function-name extras harmless."
+  },
+  {
+    "qid": "q13",
+    "gold_rev": 1,
+    "answer_gold": "server/router/api/v1 (13 files: memo_service.go, memo_service_converter.go, memo_service_comments.go,\nmemo_update_helpers.go, memo_mention_helpers.go, memo_batch_helpers.go, memo_attachment_service.go,\nmemo_relation_service.go, memo_share_service.go, reaction_service.go, sse_event_helpers.go,\ncommon.go, user_service_notifications.go) · store/db/{sqlite,mysql,postgres}/ (memo.go,\nmemo_relation.go, memo_share.go) · store/ · server/runner/memopayload/runner.go ·\nserver/router/rss/rss.go · server/notification/email.go · proto/gen/store/memo.pb.go",
+    "answer_gold_variants": [],
+    "scoring_rubric": "full credit: names the api/v1 handler package + all 3 dialect dirs + memopayload + at least TWO of {rss, notification/email, proto/gen/store}; zero fabricated locations",
+    "facet_guide": "GOLD DISPUTE (flagged to owner): the gold roster is INCOMPLETE — server/router/fileserver (fileserver.go:666-699: Store.GetMemo + memo.Visibility/CreatorID/ID usage) and server/router/frontend (frontend.go:149: Store.ListMemos receiving []*store.Memo) BOTH reference store.Memo in production code and would need review; candidates were failed as 'fabricating' them. Those fails are misgrades. Until re-ruled, judge with: REQUIRED core = server/router/api/v1 (the handler package) + all 3 dialect dirs (store/db/{sqlite,mysql,postgres}) + server/runner/memopayload + at least TWO of {server/router/rss, server/notification, proto/gen/store}. NEVER-PENALIZE extras: fileserver, frontend, store/ itself, test dirs (tests referencing the struct DO need review — listing them is defensible, not fabrication). TRUE fabrication = locations with no store.Memo reference at all (e.g. internal/webhook — its payload carries the PROTO v1pb.Memo, not store.Memo; internal/idp; server/auth). Package-grain or file-grain listings both fine."
+  },
+  {
+    "qid": "q13",
+    "gold_rev": 2,
+    "answer_gold": "server/router/api/v1 (13 files: memo_service.go, memo_service_converter.go, memo_service_comments.go,\nmemo_update_helpers.go, memo_mention_helpers.go, memo_batch_helpers.go, memo_attachment_service.go,\nmemo_relation_service.go, memo_share_service.go, reaction_service.go, sse_event_helpers.go,\ncommon.go, user_service_notifications.go) - store/db/{sqlite,mysql,postgres}/ (memo.go,\nmemo_relation.go, memo_share.go) - store/ - server/runner/memopayload/runner.go -\nserver/router/rss/rss.go - server/notification/email.go - proto/gen/store/memo.pb.go -\nserver/router/fileserver/fileserver.go (:666-699) - server/router/frontend/frontend.go (:149)",
+    "answer_gold_variants": [],
+    "scoring_rubric": "full credit: names the api/v1 handler package + all 3 dialect dirs + memopayload + at least TWO of {rss, notification/email, proto/gen/store, fileserver, frontend}; zero fabricated locations — fabrication means citing a location with NO store.Memo reference (e.g. internal/webhook, which carries the proto v1pb.Memo); test-dir listings are acceptable extra",
+    "facet_guide": "GOLD_REV 2 (owner-ruled 2026-08-04): the roster now INCLUDES server/router/fileserver (fileserver.go:666-699 — Store.GetMemo + memo.Visibility/CreatorID/ID reads) and server/router/frontend (frontend.go:149 — Store.ListMemos receiving []*store.Memo); crediting them is CORRECT, never fabrication. Zero-fabrication RECAST: fabrication = locations with NO store.Memo reference (rubric anchor: internal/webhook carries the PROTO v1pb.Memo, not store.Memo; also internal/idp, server/auth). Test-dir listings = acceptable extras (tests referencing the struct do need review). Required core: server/router/api/v1 (handler package) + all 3 dialect dirs (store/db/{sqlite,mysql,postgres}) + server/runner/memopayload + at least TWO of {server/router/rss, server/notification, proto/gen/store}. Package-grain or file-grain both fine."
+  },
+  {
+    "qid": "q14",
+    "gold_rev": 1,
+    "answer_gold": "ListShortcuts, GetShortcut, CreateShortcut, UpdateShortcut, DeleteShortcut — server/router/api/v1/shortcut_service.go (verify filename at freeze)",
+    "answer_gold_variants": [],
+    "facet_guide": "Answer: five RPCs — ListShortcuts, GetShortcut, CreateShortcut, UpdateShortcut, DeleteShortcut — implemented in server/router/api/v1/shortcut_service.go. Proto citations (shortcut_service.proto:18-48) are fine extras. The ONLY observed fail class: citing connect_services.go as the implementer — that is the generated wrapper layer; unlabeled it is S4 misattribution. Labeled wrapper + real file = pass."
+  },
+  {
+    "qid": "q15",
+    "gold_rev": 1,
+    "answer_gold": "user: User — store/user.go; attachment: Attachment — store/attachment.go; reaction: Reaction — store/reaction.go",
+    "answer_gold_variants": [],
+    "facet_guide": "Mechanical: user: User — store/user.go(:29); attachment: Attachment — store/attachment.go(:16); reaction: Reaction — store/reaction.go(:7). Line anchors optional. Fails: proto types (v1pb.User / apiv1 structs — wire types, not the table-mapped store structs), dialect-driver files, or missing one of the three pairs."
+  },
+  {
+    "qid": "q16",
+    "gold_rev": 1,
+    "answer_gold": "memo relations and attachments (then the memo row) — store/memo.go:140-159",
+    "answer_gold_variants": [
+      "memo_relation rows and attachment rows",
+      "also acceptable: noting the HANDLER additionally cascade-deletes comment memos first (memo_service.go:567-577) before calling the store"
+    ],
+    "facet_guide": "Answer: the STORE layer (store.Store.DeleteMemo, store/memo.go:140-159) deletes memo_relation rows (both directions) and attachment rows before the memo row. Accepted extras: noting the HANDLER cascade-deletes comment memos first (memo_service.go:567-577), and that memo_share goes by DB CASCADE (the schema's only FK rule) rather than store code. Fails: 'nothing is deleted' / cascade-only answers, comments-only answers (that is the handler layer, not the store), and over-inclusion presenting reactions as store-deleted (store.DeleteMemo does not touch reaction rows)."
+  },
+  {
+    "qid": "q17",
+    "gold_rev": 1,
+    "answer_gold": "web/src/hooks/useMemoQueries.ts; memoServiceClient",
+    "answer_gold_variants": [
+      "S6 (2026-07-21): 'MemoService' (the client class) acceptable for 'memoServiceClient' (the instance) when connect.ts is cited — instance-vs-class of the same client"
+    ],
+    "facet_guide": "Answer: web/src/hooks/useMemoQueries.ts; memoServiceClient. S6: 'MemoService' (the descriptor/class) acceptable for the instance name when connect.ts is cited. Fails: other hook files (useUserQueries.ts), other clients, or the connect.ts file given as the CRUD-module slot (it creates clients; the CRUD hooks live in useMemoQueries.ts)."
+  },
+  {
+    "qid": "q18",
+    "gold_rev": 1,
+    "answer_gold": "store/db/sqlite/sqlite.go · store/db/mysql/mysql.go · store/db/postgres/postgres.go\nfactory: NewDBDriver — store/db/db.go",
+    "answer_gold_variants": [],
+    "facet_guide": "Answer: store/db/sqlite/sqlite.go · store/db/mysql/mysql.go · store/db/postgres/postgres.go; factory NewDBDriver — store/db/db.go(:14). Fails: missing a dialect, wrong entry files (memo.go as the 'entry file'), factory misnamed (NewDB is the per-dialect constructor, not the selector), or factory located in main.go (main READS the flag; SELECTION happens in NewDBDriver's switch)."
+  },
+  {
+    "qid": "q19",
+    "gold_rev": 1,
+    "answer_gold": "gRPC-Gateway (REST/JSON) — server/router/api/v1/v1.go (RegisterGateway)\nConnectRPC — server/router/api/v1/connect_handler.go (+ connect_services.go)",
+    "answer_gold_variants": [],
+    "facet_guide": "Answer: gRPC-Gateway (REST/JSON) — server/router/api/v1/v1.go (RegisterGateway / RegisterMemoServiceHandlerServer ~:108) AND ConnectRPC — server/router/api/v1/connect_handler.go (:40, NewMemoServiceHandler mounting; connect_services.go is the wrapping layer, acceptable ALONGSIDE). Protocol naming variance fine: 'Connect'/'ConnectRPC'; 'gRPC-Gateway'/'REST via gateway'/'HTTP transcoding'. FAILS: 'plain gRPC' as a protocol with generated stub files (memo_service_grpc.pb.go) as the registration — the server does not serve plain gRPC; the generated files are not registration sites; SSE as a protocol (different question); citing ONLY connect_services.go for Connect (judge precedent: the registration file is required — minor boundary noted: the question's '/wrapping' wording makes services.go arguable, but the ruling stands registration-primary)."
+  },
+  {
+    "qid": "q20",
+    "gold_rev": 1,
+    "answer_gold": "Server-Sent Events; hub server/router/api/v1/sse_hub.go; broadcast from six sites:\nCreateMemo (memo_service.go:163), DeleteMemo (:585), UpdateMemo (via memo_update_helpers.go:71),\nCreateMemoComment (memo_service_comments.go:126), UpsertReaction (reaction_service.go:106),\nDeleteReaction (reaction_service.go:161)",
+    "answer_gold_variants": [
+      "SSE"
+    ],
+    "scoring_rubric": "full credit: SSE + hub file + at least 4 of the 6 broadcast sites, zero fabricated sites",
+    "facet_guide": "GOLD DISPUTE (flagged to owner): the six-site roster is INCONSISTENT — the SSE broadcast for updates lives inside dispatchMemoUpdatedSideEffects (memo_update_helpers.go:71), which is called from THREE sites: UpdateMemo (memo_service.go:513), SetMemoAttachments (memo_attachment_service.go:48), and SetMemoRelations (memo_relation_service.go:48). Gold credits UpdateMemo via this helper but treats SetMemoRelations as FABRICATED — the same via-helper logic must credit all three (mirroring h06's webhook roster, which includes both Set* handlers via the same helper). Until re-ruled: mechanism = Server-Sent Events (SSE); hub = server/router/api/v1/sse_hub.go; broadcast sites = the six named (CreateMemo :163, DeleteMemo :585, UpdateMemo via helpers :71, CreateMemoComment :126, UpsertReaction :106, DeleteReaction :161) with SetMemoAttachments/SetMemoRelations PENALTY-NEUTRAL as via-helper extras (never 'fabricated'); \u003e=4 of the roster still required. True fabrications: webhook Dispatch* functions listed as SSE sites, wrong hub filenames (sse.go)."
+  },
+  {
+    "qid": "q20",
+    "gold_rev": 2,
+    "answer_gold": "Server-Sent Events; hub server/router/api/v1/sse_hub.go; broadcast from eight sites:\nCreateMemo (memo_service.go:163), DeleteMemo (:585), UpdateMemo (via memo_update_helpers.go:71),\nSetMemoAttachments (memo_attachment_service.go:48, via memo_update_helpers.go:71),\nSetMemoRelations (memo_relation_service.go:48, via memo_update_helpers.go:71),\nCreateMemoComment (memo_service_comments.go:126), UpsertReaction (reaction_service.go:106),\nDeleteReaction (reaction_service.go:161)",
+    "answer_gold_variants": [
+      "SSE"
+    ],
+    "scoring_rubric": "full credit: SSE + hub file + at least 4 of the 8 broadcast sites, zero fabricated sites (the Set* handlers broadcast via dispatchMemoUpdatedSideEffects — crediting them is correct, never fabrication)",
+    "facet_guide": "GOLD_REV 2 (owner-ruled 2026-08-04): the broadcast roster is EIGHT sites — CreateMemo (memo_service.go:163), DeleteMemo (:585), UpdateMemo (via dispatchMemoUpdatedSideEffects, memo_update_helpers.go:71), CreateMemoComment (memo_service_comments.go:126), UpsertMemoReaction (reaction_service.go:106), DeleteMemoReaction (:161), plus SetMemoAttachments (memo_attachment_service.go:48) and SetMemoRelations (memo_relation_service.go:48), both via the same broadcasting helper (each marked via-helper in gold). Rubric: mechanism (SSE) + hub (server/router/api/v1/sse_hub.go) + at least 4 of the 8, zero fabricated; crediting the Set* handlers is NEVER fabrication. True fabrications: webhook Dispatch* functions listed as SSE sites, wrong hub filenames (sse.go), WebSockets as the mechanism."
+  },
+  {
+    "qid": "q21",
+    "gold_rev": 1,
+    "answer_gold": "Twelve production call sites across seven packages:\nauth_service.go:56 (SignIn) · auth_service_session.go:251 (fetchCurrentUser) ·\nauth_service_sso.go:90 and :161 (SSO login, 2 sites) · instance_service.go:334 (setup) ·\nuser_resource_name.go:54 (ResolveUserByName — the helper GetUser/UpdateUser/DeleteUser/\nshortcut/webhook paths go through) · auth/authenticator.go:87 (AuthenticateByRefreshToken)\nand :159 (resolveBearer) · fileserver/fileserver.go:716 · rss/rss.go:126 ·\nnotification/email.go:60,68 · store/user_setting.go:135 (PAT lookup — pilot amendment #1,\nsurfaced by the first cold run, verified in source)\nNOTE: APIV1Service.GetUser does NOT call Store.GetUser directly (goes via ResolveUserByName).\nDISTRACTOR: store/db/mysql/user.go:77 is d.GetUser on the mysql DRIVER (Driver.GetUser),\nnot Store.GetUser — citing it is a member-grain misattribution, not a caller.",
+    "answer_gold_variants": [],
+    "scoring_rubric": "full credit: ≥9 of the 12 sites, no nonexistent sites, and at most ONE misattribution (e.g. the mysql driver distractor or user_service GetUser-as-direct)",
+    "facet_guide": "Twelve production sites, \u003e=9 required, at most ONE misattribution, zero nonexistent sites. Roster: auth_service.go:56 · auth_service_session.go:251 · auth_service_sso.go:90,:161 (two sites) · instance_service.go:334 · user_resource_name.go:54 (ResolveUserByName — the helper many handlers route through) · auth/authenticator.go:87,:159 · fileserver/fileserver.go:716 · rss/rss.go:126 · notification/email.go:60,68 · store/user_setting.go:135 (PAT lookup). Known misattribution classes (each counts toward the ONE allowed): mysql driver d.GetUser (store/db/mysql/user.go — Driver.GetUser member grain, not a Store.GetUser caller), ConnectServiceHandler.GetUser wrapper, APIV1Service.GetUser-as-direct (it goes via ResolveUserByName). Test-file callers are not production sites. Line variance within the named functions is fine."
+  },
+  {
+    "qid": "q22",
+    "gold_rev": 1,
+    "answer_gold": "DispatchMemoCreatedWebhook — server/router/api/v1/memo_service_webhooks.go; delivery via internal/webhook (PostAsync); HMAC-SHA256 with per-webhook signing secret",
+    "answer_gold_variants": [
+      "S6 (2026-07-21): 'HMAC per Standard Webhooks' acceptable for 'HMAC-SHA256' — same mechanism; SHA256 named = full form"
+    ],
+    "facet_guide": "Three slots: dispatcher = DispatchMemoCreatedWebhook — server/router/api/v1/memo_service_webhooks.go (:15; called from the handler at memo_service.go:157 — citing the CALL site as extra is fine, but naming memo_service.go as the dispatcher's FILE fails); delivery package = internal/webhook (PostAsync/Post); signing = HMAC-SHA256 with per-webhook signing secret (S6: 'HMAC per Standard Webhooks' acceptable — same mechanism). dispatchMemoRelatedWebhook ALONE as the dispatcher fails (it is the internal shared helper; the handler calls DispatchMemoCreatedWebhook) — mentioning it as the delegation target alongside is fine. server/webhook as the delivery package path fails (no such package — internal/webhook)."
+  },
+  {
+    "qid": "q23",
+    "gold_rev": 1,
+    "answer_gold": "sql: store/migration/sqlite/LATEST.sql (memo table)\nstore model: store/memo.go\napi proto: proto/api/v1/memo_service.proto\nfrontend types: web/src/types/proto/api/v1/memo_service_pb.ts",
+    "answer_gold_variants": [
+      "also acceptable: proto/store/memo.proto for the payload layer",
+      "S3 (2026-07-21): the api-proto row accepts any of the four wire-contract renderings (source .proto OR generated pb.go/.connect.go/_pb.ts) with the service identity right; source .proto = full form"
+    ],
+    "facet_guide": "GOLD-TOLERANCE DISPUTE (flagged to owner): candidates were failed for citing store/migration/mysql/LATEST.sql on the SQL row — but the memo table is defined identically in ALL THREE dialects' LATEST.sql, and nothing in this question pins a dialect (contrast q10's 'fresh SQLite install'). q12/q24 explicitly accept dialect variants for their dialect hops; the same variance should apply here. Until re-ruled: treat ANY dialect's LATEST.sql as penalty-neutral on the SQL row. The four rows: sql — store/migration/{sqlite|mysql|postgres}/LATEST.sql (memo table); store model — store/memo.go; api proto — S3: proto/api/v1/memo_service.proto (full form) or any generated twin with service identity right; also acceptable: proto/store/memo.proto for the PAYLOAD layer as an extra; frontend types — web/src/types/proto/api/v1/memo_service_pb.ts. FAILS: missing a layer, code files on the SQL row, proto/gen/store/memo.pb.go presented as the API-proto row (that is the payload wire type)."
+  },
+  {
+    "qid": "q23",
+    "gold_rev": 2,
+    "answer_gold": "sql: store/migration/{sqlite|mysql|postgres}/LATEST.sql (memo table — any dialect's LATEST.sql passes)\nstore model: store/memo.go\napi proto: proto/api/v1/memo_service.proto\nfrontend types: web/src/types/proto/api/v1/memo_service_pb.ts",
+    "answer_gold_variants": [
+      "also acceptable: proto/store/memo.proto for the payload layer",
+      "S3 (2026-07-21): the api-proto row accepts any of the four wire-contract renderings (source .proto OR generated pb.go/.connect.go/_pb.ts) with the service identity right; source .proto = full form"
+    ],
+    "facet_guide": "GOLD_REV 2 (owner-ruled 2026-08-04): the SQL row accepts ANY dialect's schema — store/migration/{sqlite|mysql|postgres}/LATEST.sql (the memo table is defined identically in all three; nothing in this question pins a dialect). The four rows: sql — any dialect LATEST.sql (memo table); store model — store/memo.go (:35); api proto — S3: proto/api/v1/memo_service.proto (full form) or any generated twin with service identity right; proto/store/memo.proto acceptable as the PAYLOAD-layer extra; frontend types — web/src/types/proto/api/v1/memo_service_pb.ts. FAILS: missing a layer, code files on the SQL row (store/db/*/memo.go is driver code, not schema), proto/gen/store/memo.pb.go presented as the API-proto row (payload wire type)."
+  },
+  {
+    "qid": "q24",
+    "gold_rev": 1,
+    "answer_gold": "web/src/hooks/useMemoQueries.ts (useCreateMemo)\nweb/src/connect.ts (memoServiceClient)\nproto/api/v1/memo_service.proto (CreateMemo)\nserver/router/api/v1/memo_service.go (CreateMemo)\nstore/memo.go (CreateMemo)\nstore/db/sqlite/memo.go (INSERT; other dialects accepted)",
+    "answer_gold_variants": [
+      "PILOT AMENDMENT #2 (07-18, source-verified): the MemoEditor chain is equally correct — web/src/components/MemoEditor/hooks/useMemoSave.ts → MemoEditor/services/memoService.ts (memoServiceClient.createMemo at :120) → same proto/handler/store/dialect tail",
+      "S3 (2026-07-21): the proto hop accepts any of the four wire-contract renderings (source .proto OR generated twins) with the service identity right; source .proto = full form"
+    ],
+    "facet_guide": "Six hops: hook — web/src/hooks/useMemoQueries.ts (useCreateMemo :178) OR the PILOT-AMENDED MemoEditor chain (web/src/components/MemoEditor/hooks/useMemoSave.ts → MemoEditor/services/memoService.ts, memoServiceClient.createMemo at :120) — both source-verified equal; client — web/src/connect.ts (for the MemoEditor chain, memoService.ts occupies this slot); rpc — S3 wire-contract renderings; handler — server/router/api/v1/memo_service.go (:70); store — store/memo.go (Store.CreateMemo :109) — driver.go substitution is THE dominant fail, same as q12; dialect — any of the three store/db/*/memo.go. Line numbers unscored."
+  },
+  {
+    "qid": "q25",
+    "gold_rev": 1,
+    "answer_gold": "CEL-like filter expressions; engine in internal/filter/; each dialect's ListMemos renders the parsed filter into dialect-specific WHERE clauses",
+    "answer_gold_variants": [],
+    "facet_guide": "Three parts: engine = CEL / CEL-like filter expressions (cel-go; 'CEL-like' and 'CEL via github.com/google/cel-go' both fine); location = internal/filter/ (engine.go plus render/schema/parser files — package or file grain both fine); mechanism = the parsed filter is rendered into dialect-specific WHERE clauses by each dialect's ListMemos (filter.AppendConditions with a dialect parameter). FAILS: wrong engine family (SQL parser, regex, GraphQL filters), wrong location (server/router filters), or a mechanism claiming the filter is passed to the database as-is."
+  },
+  {
+    "qid": "q26",
+    "gold_rev": 1,
+    "answer_gold": "memo, memo_relation, attachment",
+    "answer_gold_variants": [
+      "PILOT AMENDMENT #3 (07-18, source-verified): also acceptable to add memo_share via DB-level FK ON DELETE CASCADE (sqlite LATEST.sql:108) — extra correct detail, not required",
+      "S6 (2026-07-21) EXPLICIT FAIL: listing 'reaction' as deleted-by-DeleteMemo = fail — DeleteMemo only READS reactions for the payload (observed real misattribution)"
+    ],
+    "facet_guide": "Answer: memo, memo_relation, attachment. Pilot amendment #3: adding memo_share via the DB-level FK ON DELETE CASCADE (sqlite LATEST.sql:108) is extra correct detail, not required. S6 EXPLICIT FAIL: listing 'reaction' as deleted by DeleteMemo — DeleteMemo only READS reactions for the response payload; reaction deletion belongs to user deletion, not memo deletion. Comment memos (recursive handler cascade) as an extra is fine when labeled handler-layer."
+  },
+  {
+    "qid": "q27",
+    "gold_rev": 1,
+    "answer_gold": "Go embed (//go:embed dist/*) with SPA-fallback middleware — server/router/frontend/frontend.go",
+    "answer_gold_variants": [],
+    "facet_guide": "Answer: Go embed (//go:embed dist/* at frontend.go:20-21) with SPA-fallback serving — server/router/frontend/frontend.go. Wording variance fine: 'embed.FS', 'Echo static middleware over embedded FS', 'embedded at compile time'. FAILS: nginx/CDN/reverse-proxy claims, vite dev server as the production mechanism, wrong file."
+  },
+  {
+    "qid": "q28",
+    "gold_rev": 1,
+    "answer_gold": "The server starts exactly ONE background runner: s3presign (own ticker loop,\nserver/runner/s3presign/runner.go, started in server/server.go:153-174).\nmemopayload (server/runner/memopayload/) is a LIBRARY invoked inline per-request\n(memo_service.go:108) — NOT a background runner, despite living in server/runner/.\ninternal/scheduler/ is a full cron framework with ZERO imports from server code (unused).",
+    "answer_gold_variants": [
+      "S5 (2026-07-21, owner-ruled) EXTRAS POLICY: init()-time worker goroutines (webhook/email) and cache cleanup tickers are acceptable as EXTRAS only when explicitly labeled import-time/not-server-started (true, responsive detail); UNLABELED extras = the over-inclusion fail the honesty_trap defines"
+    ],
+    "honesty_trap": "two traps: (a) claiming scheduler-driven jobs (scheduler is unused); (b) claiming memopayload is a started background runner (its runner/ location suggests it; the call graph says inline). Full credit requires s3presign-only + at least one trap avoided explicitly",
+    "facet_guide": "Full credit = s3presign-only + at least one trap avoided EXPLICITLY. The server starts exactly ONE runner: s3presign (12h time.Ticker + boot RunOnce, wired server/server.go:153-174). TWO TRAPS: (a) internal/scheduler is a complete cron framework with ZERO server imports — claiming scheduler-driven jobs fails; (b) memopayload lives in server/runner/ but is a LIBRARY called inline per-request (memo_service.go:108) — claiming it is a started background runner fails. S5 EXTRAS POLICY: init()-time worker goroutines (webhook delivery workers) and cache cleanup tickers are acceptable extras ONLY when explicitly labeled import-time/not-server-started; UNLABELED extras = the over-inclusion fail. This question shares the dead-wiring trap family with battery-hard h01/h08/r03."
+  },
+  {
+    "qid": "q29",
+    "gold_rev": 1,
+    "answer_gold": "interceptor in web/src/connect.ts; JWT access + refresh tokens; validated by server/auth",
+    "answer_gold_variants": [
+      "S6 (2026-07-21): PAT (personal access token) as an ADDITIONAL token kind = acceptable true detail"
+    ],
+    "facet_guide": "Three slots: interceptor = web/src/connect.ts (authInterceptor ~:156-178); tokens = JWT access + refresh tokens (S6: PAT as an ADDITIONAL kind = accepted true detail; lifetimes/storage details are fine extras); backend validation = server/auth. A backend interceptor mention (connect_interceptors.go) as an extra alongside the frontend one is fine. FAILS: interceptor located elsewhere (hooks files, App.tsx), session-cookie-only token models, validation attributed to the wrong package (server/router/api/v1 handlers do authz; token VALIDATION is server/auth)."
+  },
+  {
+    "qid": "q30",
+    "gold_rev": 1,
+    "answer_gold": "created/updated/deleted/comment → DispatchMemo{Created,Updated,Deleted,CommentCreated?}Webhook in server/router/api/v1/memo_service_webhooks.go (exact names at freeze); all converge on internal/webhook PostAsync",
+    "answer_gold_variants": [],
+    "facet_guide": "Answer: created → DispatchMemoCreatedWebhook, updated → DispatchMemoUpdatedWebhook, deleted → DispatchMemoDeletedWebhook, comment → DispatchMemoCommentCreatedWebhook — all in server/router/api/v1/memo_service_webhooks.go; convergence = internal/webhook PostAsync (webhook.go:184). Three-of-four with comment omitted has judge precedent as pass when the rest is exact (comment marked optional in the gold's own '?'). Activity-type strings (memos.memo.created) are fine extras. FAILS: invented dispatcher names, dispatchMemoRelatedWebhook presented as THE convergence (the comment path bypasses it — PostAsync is where all converge; same fact as battery-hard h06), webhook.Post without the PostAsync/enqueue relationship when presented as the sole convergence is weaker but acceptable if its delivery role is stated."
+  }
+]

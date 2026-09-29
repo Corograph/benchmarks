@@ -1,0 +1,267 @@
+{
+  "economics": {
+    "completed_at": "2026-08-07T04:46:36Z",
+    "cost_basis": "not_reported",
+    "cost_reported_usd": null,
+    "duration_ms": null,
+    "history_replay_delta": null,
+    "llm_calls_main_thread": 8,
+    "llm_calls_recorded": 0,
+    "main_turns": null,
+    "per_question": [
+      {
+        "cost_reported": null,
+        "duration_ms": 12559,
+        "main_turns": 2,
+        "qid": "q01",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 14134,
+        "tokens_cache_write": 7274,
+        "tokens_input": 4,
+        "tokens_output": 321
+      },
+      {
+        "cost_reported": null,
+        "duration_ms": 10206,
+        "main_turns": 2,
+        "qid": "q02",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 14108,
+        "tokens_cache_write": 193,
+        "tokens_input": 4,
+        "tokens_output": 244
+      },
+      {
+        "cost_reported": null,
+        "duration_ms": 15693,
+        "main_turns": 2,
+        "qid": "q03",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 16383,
+        "tokens_cache_write": 0,
+        "tokens_input": 4,
+        "tokens_output": 274
+      },
+      {
+        "cost_reported": null,
+        "duration_ms": 18648,
+        "main_turns": 2,
+        "qid": "q04",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 17191,
+        "tokens_cache_write": 0,
+        "tokens_input": 4,
+        "tokens_output": 434
+      }
+    ],
+    "rate_table_version": null,
+    "started_at": "2026-08-07T04:43:12Z",
+    "token_source": "ledger_all_calls",
+    "tokens_cache_read": 61816,
+    "tokens_cache_write": 7467,
+    "tokens_input": 16,
+    "tokens_output": 1273,
+    "tool_calls": {
+      "by_class": {
+        "product_builtin": 1,
+        "product_semantic": 4
+      },
+      "by_tool": {
+        "corograph_query": 4,
+        "grep_content": 1
+      },
+      "total": 5
+    }
+  },
+  "files": {
+    "answers/q01.md": "2471b6e106f72e2412f54f14a9393f0671ada82a390053187eeb980a72866220",
+    "answers/q02.md": "39c1686d19e66556b404bf7f1b112be73b05d165dfabac00af3522d90728ae44",
+    "answers/q03.md": "5fd5dabd453a37a40bc1f1b41354681e38d8b053fb28d7469623f86a7a3785c1",
+    "answers/q04.md": "b1529008e085ebbb1427e03e9d87ca43a8f14b7f3921642e6f0aab5578f47729",
+    "transcript/q01.jsonl": "d2438a09df736b79a56d9b393ef324553367d266ba2f0cf188402d4e38424dc5",
+    "transcript/q02.jsonl": "e8897619562fe22ded5e3dcf38cd9a1047ddb63af703a5fb7df7eee571b4e9ef",
+    "transcript/q03.jsonl": "d6b0dd5421236b1ddbb2f473728ad6494ce9a7a6619deefc8e2755305f5264a2",
+    "transcript/q04.jsonl": "5f0af52e790811c401926dcf0fc291b165b10301765efc69c4bae89146291593",
+    "verdicts.json": "df77fe0846ce884ba4fb3ac13a56668d053f30527d943371411ed8c425f45086"
+  },
+  "identity": {
+    "arm": "cg-ask-fz-009",
+    "arm_label": "Corograph Ask (Ask) @ fz-009",
+    "battery": "memos",
+    "commit_sha": "2d01420c23372d5708904ec78e03485edb44d49b",
+    "denominator": 30,
+    "exam": "ZeroShotExam",
+    "exam_epoch": 4,
+    "family": "product",
+    "model": "claude-fable-5",
+    "rep": 4,
+    "repo": "memos",
+    "repo_public": "usememos-memos",
+    "run_key": "ef773dfc921e2e957e945faf5ffc8679|cg-ask-fz-009|claude-fable-5|ZeroShotExam|33ee333a178d3d40bd6a3f99f45d4162|4",
+    "side": "corograph"
+  },
+  "provenance": {
+    "captured_first": "2026-08-07T04:43:12Z",
+    "captured_last": "2026-08-07T04:46:36Z",
+    "cell_records": 4,
+    "exam_queue": "exq-20260807-042424-bd4619",
+    "examiner_version_live": {
+      "Corograph": {
+        "engine_version": "0.11.8",
+        "module": "v0.11.8",
+        "replace": "../ta-indexer/pkg/Corograph",
+        "surface_content_hash": "dc074c6eb47fc8f6",
+        "surface_min_engine": "0.11.8",
+        "surface_source": "embedded",
+        "surface_version": "2.4.2"
+      },
+      "examiner": {
+        "commit": "994aec27df526222bc53da219a819e2d1c083a37",
+        "go": "go1.26.1",
+        "version": "0.1.13"
+      },
+      "indexer": {
+        "ir_meta_version": "1.0",
+        "ir_schema_version": "1.0",
+        "module": "v1.4.74",
+        "replace": "../ta-indexer",
+        "version": "1.4.74"
+      },
+      "modules": {
+        "connectrpc.com/connect": "v1.19.1",
+        "github.com/Corograph/ta-dev": "v0.0.0 =\u003e ../ta-dev",
+        "github.com/Corograph/ta-indexer": "v1.4.74 =\u003e ../ta-indexer",
+        "github.com/Corograph/ta-indexer/pkg/Corograph": "v0.11.8 =\u003e ../ta-indexer/pkg/Corograph",
+        "github.com/Corograph/ta-proto": "v0.0.7 =\u003e ../ta-proto",
+        "github.com/google/uuid": "v1.6.0",
+        "github.com/scip-code/scip/bindings/go/scip": "v0.7.1",
+        "github.com/sourcegraph/beaut": "v0.0.0-20240611013027-627e4c25335a",
+        "golang.org/x/mod": "v0.35.0",
+        "golang.org/x/net": "v0.53.0",
+        "golang.org/x/sync": "v0.20.0",
+        "golang.org/x/text": "v0.36.0",
+        "golang.org/x/tools": "v0.44.0",
+        "google.golang.org/protobuf": "v1.36.11"
+      },
+      "ta_dev": {
+        "module": "v0.0.0",
+        "replace": "../ta-dev",
+        "version": "0.4.17"
+      },
+      "ta_proto": {
+        "module": "v0.0.7",
+        "replace": "../ta-proto"
+      }
+    },
+    "freeze_id": "fz-009",
+    "gateway_launch_folder": "gateway-0.9.57",
+    "hostname": "Mini-M4-48GB",
+    "record_shape": "gateway_ledger",
+    "surface_dirs": "AGENT-Surface=0.9.54--rev02 · DEV-Surface=0.4.17 · Corograph-Surface=Corograph-v0.11.x-surface-v2.4.2",
+    "tuple": "idx-1.4.74-Corograph-0.11.8-dev-0.4.17",
+    "units": 4
+  },
+  "redaction": {
+    "fences": 0,
+    "envelope_lines": 0,
+    "selectors": 0,
+    "macros": 0,
+    "attrs": 0,
+    "names": 4,
+    "paths": 0
+  },
+  "schema_version": "public-run/1",
+  "scoring": {
+    "adjudications": [],
+    "note": "no score — the run is DNF or unscored; never a mean contributor",
+    "total": null
+  },
+  "transcript": {
+    "lane": "gateway",
+    "source": "tree",
+    "units": [
+      {
+        "chars_source": "result_chars",
+        "path": "transcript/q01.jsonl",
+        "query_calls": 1,
+        "redaction": {
+          "fences": 0,
+          "envelope_lines": 0,
+          "selectors": 0,
+          "macros": 0,
+          "attrs": 0,
+          "names": 1,
+          "paths": 0
+        },
+        "tool_calls": 2,
+        "turns": 1,
+        "unit": "q01"
+      },
+      {
+        "chars_source": "result_chars",
+        "path": "transcript/q02.jsonl",
+        "query_calls": 1,
+        "redaction": {
+          "fences": 0,
+          "envelope_lines": 0,
+          "selectors": 0,
+          "macros": 0,
+          "attrs": 0,
+          "names": 1,
+          "paths": 0
+        },
+        "tool_calls": 1,
+        "turns": 1,
+        "unit": "q02"
+      },
+      {
+        "chars_source": "result_chars",
+        "path": "transcript/q03.jsonl",
+        "query_calls": 1,
+        "redaction": {
+          "fences": 0,
+          "envelope_lines": 0,
+          "selectors": 0,
+          "macros": 0,
+          "attrs": 0,
+          "names": 1,
+          "paths": 0
+        },
+        "tool_calls": 1,
+        "turns": 1,
+        "unit": "q03"
+      },
+      {
+        "chars_source": "result_chars",
+        "path": "transcript/q04.jsonl",
+        "query_calls": 1,
+        "redaction": {
+          "fences": 0,
+          "envelope_lines": 0,
+          "selectors": 0,
+          "macros": 0,
+          "attrs": 0,
+          "names": 1,
+          "paths": 0
+        },
+        "tool_calls": 1,
+        "turns": 1,
+        "unit": "q04"
+      }
+    ]
+  },
+  "validity": {
+    "detail": "missing/failed: q05,q06,q07,q08,q09,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,q30",
+    "ok": false,
+    "reason": "partial_exam",
+    "status": "captured"
+  }
+}

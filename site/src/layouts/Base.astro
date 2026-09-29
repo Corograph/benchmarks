@@ -1,0 +1,246 @@
+---
+import '../styles/global.css'
+import { FIGURES } from '../lib/figures'
+import { COMPARISONS } from '../lib/comparisons'
+import { loadManifest, epochName } from '../lib/data'
+import { ANALYTICS } from '../lib/analytics'
+import EarlyAccessCTA from '../components/EarlyAccessCTA.astro'
+const { title, description = 'The public proof package behind the Corograph benchmark numbers: every question, answer, verdict, transcript and figure, reproducible from one export.', footerCta = true } = Astro.props
+const manifest = loadManifest()
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const here = Astro.url.pathname.replace(base, '').replace(/\/$/, '') || '/'
+const is = (p: string) => (p === '/' ? here === '/' : here.startsWith(p))
+// page slug for analytics props + the CTA src: "home", "compare/indexers", "results/accuracy", "about" …
+const pageSlug = here === '/' ? 'home' : here.replace(/^\//, '')
+const canonical = new URL(Astro.url.pathname, Astro.site).href
+const ogImage = new URL(`${base}/og.png`, Astro.site).href
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — COROGRAPH Benchmarks</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="COROGRAPH Benchmarks" />
+    <meta property="og:title" content={`${title} — COROGRAPH Benchmarks`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} — COROGRAPH Benchmarks`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    {ANALYTICS.enabled && (
+      <>
+        <script defer src={ANALYTICS.scriptUrl} data-website-id={ANALYTICS.websiteId} data-auto-track="true" data-exclude-search="true"></script>
+        <script defer src={ANALYTICS.recorderUrl} data-website-id={ANALYTICS.websiteId}></script>
+      </>
+    )}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
+    <script is:inline>
+      // theme before first paint: system | light | dark (system default; the choice persists)
+      (function () {
+        var mode = 'system'
+        try { mode = localStorage.getItem('theme') || 'system' } catch (e) {}
+        if (mode !== 'dark' && mode !== 'light') mode = 'system'
+        var dark = mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        if (dark) document.documentElement.dataset.theme = 'dark'
+        document.documentElement.dataset.themeMode = mode
+      })()
+    </script>
+  </head>
+  <body>
+    <div class="shell">
+      <nav class="nav" aria-label="site" id="site-nav">
+        <div class="nav-head">
+          <a class="brand" href={`${base}/`}>
+            <span class="brand-word">COROGRAPH</span>
+            <span class="brand-kicker">Benchmarks</span>
+          </a>
+          <button class="nav-toggle" type="button" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="bars" d="M4 7h16M4 12h16M4 17h16" /><path class="x" d="M6 6l12 12M18 6L6 18" /></svg>
+            <span>Menu</span>
+          </button>
+        </div>
+        <div class="brand-sub">{epochName(manifest.epoch.id)} · the public proof package</div>
+        <a class={is('/') ? 'on' : ''} href={`${base}/`}>Benchmark Results</a>
+        <a class={is('/procedure') ? 'on' : ''} href={`${base}/procedure/`}>Benchmark Procedure</a>
+        <EarlyAccessCTA variant="nav" page={pageSlug} />
+        <h4>Comparisons</h4>
+        {COMPARISONS.map(c => (
+          <>
+            <a class={is(`/compare/${c.slug}`) ? 'on' : ''} href={`${base}/compare/${c.slug}/`}>{c.short}</a>
+            {is(`/compare/${c.slug}`) && (
+              <div class="subnav" data-subnav>
+                {c.figures.map(s => { const f = FIGURES.find(x => x.slug === s)!; return (
+                  <a class="sub" href={`#${f.slug}`} data-target={f.slug}><span class="fig-no">{f.number}</span>{f.short}</a>
+                ) })}
+              </div>
+            )}
+          </>
+        ))}
+        <h4>Figures</h4>
+        {FIGURES.map(f => (
+          <a class={is(`/results/${f.slug}`) ? 'on' : ''} href={`${base}/results/${f.slug}/`}><span class="fig-no">{f.number}</span>{f.short}</a>
+        ))}
+        <h4>Report</h4>
+        <a class={is('/method') ? 'on' : ''} href={`${base}/method/`}>Method</a>
+        <a class={is('/limitations') ? 'on' : ''} href={`${base}/limitations/`}>Limitations</a>
+        <a class={is('/data') ? 'on' : ''} href={`${base}/data/`}>Data &amp; reproducibility</a>
+        <a class={is('/about') ? 'on' : ''} href={`${base}/about/`}>About this site</a>
+        <a href="https://github.com/Corograph/benchmarks" target="_blank" rel="noopener">Repository ↗</a>
+        <div class="nav-foot">
+          Every number links to the run that produced it.
+          <div class="nav-brands">
+            <a href="https://www.corograph.com" target="_blank" rel="noopener" title="Corograph — the product"><span class="anta">COROGRAPH</span><span class="ext">↗</span></a>
+            <a href="https://metaphori.ai" target="_blank" rel="noopener" title="Metaphori, Inc. — the company">
+              <img class="mlogo mlogo-light" src={`${base}/metaphori-logo-light.png`} alt="" width="16" height="16" />
+              <img class="mlogo mlogo-dark" src={`${base}/metaphori-logo-dark.png`} alt="" width="16" height="16" />
+              <span class="mword">Metaphori</span><span class="ext">↗</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+      <main class="main" data-page={pageSlug}>
+        <slot />
+        {footerCta && <EarlyAccessCTA variant="footer" page={pageSlug} />}
+      </main>
+    </div>
+    <button class="theme-fab" type="button" id="theme-toggle" aria-label="Theme: system, light or dark" title="Theme: system (follows the OS)">
+      <svg class="ico ico-light" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+      </svg>
+      <svg class="ico ico-dark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+      </svg>
+      <svg class="ico ico-system" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none" />
+      </svg>
+    </button>
+    <script is:inline>
+      // theme cycle: system → light → dark; system (the default) follows the OS and tracks changes live
+      ;(function () {
+        var el = document.documentElement
+        var btn = document.getElementById('theme-toggle')
+        var mq = window.matchMedia('(prefers-color-scheme: dark)')
+        var LABEL = { light: 'light', dark: 'dark', system: 'system (follows the OS)' }
+        function apply(mode) {
+          var dark = mode === 'dark' || (mode === 'system' && mq.matches)
+          if (dark) { el.dataset.theme = 'dark' } else { delete el.dataset.theme }
+          el.dataset.themeMode = mode
+          btn.title = 'Theme: ' + LABEL[mode]
+        }
+        apply(el.dataset.themeMode || 'system')
+        btn.addEventListener('click', function () {
+          var cur = el.dataset.themeMode || 'system'
+          var next = cur === 'system' ? 'light' : cur === 'light' ? 'dark' : 'system'
+          apply(next)
+          try { localStorage.setItem('theme', next) } catch (e) {}
+        })
+        var onChange = function () { if (el.dataset.themeMode === 'system') apply('system') }
+        if (mq.addEventListener) mq.addEventListener('change', onChange); else mq.addListener(onChange)
+      })()
+      // phone nav: the menu folds behind the hamburger and closes when a link is chosen
+      ;(function () {
+        var nav = document.getElementById('site-nav'), btn = document.getElementById('nav-toggle')
+        if (!nav || !btn) return
+        function set(open) { nav.classList.toggle('open', open); btn.setAttribute('aria-expanded', open ? 'true' : 'false') }
+        btn.addEventListener('click', function () { set(!nav.classList.contains('open')) })
+        nav.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) set(false) })
+      })()
+      // nav scrollbar: the thumb is transparent until the nav scrolls, then fades out again
+      ;(function () {
+        var nav = document.getElementById('site-nav')
+        if (!nav) return
+        var timer = 0
+        nav.addEventListener('scroll', function () {
+          nav.classList.add('scrolling')
+          clearTimeout(timer)
+          timer = setTimeout(function () { nav.classList.remove('scrolling') }, 900)
+        }, { passive: true })
+      })()
+      // referrer capture + events. `?ref=hn` on landing is kept for the session and appended,
+      // with the page slug, to every early-access link, so a sign-up on corograph.com is
+      // attributed to where the reader came from. Events go to the counter when it is loaded
+      // (production builds only) and are no-ops otherwise. Props are enums and slugs — never
+      // free text, never an address.
+      ;(function () {
+        var page = (document.querySelector('main[data-page]') || {}).dataset
+        page = page ? page.page : 'unknown'
+        var ref = ''
+        try {
+          var q = new URLSearchParams(location.search).get('ref')
+          if (q) { ref = q.toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 24); sessionStorage.setItem('cg-ref', ref) }
+          else ref = sessionStorage.getItem('cg-ref') || ''
+        } catch (e) {}
+        function track(name, props) {
+          try { if (window.umami && typeof window.umami.track === 'function') window.umami.track(name, props) } catch (e) {}
+        }
+        // every early-access link carries the ref it should be attributed to
+        document.querySelectorAll('a[data-cta]').forEach(function (a) {
+          try { var u = new URL(a.href); u.searchParams.set('ref', ref || 'bench'); a.href = u.toString() } catch (e) {}
+        })
+        // landing: once per session, so the source of the visit is a queryable event even
+        // when the browser strips the Referer header
+        try {
+          if (!sessionStorage.getItem('cg-landed')) { sessionStorage.setItem('cg-landed', '1'); track('landing', { ref: ref || 'direct', page_slug: page }) }
+        } catch (e) {}
+        if (page.indexOf('compare/') === 0) track('compare_view', { comparison: page.slice(8) })
+        // clicks: CTA · figure subnav jump · run directory · download · figure control · other
+        // outbound (delegated; islands render late). Nav links are NOT events: every one is a
+        // page load, so the pageview path already records them.
+        document.addEventListener('click', function (e) {
+          var a = e.target && e.target.closest ? e.target.closest('a[href]') : null
+          if (!a) {
+            var b = e.target && e.target.closest ? e.target.closest('button') : null
+            if (!b) return
+            // the share control: a link to this figure's current view was copied
+            if (b.dataset.share) { track('figure_share', { figure: b.dataset.share, page_slug: page }); return }
+            if (/download (CSV|SVG)/.test(b.textContent || '')) { track('download', { kind: /CSV/.test(b.textContent) ? 'csv' : 'svg', page_slug: page }); return }
+            // a figure control: which control, which value, on which figure — the one product
+            // question pageviews cannot answer (does anyone leave the default view?)
+            if (b.classList.contains('seg-btn') && b.dataset.value) {
+              var seg = b.closest('.seg'), figEl = b.closest('[data-figure]')
+              track('figure_control', { control: (seg && seg.getAttribute('aria-label')) || 'unknown', value: b.dataset.value, figure: (figEl && figEl.dataset.figure) || 'unknown', page_slug: page })
+            }
+            return
+          }
+          if (a.dataset.cta) { track('cta_click', { cta_id: a.dataset.cta, page_slug: page }); return }
+          // a jump to a figure from a comparison page's subnav (a hash change, not a page load)
+          if (a.dataset.target && a.closest('[data-subnav]')) { track('figure_jump', { figure: a.dataset.target, page_slug: page }); return }
+          var u
+          try { u = new URL(a.href) } catch (err) { return }
+          if (u.host === location.host) return
+          var m = u.pathname.match(/\/tree\/main\/runs\/([^/]+)\/([^/]+)(?:\/([^/]+)\/([^/]+))?/)
+          if (m) { track('run_open', { tool: m[1], model: m[2], battery: m[4] || 'all', page_slug: page }); return }
+          track('outbound', { href_domain: u.host, page_slug: page })
+        }, true)
+      })()
+      // subnav scroll-spy: the section nearest the top of the viewport is the current one
+      ;(function () {
+        var sub = document.querySelector('[data-subnav]')
+        if (!sub) return
+        var links = Array.prototype.slice.call(sub.querySelectorAll('a[data-target]'))
+        var heads = links.map(function (a) { return document.getElementById(a.dataset.target) }).filter(Boolean)
+        if (!heads.length) return
+        var ticking = false
+        function update() {
+          ticking = false
+          var cur = heads[0]
+          for (var i = 0; i < heads.length; i++) if (heads[i].getBoundingClientRect().top <= 120) cur = heads[i]
+          links.forEach(function (a) { a.classList.toggle('on', a.dataset.target === cur.id) })
+        }
+        window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update) } }, { passive: true })
+        update()
+      })()
+    </script>
+  </body>
+</html>

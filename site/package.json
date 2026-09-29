@@ -1,0 +1,28 @@
+{
+  "name": "corograph-benchmarks-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "The companion site of the Corograph Benchmarks public proof package — every figure computed from ../epochs/E00N/summary/runs.json at build time.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:production": "SITE_ENV=production astro build",
+    "linkcheck": "python3 scripts/linkcheck.py",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/react": "^6.0.5",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.2",
+    "marked": "^15.0.12",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.6.0"
+  }
+}

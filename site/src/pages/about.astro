@@ -1,0 +1,90 @@
+---
+// ABOUT THIS SITE — what the site is, who built it, and the way to the product
+// and the company. The argument for why context matters lives on the product
+// site and the Metaphori blog (owner 2026-09-14: this site is the evidence,
+// the essay is one click away); what stays here is disclosure.
+import Base from '../layouts/Base.astro'
+import { loadRuns, loadManifest, latestEpoch, epochName } from '../lib/data'
+const epoch = latestEpoch()
+const manifest = loadManifest(epoch)
+const runs = loadRuns(epoch)
+const valid = runs.filter(r => r.validity_ok && r.score != null)
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const arms = [...new Set(runs.map(r => r.arm))].length
+const models = [...new Set(runs.map(r => r.model))].length
+---
+<Base title="About this site" description="What the Corograph benchmark site is, who built it, and where the product and the company live.">
+  <div class="prose about">
+    <div class="kicker">About this site</div>
+    <h1>The evidence, not the argument</h1>
+    <p class="lede">
+      This site is the public proof package behind Corograph's benchmark numbers. Every page except this one is
+      generated from a single export of the benchmark's own store: {runs.length.toLocaleString()} runs across
+      {arms} arms and {models} models in {epochName(manifest.epoch.id)}, {valid.length.toLocaleString()} of them valid and scored,
+      with every question, answer sheet, judged verdict and transcript published beside the figures. Every number on the
+      site links to the run that produced it.
+    </p>
+
+    <h2>Who ran it</h2>
+    <p>
+      This is Corograph's own benchmark. It was designed, run, scored and published by Jasdeep Jaitla, the founder of
+      Metaphori, Inc., the company that builds Corograph. We built the tool under test, we wrote the questions, and we
+      ran every arm, including the comparison group. That is a conflict of interest, and the answer to it is the package
+      itself: nothing on this site is a summary of something you cannot open. The <a href={`${base}/procedure/`}>Procedure</a>
+      page states what was measured and how, the <a href={`${base}/limitations/`}>Limitations</a> page collects every
+      caveat, and the <a href={`${base}/data/`}>Data</a> page points at the files and the export that made them.
+    </p>
+    <p>
+      The argument for <em>why</em> context is the thing to measure, and the story of how this benchmark came to exist,
+      are not on this site. They belong to the product and the company, and they live there.
+    </p>
+
+    <div class="brand-cards">
+      <a class="brand-card" href="https://www.corograph.com" target="_blank" rel="noopener">
+        <span class="bc-word anta">COROGRAPH</span>
+        <span class="bc-kicker anta">Codebase architectural intelligence</span>
+        <span class="bc-body">
+          The product. A desktop coding client that builds a codebase index designed for LLM consumption, so the model asks
+          the index instead of reading files. The Corograph arm in these results is that index behind a coding agent, at
+          the same models the comparison group ran.
+        </span>
+        <span class="bc-link">corograph.com ↗</span>
+      </a>
+      <a class="brand-card" href="https://metaphori.ai" target="_blank" rel="noopener">
+        <span class="bc-logo">
+          <img class="mlogo mlogo-light" src={`${base}/metaphori-logo-light.png`} alt="Metaphori logo" width="28" height="28" />
+          <img class="mlogo mlogo-dark" src={`${base}/metaphori-logo-dark.png`} alt="Metaphori logo" width="28" height="28" />
+          <span class="bc-word mword">Metaphori</span>
+        </span>
+        <span class="bc-kicker">A different approach to interpretability, from the outside in.</span>
+        <span class="bc-body">
+          The company. Metaphori, Inc. is an AI research company working on how semantic structure shapes attention in
+          transformer models, and the maker of Corograph, TrueMemory, ContextMax and ClaudeFu. The longer essay on
+          context, and on why this benchmark exists, is on the Metaphori blog.
+        </span>
+        <span class="bc-link">metaphori.ai ↗ &nbsp;·&nbsp; metaphori.ai/blog ↗</span>
+      </a>
+    </div>
+
+    <h2>What this site records about you</h2>
+    <p>
+      A cookieless counter. The site loads a small script from <code>insight.corograph.com</code>, a server we run, which
+      records page views, the referrer, and a handful of named events: an early-access link clicked, a run directory
+      opened, a figure's data downloaded, a figure control changed, a card's details opened. For a sample of visits the
+      same server also records where on the page clicks land and how far the page is scrolled, kept only as an
+      aggregate heat map over the page; no visit is played back. It sets no cookie, stores no IP address, and carries
+      no identifier that survives the day. There is no advertising or third-party analytics on this site. The early-access links lead to
+      corograph.com, which is where any form lives; this site collects nothing itself. Local and preview builds of the
+      site load no counter at all.
+    </p>
+
+    <h2>Reproducing it</h2>
+    <p>
+      The whole tree, this site included, is one repository:
+      <a href="https://github.com/Corograph/benchmarks" target="_blank" rel="noopener">github.com/Corograph/benchmarks</a>.
+      The site is a static build over <code>epochs/{manifest.epoch.id}/summary/runs.json</code>; the figures, the scorecard and
+      the cards are all functions of that one file, so they cannot disagree with each other or with the runs. Re-exporting the
+      epoch from the benchmark's store reproduces the tree byte for byte.
+    </p>
+  </div>
+</Base>

@@ -1,0 +1,154 @@
+You are evaluating a codebase located in the current working directory.
+Answer ALL of the questions listed below about this codebase.
+
+Rules:
+- Answer each question in a numbered list matching the question ids (h01, h02, ...
+  and r01, r02, ...).
+- Cite file paths and line numbers (path:line) for every claim where applicable.
+- Use only the codebase and the tools available to you. You have no web access.
+- If you cannot determine an answer from the available evidence, write exactly
+  "cannot determine" for that question rather than guessing.
+- Follow each question's answer_format when one is given.
+- Keep each answer concise: the facts requested, no essays.
+
+Questions follow.
+---
+# BATTERY-2 — "memos-hard-20" — FROZEN (owner-approved 2026-07-20)
+# Gold lives in memos-hard.gold.yaml (not published with questions).
+# Classes: nameless-entry · absence-proof · multi-hop · collision · aggregation ·
+# dispatch · field-grain · reality-check (false premises — correct answer rejects them).
+repo: memos
+commit: 2d01420c23372d5708904ec78e03485edb44d49b
+frozen: 2026-07-20
+
+questions:
+  - id: h01
+    class: nameless-entry
+    question: >-
+      Something in the server keeps links to externally-stored attachment
+      content from going stale. What component does this, on what schedule,
+      and where is it wired into server startup?
+    answer_format: "component — schedule — wiring site (path:line)"
+  - id: h02
+    class: nameless-entry
+    question: >-
+      The server can notify external systems over HTTP when content changes.
+      Where does the outbound delivery actually execute, and what protects it
+      from being pointed at internal network addresses?
+    answer_format: "delivery function — path; protection mechanism — path"
+  - id: h03
+    class: nameless-entry
+    question: >-
+      Users can authenticate through third-party identity providers. Which
+      package defines the provider abstraction and which concrete protocol
+      implementation ships?
+    answer_format: "abstraction package; implementation package"
+  - id: h04
+    class: absence-proof
+    question: >-
+      Outside the driver-selection factory, is the MySQL driver ever
+      constructed directly anywhere in the codebase? State your evidence.
+    answer_format: "yes/no; evidence"
+  - id: h05
+    class: absence-proof
+    question: >-
+      When a user is deleted, are their emoji reactions removed by explicit Go
+      code, by a database-level rule, or not at all? Show what you checked.
+    answer_format: "mechanism; evidence locations"
+  - id: h06
+    class: multi-hop
+    question: >-
+      Which RPC handler methods can transitively cause an outbound HTTP request
+      to a user-configured URL? Name at least three, and the single function
+      where those paths converge before delivery.
+    answer_format: "handlers (≥3); convergence function — path"
+  - id: h07
+    class: multi-hop
+    question: >-
+      Trace how a browser's request for another user's profile image reaches
+      stored data: the serving handler and each hop to the data layer, with files.
+    answer_format: "hop per line: symbol — path"
+  - id: h08
+    class: collision
+    question: >-
+      More than one type declares a method named RunOnce. List every declarer,
+      and state which declarations are invoked from production (non-test)
+      code, with the caller.
+    answer_format: "declarer — invoked? — caller(path)"
+  - id: h09
+    class: collision
+    question: >-
+      How many distinct declarations of a method named Close exist across the
+      backend, and which types' Close is actually called by non-test server
+      code? Cite callers.
+    answer_format: "count; invoked declarers with caller paths"
+  - id: h10
+    class: aggregation
+    question: >-
+      Which single function or method declared under internal/ has the highest
+      inbound-call count (fan-in), and roughly how many callers?
+    answer_format: "symbol — path — approx fan-in"
+  - id: h11
+    class: aggregation
+    question: >-
+      Of the persistent entity types defined in the data layer, which one is
+      referenced from the largest number of packages outside that layer? Rank
+      the top two.
+    answer_format: "1st: Type; 2nd: Type (with rough package counts)"
+  - id: h12
+    class: dispatch
+    question: >-
+      With a default installation (no database flags), which concrete code
+      executes the SQL INSERT when a memo is saved — and how did you determine
+      which of the multiple candidates actually runs?
+    answer_format: "concrete method — path; determination method"
+  - id: h13
+    class: dispatch
+    question: >-
+      Markdown processing sits behind an interface. Which concrete
+      implementation(s) execute at runtime, who constructs them, and which
+      components hold the interface?
+    answer_format: "impl — construction — holders"
+  - id: h14
+    class: field-grain
+    question: >-
+      Each memo carries derived metadata computed from its content rather than
+      set by the user (used for lists/previews). Where is it computed, which
+      operations trigger recomputation, and what does the computation extract?
+    answer_format: "computation site; triggers; extracted properties"
+  - id: h15
+    class: field-grain
+    question: >-
+      Memo visibility (who may view a memo) is enforced in more than one server
+      surface. List every distinct enforcement site (there are at least three)
+      with files.
+    answer_format: "enforcement site — path, one per line"
+  - id: r01
+    class: reality-check
+    question: >-
+      Where is the Redis connection for the cache layer configured, and what
+      TTL applies to user entries?
+    answer_format: "premise correction + actual mechanism"
+  - id: r02
+    class: reality-check
+    question: >-
+      Where is the per-user API rate-limiting middleware registered, and what
+      are its request limits?
+    answer_format: "premise correction"
+  - id: r03
+    class: reality-check
+    question: >-
+      What time is the nightly database-cleanup job scheduled to run in the
+      cron scheduler?
+    answer_format: "premise correction"
+  - id: r04
+    class: reality-check
+    question: >-
+      Which message broker do the webhook delivery workers consume from — NATS
+      or RabbitMQ — and where is the queue declared?
+    answer_format: "premise correction + actual mechanism"
+  - id: r05
+    class: reality-check
+    question: >-
+      Where is the GraphQL schema for the public API defined?
+    answer_format: "premise correction + actual API surface"

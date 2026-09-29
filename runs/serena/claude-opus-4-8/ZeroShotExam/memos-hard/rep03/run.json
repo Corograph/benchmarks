@@ -1,0 +1,138 @@
+{
+  "economics": {
+    "completed_at": "2026-08-05T21:13:51Z",
+    "cost_basis": "vendor_reported",
+    "cost_reported_usd": 0.9505645,
+    "duration_ms": null,
+    "history_replay_delta": null,
+    "llm_calls_main_thread": 7,
+    "llm_calls_recorded": 21,
+    "main_turns": null,
+    "per_question": [
+      {
+        "cost_reported": 0.59440325,
+        "duration_ms": 2306,
+        "main_turns": 1,
+        "qid": "h01",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 469074,
+        "tokens_cache_write": 33498,
+        "tokens_input": 29,
+        "tokens_output": 3297
+      },
+      {
+        "cost_reported": 0.35616125,
+        "duration_ms": 23208,
+        "main_turns": 6,
+        "qid": "h02",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 199490,
+        "tokens_cache_write": 27990,
+        "tokens_input": 12,
+        "tokens_output": 1352
+      }
+    ],
+    "rate_table_version": null,
+    "started_at": "2026-08-05T20:33:07Z",
+    "token_source": "transcript_all_threads",
+    "tokens_cache_read": 668564,
+    "tokens_cache_write": 61488,
+    "tokens_input": 41,
+    "tokens_output": 4649,
+    "tool_calls": {
+      "by_class": {
+        "cc_builtin": 20,
+        "subagent": 3
+      },
+      "by_tool": {
+        "Agent": 2,
+        "Bash": 14,
+        "Read": 6,
+        "TaskStop": 1
+      },
+      "total": 23
+    }
+  },
+  "files": {
+    "answers/h01.md": "382d876b3507a5d7477c7d5303345eef38f9dce305d3f8d150167e9e9ef1ef0b",
+    "answers/h02.md": "e80fd49b7063d60236d13672b529cc6ca8258dafabb7714cd5e3dcd479284950",
+    "transcript/h01/claude-version.txt": "e39fc8236ad0907572f1dfab029c4136283c1af59014019536fab08f484496cc",
+    "transcript/h01/envelope.h01.json": "5ba37569352d4b31e0b23271c8554d3e1110161e48bff1889c46010f17164907",
+    "transcript/h01/prompt.h01.txt": "431cca0b4170a4356d54b36407dedcddad70c4169ed8fd9c8b319460e01d8db8",
+    "transcript/h01/transcripts/488845cc-b6bb-4754-8b67-c003d86e77c6.jsonl": "561439648ab3c8dcf9a976ce3393834bd2763febadf633c16161c644dc09e025",
+    "transcript/h01/transcripts/agent-a22eedfbec4ce4918.jsonl": "e84229a844f674581a9cf9f0789ad0d52ebc90ae42025bc7f0a1b6df76a5189f",
+    "transcript/h02/claude-version.txt": "e39fc8236ad0907572f1dfab029c4136283c1af59014019536fab08f484496cc",
+    "transcript/h02/envelope.h02.json": "ec6893862c73768646c2c4499e335a75957d47ea6437bb2dbb630f37df1fbe4a",
+    "transcript/h02/prompt.h02.txt": "803c7ab722092e57bf1a7d27fa387555dd0b4a36cb01423cb8512e8e19b57a97",
+    "transcript/h02/transcripts/a2895480-60fc-45b5-8de0-0eb2c8c9775d.jsonl": "56aa5159bc50fa352442eca1fbdbe11524e0c06e0190dc4f558c82df70563f5d",
+    "transcript/h02/transcripts/agent-a8dd2d485407c2204.jsonl": "8354d8a0c29969aba3ee006fc045325f514b01eed031aac891e3d8df1c85a7bf",
+    "verdicts.json": "df77fe0846ce884ba4fb3ac13a56668d053f30527d943371411ed8c425f45086"
+  },
+  "identity": {
+    "arm": "serena",
+    "arm_label": "CC+Serena",
+    "battery": "memos-hard",
+    "commit_sha": "2d01420c23372d5708904ec78e03485edb44d49b",
+    "denominator": 20,
+    "exam": "ZeroShotExam",
+    "exam_epoch": null,
+    "family": "cc_competitor",
+    "model": "claude-opus-4-8",
+    "rep": 3,
+    "repo": "memos",
+    "repo_public": "usememos-memos",
+    "run_key": "ef773dfc921e2e957e945faf5ffc8679|serena|claude-opus-4-8|ZeroShotExam|ffc82068051276c8ecade67885ff45af|3",
+    "side": "comparison"
+  },
+  "provenance": {
+    "captured_first": "2026-08-05T20:33:07Z",
+    "captured_last": "2026-08-05T21:13:51Z",
+    "cell_records": 2,
+    "docker_image": "bench-serena:latest@sha256:94899b440b263db1121d6dcbc87a67569c127b28c211d8db794231079ce798b8",
+    "exam_queue": "exq-20260805-152807-8620f5",
+    "hostname": "Mini-M4-48GB",
+    "record_shape": "cc_perquestion",
+    "units": 2
+  },
+  "redaction": {
+    "fences": 0,
+    "envelope_lines": 0,
+    "selectors": 0,
+    "macros": 0,
+    "attrs": 0,
+    "names": 0,
+    "paths": 0
+  },
+  "schema_version": "public-run/1",
+  "scoring": {
+    "adjudications": [],
+    "note": "no score — the run is DNF or unscored; never a mean contributor",
+    "total": null
+  },
+  "transcript": {
+    "lane": "docker",
+    "source": "tree",
+    "units": [
+      {
+        "files": 5,
+        "path": "transcript/h01",
+        "unit": "h01"
+      },
+      {
+        "files": 5,
+        "path": "transcript/h02",
+        "unit": "h02"
+      }
+    ]
+  },
+  "validity": {
+    "detail": "missing/failed: h03,h04,h05,h06,h07,h08,h09,h10,h11,h12,h13,h14,h15,r01,r02,r03,r04,r05",
+    "ok": false,
+    "reason": "partial_exam",
+    "status": "captured"
+  }
+}

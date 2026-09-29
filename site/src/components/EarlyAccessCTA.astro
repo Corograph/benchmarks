@@ -1,0 +1,37 @@
+---
+// The early-access handoff. Three variants, one destination: corograph.com/early-access,
+// tagged with the reader's landing ref (captured by the layout script), the page they were
+// on, and which CTA they clicked. The site never carries a form.
+//
+//   nav     one line at the end of the site nav
+//   inline  a card beneath the evidence — home (after the scorecard) and the comparison pages
+//           (beneath the cost-per-correct figure); NEVER on the figure/method/limitations pages,
+//           which stay evidence-only
+//   footer  under every page's content
+import { EARLY_ACCESS_URL } from '../lib/analytics'
+interface Props { variant: 'nav' | 'inline' | 'footer'; page: string; body?: string }
+const { variant, page, body } = Astro.props
+const ctaId = variant === 'inline' ? `inline_${page}` : variant
+// ref + src are appended at click time by the layout script (data-cta marks the link)
+const href = `${EARLY_ACCESS_URL}?src=${encodeURIComponent(page)}&cta=${encodeURIComponent(ctaId)}`
+---
+{variant === 'nav' && (
+  <a class="cta-nav" href={href} data-cta={ctaId} target="_blank" rel="noopener">Early access ↗</a>
+)}
+{variant === 'inline' && (
+  <aside class="cta cta-inline">
+    <div class="cta-kicker">Early access</div>
+    <h3 class="cta-head">Ask Corograph from the harness you already use.</h3>
+    <p class="cta-body">{body ?? '18 to 56% lower cost per correct answer, measured on this page. Early access runs on the same engine.'}</p>
+    <a class="cta-btn" href={href} data-cta={ctaId} target="_blank" rel="noopener">Get early access ↗</a>
+  </aside>
+)}
+{variant === 'footer' && (
+  <footer class="cta cta-footer">
+    <div class="cta-footer-text">
+      <span class="cta-head">Every number here links to its runs. The engine behind them is opening.</span>
+      <span class="cta-body">Epoch-5 is next: a second repository and outside review. Get the results when they publish, or get early access now.</span>
+    </div>
+    <a class="cta-btn" href={href} data-cta={ctaId} target="_blank" rel="noopener">Get early access ↗</a>
+  </footer>
+)}

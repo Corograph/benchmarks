@@ -1,0 +1,316 @@
+[
+  {
+    "qid": "q01",
+    "position": 1,
+    "prompt": "What HTTP method and URL path does the CreateMemo RPC map to in the REST gateway?",
+    "output_structure": "METHOD /path",
+    "difficulty": 1,
+    "categories": [
+      "endpoints"
+    ]
+  },
+  {
+    "qid": "q02",
+    "position": 2,
+    "prompt": "Which SQL dialects does this project ship migrations for?",
+    "output_structure": "comma-separated list",
+    "difficulty": 1,
+    "categories": [
+      "db"
+    ]
+  },
+  {
+    "qid": "q03",
+    "position": 3,
+    "prompt": "Which struct implements the database driver for PostgreSQL, and in which file is it defined?",
+    "output_structure": "StructName — path",
+    "difficulty": 1,
+    "categories": [
+      "types"
+    ]
+  },
+  {
+    "qid": "q04",
+    "position": 4,
+    "prompt": "Which function handles the SignIn RPC on the backend, and in which file?",
+    "output_structure": "Type.Method — path",
+    "difficulty": 1,
+    "categories": [
+      "calls",
+      "endpoints"
+    ]
+  },
+  {
+    "qid": "q05",
+    "position": 5,
+    "prompt": "How many gRPC/Connect services are defined under proto/api/v1, and what are their names?",
+    "output_structure": "count, then names",
+    "difficulty": 1,
+    "categories": [
+      "endpoints"
+    ]
+  },
+  {
+    "qid": "q06",
+    "position": 6,
+    "prompt": "Which database table stores links between one memo and another related memo?",
+    "output_structure": "table name",
+    "difficulty": 1,
+    "categories": [
+      "db"
+    ]
+  },
+  {
+    "qid": "q07",
+    "position": 7,
+    "prompt": "In which frontend source file are the ConnectRPC service clients created?",
+    "output_structure": "path",
+    "difficulty": 1,
+    "categories": [
+      "cross-stack"
+    ]
+  },
+  {
+    "qid": "q08",
+    "position": 8,
+    "prompt": "What is the name of the Go interface that all database backends implement, and where is it defined?",
+    "output_structure": "InterfaceName — path",
+    "difficulty": 1,
+    "categories": [
+      "types"
+    ]
+  },
+  {
+    "qid": "q09",
+    "position": 9,
+    "prompt": "Which proto service exposes the Transcribe RPC?",
+    "output_structure": "ServiceName",
+    "difficulty": 1,
+    "categories": [
+      "endpoints"
+    ]
+  },
+  {
+    "qid": "q10",
+    "position": 10,
+    "prompt": "For a fresh SQLite install, which single file provides the complete current schema?",
+    "output_structure": "path",
+    "difficulty": 1,
+    "categories": [
+      "db"
+    ]
+  },
+  {
+    "qid": "q11",
+    "position": 11,
+    "prompt": "Which API-layer handler function(s) call Store.CreateMemo? Give function and file.",
+    "output_structure": "Type.Method — path, one per line",
+    "difficulty": 2,
+    "categories": [
+      "calls"
+    ]
+  },
+  {
+    "qid": "q12",
+    "position": 12,
+    "prompt": "Trace the ListMemos request path from frontend to SQL: name the frontend hook, the client file, the proto RPC, the backend handler file, the store method file, and one dialect implementation file.",
+    "output_structure": "one hop per line: role — path",
+    "difficulty": 2,
+    "categories": [
+      "cross-stack"
+    ]
+  },
+  {
+    "qid": "q13",
+    "position": 13,
+    "prompt": "The store.Memo struct is being changed. List the packages (or files) that reference this struct and would need review.",
+    "output_structure": "paths or package paths, one per line",
+    "difficulty": 2,
+    "categories": [
+      "impact",
+      "types"
+    ]
+  },
+  {
+    "qid": "q14",
+    "position": 14,
+    "prompt": "List every RPC of ShortcutService and the backend file that implements them.",
+    "output_structure": "RPC names, then the implementing file",
+    "difficulty": 2,
+    "categories": [
+      "endpoints"
+    ]
+  },
+  {
+    "qid": "q15",
+    "position": 15,
+    "prompt": "Which Go structs map to the tables `user`, `attachment`, and `reaction`? Give struct and file for each.",
+    "output_structure": "table: Struct — path",
+    "difficulty": 2,
+    "categories": [
+      "db",
+      "types"
+    ]
+  },
+  {
+    "qid": "q16",
+    "position": 16,
+    "prompt": "When a memo is deleted through the API, which other kinds of records does the store layer delete before the memo row itself?",
+    "output_structure": "list",
+    "difficulty": 2,
+    "categories": [
+      "calls",
+      "db"
+    ]
+  },
+  {
+    "qid": "q17",
+    "position": 17,
+    "prompt": "Which frontend module contains the memo CRUD mutations/queries, and which generated service client does it use?",
+    "output_structure": "path; client name",
+    "difficulty": 2,
+    "categories": [
+      "cross-stack"
+    ]
+  },
+  {
+    "qid": "q18",
+    "position": 18,
+    "prompt": "List the three implementations of the database driver interface (entry file each) and name the factory function + file that selects between them at startup.",
+    "output_structure": "3 × path; then FunctionName — path",
+    "difficulty": 2,
+    "categories": [
+      "types"
+    ]
+  },
+  {
+    "qid": "q19",
+    "position": 19,
+    "prompt": "MemoService is served over TWO protocols. Name both, and give the file(s) where each protocol's registration/wrapping happens.",
+    "output_structure": "protocol — path, twice",
+    "difficulty": 2,
+    "categories": [
+      "cross-stack",
+      "endpoints"
+    ]
+  },
+  {
+    "qid": "q20",
+    "position": 20,
+    "prompt": "The server pushes live events to browsers. What mechanism is used, where is the hub implemented, and which memo handlers broadcast through it?",
+    "output_structure": "mechanism; hub path; handler names",
+    "difficulty": 2,
+    "categories": [
+      "endpoints",
+      "impact"
+    ]
+  },
+  {
+    "qid": "q21",
+    "position": 21,
+    "prompt": "If the signature of Store.GetUser changes, which call sites must be updated? List callers with files.",
+    "output_structure": "caller — path, one per line",
+    "difficulty": 3,
+    "categories": [
+      "calls",
+      "impact"
+    ]
+  },
+  {
+    "qid": "q22",
+    "position": 22,
+    "prompt": "When a memo is created, how are user webhooks notified? Name the dispatch function and file called from the handler, the package that performs the HTTP delivery, and the request-signing mechanism used.",
+    "output_structure": "dispatcher — path; delivery package; signing mechanism",
+    "difficulty": 3,
+    "categories": [
+      "calls"
+    ]
+  },
+  {
+    "qid": "q23",
+    "position": 23,
+    "prompt": "The memo entity's shape is defined at multiple layers. Give the file defining it at each of these layers: SQL schema, Go store model, API proto message, generated frontend types.",
+    "output_structure": "layer: path, one per line",
+    "difficulty": 3,
+    "categories": [
+      "cross-stack",
+      "db"
+    ]
+  },
+  {
+    "qid": "q24",
+    "position": 24,
+    "prompt": "Give the complete call chain for creating a memo, from the frontend mutation hook to the SQL INSERT, naming each hop's file (frontend hook, client, proto RPC, handler, store method, one dialect driver).",
+    "output_structure": "one hop per line: path",
+    "difficulty": 3,
+    "categories": [
+      "calls",
+      "cross-stack"
+    ]
+  },
+  {
+    "qid": "q25",
+    "position": 25,
+    "prompt": "The ListMemos RPC accepts a filter expression. What syntax/engine parses it, where does that engine live, and how does the filter become SQL for each dialect?",
+    "output_structure": "engine + path; mechanism in one sentence",
+    "difficulty": 3,
+    "categories": [
+      "db",
+      "impact"
+    ]
+  },
+  {
+    "qid": "q26",
+    "position": 26,
+    "prompt": "Which database tables are affected (directly or by explicit cascade code) when DeleteMemo runs?",
+    "output_structure": "table list",
+    "difficulty": 3,
+    "categories": [
+      "calls",
+      "db"
+    ]
+  },
+  {
+    "qid": "q27",
+    "position": 27,
+    "prompt": "How does the compiled React frontend get served in production? Name the mechanism and the file where it is wired.",
+    "output_structure": "mechanism; path",
+    "difficulty": 3,
+    "categories": [
+      "cross-stack"
+    ]
+  },
+  {
+    "qid": "q28",
+    "position": 28,
+    "prompt": "What background workers/runners does the server actually START, and what drives each one's scheduling? Note explicitly if any scheduling infrastructure present in the codebase is NOT used by the server.",
+    "output_structure": "runner — trigger, one per line; plus the unused-infra note if any",
+    "difficulty": 3,
+    "categories": [
+      "calls",
+      "impact"
+    ]
+  },
+  {
+    "qid": "q29",
+    "position": 29,
+    "prompt": "How do frontend API requests get authenticated? Name where the auth interceptor lives, what tokens it manages, and the backend package that validates them.",
+    "output_structure": "interceptor path; token kinds; backend package path",
+    "difficulty": 3,
+    "categories": [
+      "cross-stack",
+      "endpoints"
+    ]
+  },
+  {
+    "qid": "q30",
+    "position": 30,
+    "prompt": "Which memo lifecycle events dispatch webhooks, and what are the dispatch function names? Where do all of them converge for delivery?",
+    "output_structure": "event: function, one per line; then the delivery function/path",
+    "difficulty": 3,
+    "categories": [
+      "endpoints",
+      "impact"
+    ]
+  }
+]

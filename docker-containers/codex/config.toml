@@ -1,0 +1,50 @@
+# codex arm — baked hermetic config (CODEX_HOME/config.toml).
+# Every key spelling verified against the rust-v0.148.0 source checkout
+# (lib-ref-code/ta-competitors/codex/codex-rs/config/src/config_toml.rs + features/src/lib.rs)
+# — see design/EXTERNAL-HARNESS-ARMS.md §1.2c and ASSESSMENT-codex-appserver-bench-lane.md.
+#
+# Layer note: this is the $CODEX_HOME layer. Session flags (thread/start params or
+# `-c key=value`) override it — the driver passes per-cell settings explicitly and
+# records them; this file is the arm's DECLARED baseline, hashed into the vintage
+# fingerprint.
+
+# ── Unattended execution ──────────────────────────────────────────────────────
+# "never": sandbox failures return to the MODEL; zero approval round-trips.
+# NEVER use "on-failure": since 0.148 it silently ALIASES to on-request and hangs
+# unattended runs (§1.2c hang trap).
+approval_policy = "never"
+
+# Sandbox mode: OWNER RULED Option A (2026-08-25) — the CONTAINER is the sandbox
+# boundary (identical posture to every CC arm: permission-bypassed inside docker;
+# no arm carries an inner sandbox = cross-arm parity, and no hidden cost from
+# sandbox-blocked commands burning turns). Empirical basis: codex's bundled
+# bubblewrap cannot create user namespaces under default docker privileges
+# (probed 2026-08-25); danger-full-access removes the dead inner sandbox.
+# Non-interactive by construction: full access + approval "never" = zero
+# approval round-trips. Disclosed per cell as arm config.
+sandbox_mode = "danger-full-access"
+
+# ── Context hermeticity ───────────────────────────────────────────────────────
+# Suppress project AGENTS.md discovery (repo-under-test may carry doc files —
+# nothing from the repo may enter the prompt as instructions).
+# The GLOBAL $CODEX_HOME/AGENTS.md is not budget-gated: its suppression is its
+# ABSENCE from this image (enforced by the Dockerfile — no such file is copied).
+project_doc_max_bytes = 0
+
+# ── Network-reaching defaults — ALL explicitly OFF (§1.2c: four are ON by default)
+# Web search falls back to CACHED when unset — must be explicit.
+web_search = "disabled"
+check_for_update_on_startup = false
+
+[features]
+# Apps MCP is built-in, network-reaching, and DEFAULTS ON — kill it.
+apps = false
+
+[analytics]
+enabled = false
+
+[feedback]
+enabled = false
+
+[otel]
+log_user_prompt = false

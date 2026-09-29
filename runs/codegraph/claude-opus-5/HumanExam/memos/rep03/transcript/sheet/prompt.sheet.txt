@@ -1,0 +1,104 @@
+You are evaluating a codebase located in the current working directory.
+Answer ALL of the questions listed below about this codebase.
+
+Rules:
+- Answer each question in a numbered list matching the question ids (q01, q02, ...).
+- Cite file paths and line numbers (path:line) for every claim where applicable.
+- Use only the codebase and the tools available to you. You have no web access.
+- If you cannot determine an answer from the available evidence, write exactly
+  "cannot determine" for that question rather than guessing.
+- Follow each question's answer_format when one is given.
+- Keep each answer concise: the facts requested, no essays.
+
+Questions follow.
+---
+
+q01. What HTTP method and URL path does the CreateMemo RPC map to in the REST gateway?
+answer_format: METHOD /path
+
+q02. Which SQL dialects does this project ship migrations for?
+answer_format: comma-separated list
+
+q03. Which struct implements the database driver for PostgreSQL, and in which file is it defined?
+answer_format: StructName — path
+
+q04. Which function handles the SignIn RPC on the backend, and in which file?
+answer_format: Type.Method — path
+
+q05. How many gRPC/Connect services are defined under proto/api/v1, and what are their names?
+answer_format: count, then names
+
+q06. Which database table stores links between one memo and another related memo?
+answer_format: table name
+
+q07. In which frontend source file are the ConnectRPC service clients created?
+answer_format: path
+
+q08. What is the name of the Go interface that all database backends implement, and where is it defined?
+answer_format: InterfaceName — path
+
+q09. Which proto service exposes the Transcribe RPC?
+answer_format: ServiceName
+
+q10. For a fresh SQLite install, which single file provides the complete current schema?
+answer_format: path
+
+q11. Which API-layer handler function(s) call Store.CreateMemo? Give function and file.
+answer_format: Type.Method — path, one per line
+
+q12. Trace the ListMemos request path from frontend to SQL: name the frontend hook, the client file, the proto RPC, the backend handler file, the store method file, and one dialect implementation file.
+answer_format: one hop per line: role — path
+
+q13. The store.Memo struct is being changed. List the packages (or files) that reference this struct and would need review.
+answer_format: paths or package paths, one per line
+
+q14. List every RPC of ShortcutService and the backend file that implements them.
+answer_format: RPC names, then the implementing file
+
+q15. Which Go structs map to the tables `user`, `attachment`, and `reaction`? Give struct and file for each.
+answer_format: table: Struct — path
+
+q16. When a memo is deleted through the API, which other kinds of records does the store layer delete before the memo row itself?
+answer_format: list
+
+q17. Which frontend module contains the memo CRUD mutations/queries, and which generated service client does it use?
+answer_format: path; client name
+
+q18. List the three implementations of the database driver interface (entry file each) and name the factory function + file that selects between them at startup.
+answer_format: 3 × path; then FunctionName — path
+
+q19. MemoService is served over TWO protocols. Name both, and give the file(s) where each protocol's registration/wrapping happens.
+answer_format: protocol — path, twice
+
+q20. The server pushes live events to browsers. What mechanism is used, where is the hub implemented, and which memo handlers broadcast through it?
+answer_format: mechanism; hub path; handler names
+
+q21. If the signature of Store.GetUser changes, which call sites must be updated? List callers with files.
+answer_format: caller — path, one per line
+
+q22. When a memo is created, how are user webhooks notified? Name the dispatch function and file called from the handler, the package that performs the HTTP delivery, and the request-signing mechanism used.
+answer_format: dispatcher — path; delivery package; signing mechanism
+
+q23. The memo entity's shape is defined at multiple layers. Give the file defining it at each of these layers: SQL schema, Go store model, API proto message, generated frontend types.
+answer_format: layer: path, one per line
+
+q24. Give the complete call chain for creating a memo, from the frontend mutation hook to the SQL INSERT, naming each hop's file (frontend hook, client, proto RPC, handler, store method, one dialect driver).
+answer_format: one hop per line: path
+
+q25. The ListMemos RPC accepts a filter expression. What syntax/engine parses it, where does that engine live, and how does the filter become SQL for each dialect?
+answer_format: engine + path; mechanism in one sentence
+
+q26. Which database tables are affected (directly or by explicit cascade code) when DeleteMemo runs?
+answer_format: table list
+
+q27. How does the compiled React frontend get served in production? Name the mechanism and the file where it is wired.
+answer_format: mechanism; path
+
+q28. What background workers/runners does the server actually START, and what drives each one's scheduling? Note explicitly if any scheduling infrastructure present in the codebase is NOT used by the server.
+answer_format: runner — trigger, one per line; plus the unused-infra note if any
+
+q29. How do frontend API requests get authenticated? Name where the auth interceptor lives, what tokens it manages, and the backend package that validates them.
+answer_format: interceptor path; token kinds; backend package path
+
+q30. Which memo lifecycle events dispatch webhooks, and what are the dispatch function names? Where do all of them converge for delivery?
+answer_format: event: function, one per line; then the delivery function/path

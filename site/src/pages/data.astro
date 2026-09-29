@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro'
+import { loadManifest, latestEpoch, epochName } from '../lib/data'
+import { REPO_URL } from '../lib/roster'
+const epoch = latestEpoch()
+const m = loadManifest(epoch)
+const raw = `${REPO_URL}/blob/main`
+const tree = `${REPO_URL}/tree/main`
+---
+<Base title="Data and reproducibility">
+  <div class="prose">
+  <div class="kicker">Data &amp; reproducibility</div>
+  <h1>Where every number comes from</h1>
+  <p class="lede">The site is a lens over the repository. It is built from four summary files of the proof package and nothing else; the transcripts it links to are the repository's own files.</p>
+
+  <h2>The files the site reads</h2>
+  <table>
+    <thead><tr><th>file</th><th>what it holds</th></tr></thead>
+    <tbody>
+      <tr><td><a href={`${raw}/epochs/${epoch}/summary/runs.json`} target="_blank" rel="noopener"><code>epochs/{epoch}/summary/runs.json</code></a></td><td>one flat row per run: identity, validity, score and fail counts, the four token columns and their source, duration, LLM and tool call counts by class, index-query count, cost basis, path. Every figure is a function of this file.</td></tr>
+      <tr><td><a href={`${raw}/epochs/${epoch}/summary/rate-tables.json`} target="_blank" rel="noopener"><code>epochs/{epoch}/summary/rate-tables.json</code></a></td><td>the USD-per-million-token tables behind every estimated cost, with the formula and the arm dispatch rule.</td></tr>
+      <tr><td><a href={`${raw}/epochs/${epoch}/summary/per-question.csv`} target="_blank" rel="noopener"><code>epochs/{epoch}/summary/per-question.csv</code></a></td><td>pass counts per arm × model × protocol × battery × question — Figure 12.</td></tr>
+      <tr><td><a href={`${raw}/epochs/${epoch}/summary/adoption.json`} target="_blank" rel="noopener"><code>epochs/{epoch}/summary/adoption.json</code></a></td><td>per arm × model × protocol × battery: how many question runs called the arm's codebase index, the index calls, the setup calls excluded (listed per arm), and the same per conversation — Figure 16.</td></tr>
+      <tr><td><a href={`${raw}/epochs/${epoch}/manifest.json`} target="_blank" rel="noopener"><code>epochs/{epoch}/manifest.json</code></a></td><td>every run path with the SHA-256 of its record; the instrument freeze; container image digests; the scope predicate; the scorer era.</td></tr>
+      <tr><td><a href={`${tree}/repositories`} target="_blank" rel="noopener"><code>repositories/…/batteries/*/questions.json</code></a></td><td>the questions with difficulty and categories (the grading key sits beside them).</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Reproducing a figure</h2>
+  <p>Each figure page states its definition and aggregation rule. To recompute one: filter <code>runs.json</code> to the protocol and battery shown, keep rows with <code>validity_ok = true</code> and a non-null <code>score</code>, form cells of arm × battery × model, compute the statistic in each cell, and average cells with equal weight. The data table under every figure carries the per-column value, the number of runs and cells, the minimum, maximum and standard deviation, and links to the run directories.</p>
+  <p>The site's source is in the repository under <code>site/</code>; the build runs on every push and deploys the static output. Nothing is computed at request time.</p>
+
+  <h2>Reproducing the package</h2>
+  <p>The repository tree is the output of <code>tabench export public --epoch N</code> over the benchmark's store. <code>manifest.json</code> lists every run with the SHA-256 of its <code>run.json</code>, and each <code>run.json</code> lists the SHA-256 of every other file in its directory, so the tree is hash-chained from one file. The comparison group's container definitions are in <code>docker-containers/</code> with the image digests each run carries; the Corograph instrument is pinned as a freeze whose version record is in the manifest.</p>
+
+  <h2>Export record</h2>
+  <table>
+    <tbody>
+      <tr><th>epoch</th><td>{epochName(m.epoch.id)} (<code>epochs/{m.epoch.id}/</code>) — {m.epoch.label}</td></tr>
+      <tr><th>export tool</th><td>{m.export_tool.name} {m.export_tool.version} (schema {m.export_tool.schema})</td></tr>
+      <tr><th>scorer era</th><td>{m.scorer_eras.join(', ')}</td></tr>
+      <tr><th>runs in scope</th><td>{m.scope.runs}</td></tr>
+      <tr><th>Corograph predicate</th><td><code>{m.scope.corograph_predicate}</code></td></tr>
+      <tr><th>comparison predicate</th><td><code>{m.scope.comparison_predicate}</code></td></tr>
+      {m.scope.run_selection && <tr><th>run selection</th><td>{m.scope.run_selection}</td></tr>}
+    </tbody>
+  </table>
+  </div>
+</Base>

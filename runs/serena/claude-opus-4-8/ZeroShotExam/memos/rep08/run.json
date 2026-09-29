@@ -1,0 +1,133 @@
+{
+  "economics": {
+    "completed_at": "2026-08-05T21:01:52Z",
+    "cost_basis": "vendor_reported",
+    "cost_reported_usd": 0.548303,
+    "duration_ms": null,
+    "history_replay_delta": null,
+    "llm_calls_main_thread": 8,
+    "llm_calls_recorded": 7,
+    "main_turns": null,
+    "per_question": [
+      {
+        "cost_reported": 0.44582249999999995,
+        "duration_ms": 9155,
+        "main_turns": 3,
+        "qid": "q01",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 77985,
+        "tokens_cache_write": 39730,
+        "tokens_input": 6,
+        "tokens_output": 380
+      },
+      {
+        "cost_reported": 0.1024805,
+        "duration_ms": 12974,
+        "main_turns": 5,
+        "qid": "q02",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 155651,
+        "tokens_cache_write": 819,
+        "tokens_input": 8,
+        "tokens_output": 657
+      }
+    ],
+    "rate_table_version": null,
+    "started_at": "2026-08-05T20:25:25Z",
+    "token_source": "transcript_all_threads",
+    "tokens_cache_read": 233636,
+    "tokens_cache_write": 40549,
+    "tokens_input": 14,
+    "tokens_output": 1037,
+    "tool_calls": {
+      "by_class": {
+        "cc_builtin": 6
+      },
+      "by_tool": {
+        "Bash": 5,
+        "Read": 1
+      },
+      "total": 6
+    }
+  },
+  "files": {
+    "answers/q01.md": "1d5daf3174d899f282f67301427b1103ce66797a0b54fd0c2c9a480fec9aeded",
+    "answers/q02.md": "5e653d2fb9d4334f1c697ba08731232c5d0cc9c3ce2a15973ebad5a93a7cc278",
+    "transcript/q01/claude-version.txt": "e39fc8236ad0907572f1dfab029c4136283c1af59014019536fab08f484496cc",
+    "transcript/q01/envelope.q01.json": "d862b74777cc6a8576f70377fc36e0e4c2dc3907961d9994ac06bc596ed6f85a",
+    "transcript/q01/prompt.q01.txt": "1a7ef27fc1bfcafd6cb4808031204d04d7fe46153d6d2ee78534974a9e21fdd4",
+    "transcript/q01/transcripts/69f90455-48a6-433b-ba29-ccd0c5a25273.jsonl": "e4adc9b21301cd36af4c5a645734f49ee3f0c2ab88573268a2a0742c8194bdb5",
+    "transcript/q02/claude-version.txt": "e39fc8236ad0907572f1dfab029c4136283c1af59014019536fab08f484496cc",
+    "transcript/q02/envelope.q02.json": "be64b6556746fc164a3be7c165678122a3ed0382847c77897838ae656c298c1d",
+    "transcript/q02/prompt.q02.txt": "46dbee95d51c2f7ef3b205d8b89835a23b50d8d8b6c379def5fd71c6b7c7bd4d",
+    "transcript/q02/transcripts/54df8dfa-c01b-4742-900b-0022cab0467f.jsonl": "1561eba91aa7cb53a20f99fd81ff5d42e70a78fcc03982b25671a1a420ca13f5",
+    "verdicts.json": "df77fe0846ce884ba4fb3ac13a56668d053f30527d943371411ed8c425f45086"
+  },
+  "identity": {
+    "arm": "serena",
+    "arm_label": "CC+Serena",
+    "battery": "memos",
+    "commit_sha": "2d01420c23372d5708904ec78e03485edb44d49b",
+    "denominator": 30,
+    "exam": "ZeroShotExam",
+    "exam_epoch": null,
+    "family": "cc_competitor",
+    "model": "claude-opus-4-8",
+    "rep": 8,
+    "repo": "memos",
+    "repo_public": "usememos-memos",
+    "run_key": "ef773dfc921e2e957e945faf5ffc8679|serena|claude-opus-4-8|ZeroShotExam|33ee333a178d3d40bd6a3f99f45d4162|8",
+    "side": "comparison"
+  },
+  "provenance": {
+    "captured_first": "2026-08-05T20:25:25Z",
+    "captured_last": "2026-08-05T21:01:52Z",
+    "cell_records": 2,
+    "docker_image": "bench-serena:latest@sha256:94899b440b263db1121d6dcbc87a67569c127b28c211d8db794231079ce798b8",
+    "exam_queue": "exq-20260805-152807-eacf81",
+    "hostname": "Mini-M4-48GB",
+    "record_shape": "cc_perquestion",
+    "units": 2
+  },
+  "redaction": {
+    "fences": 0,
+    "envelope_lines": 0,
+    "selectors": 0,
+    "macros": 0,
+    "attrs": 0,
+    "names": 0,
+    "paths": 0
+  },
+  "schema_version": "public-run/1",
+  "scoring": {
+    "adjudications": [],
+    "note": "no score — the run is DNF or unscored; never a mean contributor",
+    "total": null
+  },
+  "transcript": {
+    "lane": "docker",
+    "source": "tree",
+    "units": [
+      {
+        "files": 4,
+        "path": "transcript/q01",
+        "unit": "q01"
+      },
+      {
+        "files": 4,
+        "path": "transcript/q02",
+        "unit": "q02"
+      }
+    ]
+  },
+  "validity": {
+    "detail": "missing/failed: q03,q04,q05,q06,q07,q08,q09,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,q30",
+    "ok": false,
+    "reason": "partial_exam",
+    "status": "captured"
+  }
+}

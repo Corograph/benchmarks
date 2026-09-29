@@ -1,0 +1,1170 @@
+[
+  {
+    "qid": "q01",
+    "kind": "correct",
+    "answer": "POST /api/v1/memos",
+    "why": "verified: the exact-form answer — proto/api/v1/memo_service.proto:23 (post: \"/api/v1/memos\").",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q01",
+    "kind": "correct",
+    "answer": "`POST /api/v1/memos` — proto/api/v1/memo_service.proto:21-24",
+    "why": "verified: with markdown and the proto citation — the dominant banked pass shape; extras beyond METHOD /path are fine.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q01",
+    "kind": "incorrect",
+    "answer": "POST /v1/memos",
+    "why": "real banked fail (correctly failed): missing the '/api' prefix — the gateway binding is exactly /api/v1/memos; /v1/memos is a nonexistent route.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q01",
+    "kind": "incorrect",
+    "answer": "PUT /api/v1/memos",
+    "why": "wrong method: the CreateMemo binding is post: (proto :23); PUT is not mapped to this RPC.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q01",
+    "kind": "incorrect",
+    "answer": "POST /memos.api.v1.MemoService/CreateMemo",
+    "why": "wrong surface: that is the Connect/gRPC procedure path, not the REST gateway mapping the question asks for. The gateway REST route is POST /api/v1/memos.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q01",
+    "kind": "partial",
+    "answer": "/api/v1/memos",
+    "why": "FAILS: path right but the METHOD half of the asked 'METHOD /path' output is missing — the question asks for both.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q02",
+    "kind": "correct",
+    "answer": "sqlite, mysql, postgres",
+    "why": "verified: the three migration dirs under store/migration/ at the pin; exact gold form.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q02",
+    "kind": "correct",
+    "answer": "SQLite, PostgreSQL, MySQL (store/migration/{sqlite,postgres,mysql}/)",
+    "why": "verified: reordered, brand-cased, with path evidence — all acceptable variance.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q02",
+    "kind": "incorrect",
+    "answer": "sqlite, mysql, postgres, mssql",
+    "why": "no mssql migrations exist at this commit — store/migration/ contains exactly three dialect directories. An invented fourth dialect fails.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q02",
+    "kind": "incorrect",
+    "answer": "sqlite and mysql",
+    "why": "incomplete: postgres migrations ship too (store/migration/postgres/). Two of three fails a complete-list question.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q03",
+    "kind": "correct",
+    "answer": "DB — store/db/postgres/postgres.go",
+    "why": "verified: the exact gold form; type DB struct at postgres.go:16 implements store.Driver for PostgreSQL.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q03",
+    "kind": "correct",
+    "answer": "`postgres.DB` — store/db/postgres/postgres.go:16-19",
+    "why": "verified: package-qualified with line range — same struct, richer citation grain.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q03",
+    "kind": "incorrect",
+    "answer": "DB — store/db/sqlite/sqlite.go:16",
+    "why": "real banked fail (correctly failed): wrong dialect — sqlite's DB struct, not PostgreSQL's. All three dialect packages name their struct DB, so the file is the discriminator; the question asks for PostgreSQL.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q03",
+    "kind": "incorrect",
+    "answer": "DB — store/db/mysql/mysql.go:14",
+    "why": "real banked fail (correctly failed): the MySQL driver's struct — wrong dialect for the asked PostgreSQL driver (store/db/postgres/postgres.go:16).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q03",
+    "kind": "partial",
+    "answer": "The PostgreSQL driver is the DB struct in the postgres package under store/db.",
+    "why": "PASSES (borderline): struct and package unambiguous ('the postgres package under store/db' = store/db/postgres/); the unspelled filename is missing_minor since the package has one primary file defining DB.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q04",
+    "kind": "correct",
+    "answer": "APIV1Service.SignIn — server/router/api/v1/auth_service.go:51",
+    "why": "verified: the gold form with line anchor — the RPC handler implementation.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q04",
+    "kind": "correct",
+    "answer": "The SignIn RPC is handled by v1.APIV1Service.SignIn in server/router/api/v1/auth_service.go; the generated ConnectServiceHandler.SignIn wrapper (connect_services.go) delegates to it.",
+    "why": "verified: the S4-compliant two-layer form — wrapper mentioned WITH its delegating role, implementation correctly primary.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q04",
+    "kind": "incorrect",
+    "answer": "Router.SignIn — server/router/api/v1/auth_service.go",
+    "why": "real banked fail (correctly failed): no Router type declares SignIn — the method is on APIV1Service. Right file with an invented receiver fails the Type.Method slot.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q04",
+    "kind": "incorrect",
+    "answer": "APIV1Service.CreateMemo — server/router/api/v1/memo_service.go",
+    "why": "real banked fail (correctly failed): wrong RPC entirely — the question asks for SignIn.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q04",
+    "kind": "partial",
+    "answer": "ConnectServiceHandler.SignIn — server/router/api/v1/connect_services.go",
+    "why": "FAILS per S4: the generated wrapper presented as THE handler, with no label of its delegating role and no mention of APIV1Service.SignIn (auth_service.go) — misattribution of the implementation to the generated layer.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q05",
+    "kind": "correct",
+    "answer": "8 — MemoService, AuthService, UserService, AttachmentService, InstanceService, IdentityProviderService, AIService, ShortcutService",
+    "why": "verified: the exact roster; count matches names.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q05",
+    "kind": "correct",
+    "answer": "8 services: AIService (ai_service.proto:11), AttachmentService (attachment_service.proto:15), AuthService (auth_service.proto:13), IdentityProviderService (idp_service.proto:14), InstanceService (instance_service.proto:17), MemoService (memo_service.proto:17), ShortcutService (shortcut_service.proto), UserService (user_service.proto)",
+    "why": "verified: alphabetical with per-file anchors — richer citation grain, same roster.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q05",
+    "kind": "incorrect",
+    "answer": "7 services: MemoService, AttachmentService, AuthService, UserService, InstanceService, ShortcutService, AIService",
+    "why": "real banked fail (correctly failed): omits IdentityProviderService (defined in idp_service.proto — the filename hides the service name). 7 is the characteristic miscount.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q05",
+    "kind": "partial",
+    "answer": "There are 8 services under proto/api/v1: Memo, Auth, User, Attachment, Instance, IdentityProvider, AI, and Shortcut services.",
+    "why": "PASSES (borderline): count right and all eight identified with the 'Service' suffix elided uniformly — unambiguous shorthand, missing_minor formatting.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q06",
+    "kind": "correct",
+    "answer": "memo_relation",
+    "why": "verified: the table linking memo_id to related_memo_id with a type column (store/migration/sqlite/LATEST.sql:47).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q06",
+    "kind": "correct",
+    "answer": "`memo_relation` — store/migration/sqlite/LATEST.sql:47",
+    "why": "verified: with the schema anchor — the dominant banked pass shape.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q06",
+    "kind": "incorrect",
+    "answer": "memo_share",
+    "why": "wrong table: memo_share stores share links (public sharing records), not memo-to-memo relations — that is memo_relation.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q06",
+    "kind": "incorrect",
+    "answer": "memo_links",
+    "why": "no such table exists in any dialect's schema — the relation table is memo_relation.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q07",
+    "kind": "correct",
+    "answer": "web/src/connect.ts",
+    "why": "verified: all ConnectRPC service clients are created there (createClient calls, e.g. memoServiceClient at :197).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q07",
+    "kind": "correct",
+    "answer": "web/src/connect.ts (e.g. memoServiceClient = createClient(MemoService, transport) at connect.ts:197)",
+    "why": "verified: with the creation-call evidence — same answer, anchored.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q07",
+    "kind": "incorrect",
+    "answer": "web/src/hooks/useMemoQueries.ts",
+    "why": "real banked fail (correctly failed): that file IMPORTS and uses memoServiceClient; the clients are CREATED in web/src/connect.ts. Usage site is not creation site.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q07",
+    "kind": "incorrect",
+    "answer": "web/src/grpcweb.ts",
+    "why": "no such file exists — the client-creation module is web/src/connect.ts.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q08",
+    "kind": "correct",
+    "answer": "Driver — store/driver.go:10",
+    "why": "verified: the store.Driver interface (all three dialect DB structs implement it); :9/:10 both accepted per S6.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q08",
+    "kind": "correct",
+    "answer": "store.Driver — store/driver.go:10-86 (implemented by mysql.DB, postgres.DB, sqlite.DB)",
+    "why": "verified: package-qualified with range and implementors — richer grain, same answer.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q08",
+    "kind": "incorrect",
+    "answer": "DBDriver — store/db/db.go",
+    "why": "no DBDriver interface exists — store/db/db.go holds the NewDBDriver factory FUNCTION; the interface all backends implement is Driver in store/driver.go.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q08",
+    "kind": "incorrect",
+    "answer": "sql.DB — database/sql",
+    "why": "wrong layer: sql.DB is the standard-library handle the drivers wrap, not the project's backend interface (store.Driver, store/driver.go).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q09",
+    "kind": "correct",
+    "answer": "AIService",
+    "why": "verified: the Transcribe RPC is defined on AIService (proto/api/v1/ai_service.proto:11-13).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q09",
+    "kind": "correct",
+    "answer": "`AIService` — proto/api/v1/ai_service.proto:11-13",
+    "why": "verified: anchored form.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q09",
+    "kind": "incorrect",
+    "answer": "TranscriptionService",
+    "why": "no such service exists — Transcribe lives on AIService (ai_service.proto).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q09",
+    "kind": "incorrect",
+    "answer": "MemoService",
+    "why": "wrong service: MemoService carries the memo CRUD RPCs; Transcribe is AIService's single RPC.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q10",
+    "kind": "correct",
+    "answer": "store/migration/sqlite/LATEST.sql",
+    "why": "verified: the single consolidated schema file (defines all 11 tables) applied on a fresh SQLite install.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q10",
+    "kind": "incorrect",
+    "answer": "store/seed/sqlite/01__dump.sql",
+    "why": "real banked fail (correctly failed): a seed/demo-data dump, not the schema — the complete current schema is store/migration/sqlite/LATEST.sql.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q10",
+    "kind": "incorrect",
+    "answer": "store/db/sqlite/migrations/LATEST.sql",
+    "why": "real banked fail (correctly failed): invented directory — migrations live under store/migration/\u003cdialect\u003e/, not store/db/\u003cdialect\u003e/migrations/.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q10",
+    "kind": "incorrect",
+    "answer": "store/db/sqlite/sqlite.go",
+    "why": "real banked fail (correctly failed): the driver code file — contains no schema; the schema is the LATEST.sql migration.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q11",
+    "kind": "correct",
+    "answer": "APIV1Service.CreateMemo — server/router/api/v1/memo_service.go",
+    "why": "verified: the sole direct caller (s.Store.CreateMemo at memo_service.go:115); minimal exact form.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q11",
+    "kind": "correct",
+    "answer": "APIV1Service.CreateMemo — server/router/api/v1/memo_service.go:70 (calls s.Store.CreateMemo at :115). CreateMemoComment reaches it only indirectly, by invoking the RPC-layer s.CreateMemo (memo_service_comments.go:56); the generated ConnectServiceHandler.CreateMemo wrapper likewise delegates.",
+    "why": "verified: the full-disclosure form — direct caller primary, both indirect paths correctly LABELED as indirect per the accepted variants.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q11",
+    "kind": "incorrect",
+    "answer": "APIV1Service.CreateMemo — server/router/api/v1/memo_service.go\nAPIV1Service.CreateMemoComment — server/router/api/v1/memo_service_comments.go",
+    "why": "real banked fail (correctly failed): lists CreateMemoComment as a DIRECT caller of Store.CreateMemo — the explicitly flagged wrong claim; it calls the RPC-layer s.CreateMemo, not the store method.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q11",
+    "kind": "incorrect",
+    "answer": "ConnectServiceHandler.CreateMemo — server/router/api/v1/connect_services.go",
+    "why": "real banked fail (correctly failed): the generated wrapper presented as the direct caller with no delegation label — S4 misattribution.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q11",
+    "kind": "incorrect",
+    "answer": "APIV1Service.CreateMemo — server/router/api/v1/connect_services.go",
+    "why": "real banked fail (correctly failed): right method name, wrong file — APIV1Service.CreateMemo lives in memo_service.go; connect_services.go holds the generated wrappers.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q11",
+    "kind": "partial",
+    "answer": "APIV1Service.CreateMemo — server/router/api/v1/memo_service.go:70\nConnectServiceHandler.CreateMemo — server/router/api/v1/connect_services.go (generated wrapper, delegates to the above)",
+    "why": "PASSES: direct caller present and primary; the wrapper included WITH its delegation label — exactly the S4-acceptable presentation.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q12",
+    "kind": "correct",
+    "answer": "hook — web/src/hooks/useMemoQueries.ts:112 (useMemos)\nclient — web/src/connect.ts:197 (memoServiceClient)\nrpc — proto/api/v1/memo_service.proto:29 (ListMemos)\nhandler — server/router/api/v1/memo_service.go:178\nstore — store/memo.go:116\ndialect — store/db/sqlite/memo.go:54",
+    "why": "verified end-to-end (this chain is independently confirmed by call-graph traversal at the pin): all six hops, source-proto rpc rendering, sqlite dialect.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q12",
+    "kind": "correct",
+    "answer": "frontend hook: useMemos/useInfiniteMemos — web/src/hooks/useMemoQueries.ts:112,122\nclient: memoServiceClient — web/src/connect.ts:197\nproto RPC: MemoService.ListMemos — proto/gen/api/v1/apiv1connect/memo_service.connect.go\nbackend handler: APIV1Service.ListMemos — server/router/api/v1/memo_service.go:178\nstore method: Store.ListMemos — store/memo.go:116\ndialect: mysql — store/db/mysql/memo.go:62",
+    "why": "verified: both hook variants, a generated wire-contract rendering for the rpc hop (S3-accepted), mysql dialect variant — a differently-grained member of the same correct basin.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q12",
+    "kind": "incorrect",
+    "answer": "hook — web/src/hooks/useMemoQueries.ts (useMemos)\nclient — web/src/connect.ts\nrpc — proto/api/v1/memo_service.proto (ListMemos)\nhandler — server/router/api/v1/memo_service.go\nstore — store/driver.go\ndialect — store/db/sqlite/memo.go",
+    "why": "real banked fail (the dominant class, correctly failed): the store hop cites store/driver.go — the INTERFACE declaration — instead of store/memo.go where Store.ListMemos (:116) actually lives. Driver.ListMemos is the dispatch contract, not the store method file the question asks for.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q12",
+    "kind": "incorrect",
+    "answer": "hook — web/src/hooks/useMemoQueries.ts:112\nclient — web/src/connect.ts:197\nrpc — memo_service.proto (ListMemos)\nhandler — server/router/api/v1/connect_services.go\nstore — store/driver.go\ndialect — store/db/sqlite/memo.go",
+    "why": "real banked fail (correctly failed): two hops wrong — the handler cites only the generated wrapper file (connect_services.go, unlabeled) and the store hop cites the interface. The real handler file is memo_service.go; the store method file is store/memo.go.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q12",
+    "kind": "incorrect",
+    "answer": "hook — web/src/hooks/useMemoQueries.ts\nclient — web/src/connect.ts\nrpc — MemoService.ListMemos\nhandler — server/router/api/v1/memo_service.go\ndialect — store/db/sqlite/memo.go",
+    "why": "missing hop: the store method file (store/memo.go) is absent entirely — five of six hops is an incomplete trace for a question enumerating six roles.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q12",
+    "kind": "partial",
+    "answer": "hook — web/src/hooks/useMemoQueries.ts:112 (useMemos)\nclient — web/src/connect.ts:197\nrpc — proto/api/v1/memo_service.proto (ListMemos)\nhandler — server/router/api/v1/connect_services.go:314 (ConnectServiceHandler.ListMemos, generated wrapper) delegating to APIV1Service.ListMemos — server/router/api/v1/memo_service.go:178\nstore — store/memo.go:116\ndialect — store/db/postgres/memo.go",
+    "why": "PASSES: wrapper included WITH its delegation label AND the real handler file present — the S4-style acceptable presentation; postgres dialect variant fine.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q12",
+    "kind": "partial",
+    "answer": "useMemos (useMemoQueries.ts) → memoServiceClient (connect.ts) → ListMemos RPC → memo_service.go handler → memo.go store → sqlite/memo.go",
+    "why": "PASSES (borderline): all six hops present in arrow form with abbreviated paths — each is unambiguous within this repo (useMemoQueries.ts, connect.ts, memo_service.go, memo.go, sqlite/memo.go resolve uniquely); the rpc hop names the identity without a file, which S3 tolerates at minimum grain. Missing directory prefixes = missing_minor.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q13",
+    "kind": "correct",
+    "answer": "server/router/api/v1 (memo_service.go, memo_service_converter.go, memo_service_comments.go, memo_update_helpers.go, memo_mention_helpers.go, memo_batch_helpers.go, memo_attachment_service.go, memo_relation_service.go, memo_share_service.go, reaction_service.go, sse_event_helpers.go, common.go, user_service_notifications.go)\nstore/db/sqlite, store/db/mysql, store/db/postgres (memo.go, memo_relation.go, memo_share.go in each)\nstore/ (memo.go and friends)\nserver/runner/memopayload/runner.go\nserver/router/rss/rss.go\nserver/notification/email.go\nproto/gen/store/memo.pb.go",
+    "why": "verified: the gold roster at file grain — handler package, all three dialects, memopayload, rss, email, and the generated proto file.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q13",
+    "kind": "correct",
+    "answer": "Packages needing review: server/router/api/v1 · store (and store/db/sqlite, store/db/mysql, store/db/postgres) · server/runner/memopayload · server/router/rss · server/notification · server/router/fileserver (fileserver.go uses Store.GetMemo and reads memo.Visibility/CreatorID for attachment permission) · server/router/frontend (sitemap generation lists memos) · proto/gen/store.",
+    "why": "verified: the COMPLETE truth including fileserver (fileserver.go:666-699) and frontend (frontend.go:149) — both reference store.Memo in production code; this answer shape was misgraded as fabrication under the current gold and is in fact the most complete correct answer in the bank.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q13",
+    "kind": "incorrect",
+    "answer": "server/router/api/v1 and store/ — the handler package and the store package are the only places the struct appears.",
+    "why": "coverage failure: misses all three dialect dirs (each dialect's memo.go builds store.Memo rows), memopayload, rss, notification, and the generated proto — the blast radius is far wider than two packages.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q13",
+    "kind": "incorrect",
+    "answer": "server/router/api/v1 · store/db/{sqlite,mysql,postgres} · server/runner/memopayload · internal/webhook (the webhook payload embeds the memo) · internal/idp · server/auth",
+    "why": "true fabrication examples: internal/webhook's payload carries the PROTO v1pb.Memo, not store.Memo; internal/idp and server/auth have no store.Memo references at all. These are the genuinely-wrong additions the zero-fabrication rule should catch (unlike fileserver/frontend, which DO reference it).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q13",
+    "kind": "partial",
+    "answer": "server/router/api/v1 · store/db/sqlite · store/db/mysql · store/db/postgres · server/runner/memopayload · server/router/rss",
+    "why": "PASSES (borderline): the required core (api/v1 + 3 dialects + memopayload) plus one of the second tier (rss) — under the rubric's 'at least TWO of {rss, email, proto/gen/store}' this sits one short; ruling it PASS-side because the core coverage is complete and nothing is fabricated. If the owner holds the two-of-three line strictly, this flips — boundary explicitly at the second-tier count.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q13",
+    "kind": "partial",
+    "answer": "Everything under server/ and store/ references memos and needs review.",
+    "why": "FAILS: directionally true-sounding but useless as a review list — no specific packages, sweeps in packages with no store.Memo reference (server/auth, internal via server), and satisfies none of the rubric's named coverage. A blast-radius question needs the actual radius.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:07Z"
+  },
+  {
+    "qid": "q14",
+    "kind": "correct",
+    "answer": "ListShortcuts, GetShortcut, CreateShortcut, UpdateShortcut, DeleteShortcut — server/router/api/v1/shortcut_service.go",
+    "why": "verified: all five RPCs and the implementing file; matches the handler roster at the pin (shortcut_service.go:49-284).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q14",
+    "kind": "correct",
+    "answer": "RPCs: ListShortcuts, GetShortcut, CreateShortcut, UpdateShortcut, DeleteShortcut (proto/api/v1/shortcut_service.proto:18-48). Implemented in server/router/api/v1/shortcut_service.go (handlers at :49, :95, :135, :211, :284).",
+    "why": "verified: with proto and per-handler anchors — richer grain, same roster.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q14",
+    "kind": "incorrect",
+    "answer": "ListShortcuts, GetShortcut, CreateShortcut, UpdateShortcut, DeleteShortcut — server/router/api/v1/connect_services.go",
+    "why": "real banked fail (correctly failed, S4): connect_services.go holds the generated wrappers; the implementations live in shortcut_service.go. Unlabeled wrapper citation is misattribution.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q14",
+    "kind": "incorrect",
+    "answer": "ListShortcuts, CreateShortcut, UpdateShortcut, DeleteShortcut — server/router/api/v1/shortcut_service.go",
+    "why": "incomplete roster: GetShortcut is missing — the question says 'every RPC' and the service defines five.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q14",
+    "kind": "partial",
+    "answer": "ListShortcuts, GetShortcut, CreateShortcut, UpdateShortcut, DeleteShortcut — routed through the generated ConnectServiceHandler (connect_services.go), implemented in server/router/api/v1/shortcut_service.go.",
+    "why": "PASSES: wrapper mentioned WITH its routing role and the real implementing file present — the S4-acceptable presentation.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q15",
+    "kind": "correct",
+    "answer": "user: User — store/user.go:29\nattachment: Attachment — store/attachment.go:16\nreaction: Reaction — store/reaction.go:7",
+    "why": "verified: the three store-layer structs with their declaration anchors.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q15",
+    "kind": "incorrect",
+    "answer": "user: User — proto/gen/api/v1/user_service.pb.go; attachment: Attachment — proto/gen/api/v1/attachment_service.pb.go; reaction: Reaction — proto/gen/api/v1/memo_service.pb.go",
+    "why": "wrong layer: those are generated WIRE types (apiv1.*). The structs that map to the database tables are the store-layer ones (store/user.go, store/attachment.go, store/reaction.go).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q15",
+    "kind": "partial",
+    "answer": "user: store.User; attachment: store.Attachment; reaction: store.Reaction — all in the store package.",
+    "why": "PASSES (borderline): all three structs right, package-qualified; per-file paths elided but each store/\u003centity\u003e.go is unambiguous. Missing paths = missing_minor.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q16",
+    "kind": "correct",
+    "answer": "memo_relation rows and attachment rows (then the memo row itself) — store/memo.go:140-159.",
+    "why": "verified: the store-layer deletion order — relations (both directions) then attachments then the memo.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q16",
+    "kind": "correct",
+    "answer": "Before the memo row, Store.DeleteMemo removes: (1) memo_relation rows where the memo is source, (2) memo_relation rows where it is the related target, (3) attachment rows for the memo (store/memo.go:140-159). Additionally, the API handler cascade-deletes comment memos first (memo_service.go:567-577), and memo_share rows go by the database's ON DELETE CASCADE rather than store code.",
+    "why": "verified: the full-disclosure form including both accepted extras with correct attribution of each mechanism to its layer.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q16",
+    "kind": "incorrect",
+    "answer": "Nothing — the store layer deletes only the memo row; related records are removed by database CASCADE constraints (memo_share).",
+    "why": "real banked fail (correctly failed): store.DeleteMemo explicitly deletes relation and attachment rows first (store/memo.go:140-159) — 'nothing explicit' contradicts source; only memo_share is cascade-handled.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q16",
+    "kind": "incorrect",
+    "answer": "Comment memos — DeleteMemo recursively deletes each comment memo before the memo row.",
+    "why": "real banked fail (correctly failed): comment cascade lives in the API HANDLER (memo_service.go:567-577), not the store layer the question asks about; and it omits the store's actual deletions (relations + attachments).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q16",
+    "kind": "partial",
+    "answer": "memo_relation, attachment, reaction, and memo_share rows are all removed before the memo.",
+    "why": "FAILS: the two real store deletions are present but reactions are NOT deleted by store.DeleteMemo (they are not touched on memo deletion at the store layer) and memo_share is DB-cascade, not a store deletion — two over-inclusions misattribute mechanisms.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q16",
+    "kind": "partial",
+    "answer": "The store deletes the memo's relations and its attachments first.",
+    "why": "PASSES: both required record kinds, minimal form; missing anchor = missing_minor.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q17",
+    "kind": "correct",
+    "answer": "web/src/hooks/useMemoQueries.ts; memoServiceClient",
+    "why": "verified: the CRUD hooks module (useMemos/useCreateMemo/useUpdateMemo/useDeleteMemo...) calling memoServiceClient (created in web/src/connect.ts:197).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q17",
+    "kind": "correct",
+    "answer": "web/src/hooks/useMemoQueries.ts; it uses the MemoService client created in web/src/connect.ts",
+    "why": "verified: S6-accepted class-name form with connect.ts cited — instance-vs-class of the same client.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q17",
+    "kind": "incorrect",
+    "answer": "web/src/connect.ts; memoServiceClient",
+    "why": "slot confusion: connect.ts CREATES the clients — the module containing the memo CRUD mutations/queries is web/src/hooks/useMemoQueries.ts.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q17",
+    "kind": "incorrect",
+    "answer": "web/src/store/memoStore.ts; memoServiceClient",
+    "why": "no such module — memo CRUD is react-query hooks in useMemoQueries.ts, not a store module.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q18",
+    "kind": "correct",
+    "answer": "store/db/sqlite/sqlite.go\nstore/db/mysql/mysql.go\nstore/db/postgres/postgres.go\nFactory: NewDBDriver — store/db/db.go:14",
+    "why": "verified: the three driver entry files and the selecting factory (switch on profile.Driver at db.go:14+).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q18",
+    "kind": "incorrect",
+    "answer": "store/db/sqlite/sqlite.go, store/db/mysql/mysql.go, store/db/postgres/postgres.go; factory: NewDB — store/db/mysql/mysql.go",
+    "why": "factory misidentified: NewDB is each dialect's own constructor — the function that SELECTS between them at startup is db.NewDBDriver (store/db/db.go:14).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q18",
+    "kind": "incorrect",
+    "answer": "store/db/sqlite/sqlite.go, store/db/mysql/mysql.go; factory: NewDBDriver — store/db/db.go",
+    "why": "incomplete: only two of the three implementations listed (postgres missing).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q18",
+    "kind": "partial",
+    "answer": "The three drivers are the DB structs in store/db/sqlite, store/db/mysql, and store/db/postgres; NewDBDriver in store/db/db.go picks one based on the configured driver at startup.",
+    "why": "PASSES (borderline): all three implementations at package grain plus the correct factory and file; entry filenames elided but unambiguous (each package's eponymous file). Missing filenames = missing_minor.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q19",
+    "kind": "correct",
+    "answer": "gRPC-Gateway (REST/JSON) — server/router/api/v1/v1.go (RegisterMemoServiceHandlerServer at :108)\nConnectRPC — server/router/api/v1/connect_handler.go (NewMemoServiceHandler mounted at :40)",
+    "why": "verified: both protocols with their registration files and call anchors.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q19",
+    "kind": "correct",
+    "answer": "Connect — server/router/api/v1/connect_handler.go (with the ConnectServiceHandler wrappers in connect_services.go)\ngRPC-Gateway — server/router/api/v1/v1.go",
+    "why": "verified: order-reversed with the wrapping file included alongside the registration file — the gold's own (+ connect_services.go) form.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q19",
+    "kind": "incorrect",
+    "answer": "gRPC — proto/gen/api/v1/memo_service_grpc.pb.go:439 (RegisterMemoServiceServer)\nConnect — proto/gen/api/v1/apiv1connect/memo_service.connect.go",
+    "why": "real banked fail (correctly failed): both slots cite GENERATED stub files, not the server's registration sites; and the served protocol pair is gateway-REST + Connect — plain gRPC service registration is not mounted on the HTTP server.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q19",
+    "kind": "incorrect",
+    "answer": "REST — server/router/api/v1/v1.go; SSE — server/router/api/v1/sse_hub.go",
+    "why": "wrong protocol pair: SSE is the live-event push channel, not a MemoService serving protocol — the two protocols are gRPC-Gateway REST and ConnectRPC.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q19",
+    "kind": "partial",
+    "answer": "gRPC-Gateway — server/router/api/v1/v1.go:108\nConnect — server/router/api/v1/connect_services.go:314",
+    "why": "FAILS (judge precedent): the Connect slot cites only the wrapping layer (connect_services.go) and omits the registration file (connect_handler.go:40) where the protocol is actually mounted. NOTED as a minor boundary: the question says 'registration/wrapping', which makes this arguable — flagged, but the registration-primary ruling stands.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q20",
+    "kind": "correct",
+    "answer": "Server-Sent Events (SSE); hub: server/router/api/v1/sse_hub.go; broadcasting handlers: CreateMemo (memo_service.go:163), UpdateMemo (via dispatchMemoUpdatedSideEffects, memo_update_helpers.go:71), DeleteMemo (:585), CreateMemoComment (memo_service_comments.go:126), UpsertMemoReaction (reaction_service.go:106), DeleteMemoReaction (:161).",
+    "why": "verified: mechanism, hub, and all six gold sites with anchors.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q20",
+    "kind": "correct",
+    "answer": "SSE (Server-Sent Events) — hub in server/router/api/v1/sse_hub.go. Broadcasters: CreateMemo, UpdateMemo, DeleteMemo, CreateMemoComment — plus SetMemoAttachments and SetMemoRelations, which reach the same broadcast through dispatchMemoUpdatedSideEffects (memo_update_helpers.go:71), and the reaction handlers UpsertMemoReaction/DeleteMemoReaction.",
+    "why": "verified: the COMPLETE transitive truth — all six gold sites plus the two Set* handlers that call the same broadcasting helper UpdateMemo uses (memo_attachment_service.go:48, memo_relation_service.go:48). Under current gold this shape was failed as fabrication; source says it is the most complete correct answer.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q20",
+    "kind": "incorrect",
+    "answer": "SSE; hub: server/router/api/v1/sse.go; broadcasters: DispatchMemoCreatedWebhook, DispatchMemoUpdatedWebhook, DispatchMemoDeletedWebhook.",
+    "why": "real banked fail (correctly failed): wrong hub filename (sse_hub.go, not sse.go) and the listed functions are the WEBHOOK dispatchers — a different notification channel entirely; none of them is an SSE broadcast site.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q20",
+    "kind": "incorrect",
+    "answer": "WebSockets; hub: server/router/api/v1/sse_hub.go; CreateMemo, UpdateMemo, DeleteMemo.",
+    "why": "wrong mechanism: the hub is Server-Sent Events (one-way HTTP streaming, sse_hub.go/sse_handler.go), not WebSockets. The mechanism slot is a required fact.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q20",
+    "kind": "partial",
+    "answer": "Server-Sent Events; hub: server/router/api/v1/sse_hub.go; broadcast from CreateMemo (memo_service.go:163), DeleteMemo (:585), and CreateMemoComment (memo_service_comments.go:126).",
+    "why": "FAILS: mechanism and hub right, but only THREE of the roster's sites — the rubric requires \u003e=4 (UpdateMemo-via-helper and the two reaction handlers are all missing). The most common real fail shape.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q20",
+    "kind": "partial",
+    "answer": "SSE; server/router/api/v1/sse_hub.go; CreateMemo, UpdateMemo, DeleteMemo, CreateMemoComment, UpsertMemoReaction, DeleteMemoReaction, plus SetMemoRelations via the shared update-side-effects helper.",
+    "why": "PASSES: seven of the eight gold_rev 2 roster sites — SetMemoRelations now CREDITS toward the count per the ruling (memo_relation_service.go:48 calls the broadcasting helper).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:38:05Z"
+  },
+  {
+    "qid": "q21",
+    "kind": "correct",
+    "answer": "SignIn — server/router/api/v1/auth_service.go:56\nfetchCurrentUser — auth_service_session.go:251\nSSO login — auth_service_sso.go:90 and :161\nsetup — instance_service.go:334\nResolveUserByName — server/router/api/v1/user_resource_name.go:54 (GetUser/UpdateUser/DeleteUser and other handlers route through this helper)\nAuthenticateByRefreshToken — server/auth/authenticator.go:87\nresolveBearer — authenticator.go:159\nserveUserAvatar path — server/router/fileserver/fileserver.go:716\nRSS — server/router/rss/rss.go:126\nemail notifications — server/notification/email.go:60,68\nPAT lookup — store/user_setting.go:135",
+    "why": "verified: the full 12-site roster across all seven packages, including the pilot-amended PAT-lookup site and the ResolveUserByName helper correctly framed as the funnel.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q21",
+    "kind": "correct",
+    "answer": "auth.Authenticator.AuthenticateByRefreshToken — server/auth/authenticator.go\nauth.Authenticator.resolveBearer — server/auth/authenticator.go\nAPIV1Service.SignIn — server/router/api/v1/auth_service.go\nfetchCurrentUser — server/router/api/v1/auth_service_session.go\nSSO (two sites) — server/router/api/v1/auth_service_sso.go\nGetInstanceAdmin/setup — server/router/api/v1/instance_service.go\nResolveUserByName — server/router/api/v1/user_resource_name.go\nfileserver getUserByUsername — server/router/fileserver/fileserver.go\nrss — server/router/rss/rss.go\nemail — server/notification/email.go\nstore PAT lookup — store/user_setting.go",
+    "why": "verified: function-name grain without line numbers — all twelve sites present at \u003e=9 threshold with zero misattributions; line-free citations acceptable when functions are named.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q21",
+    "kind": "incorrect",
+    "answer": "SignIn — auth_service.go; fetchCurrentUser — auth_service_session.go; SSO — auth_service_sso.go (2); authenticator.go (2 sites); rss.go; email.go; ResolveUserByName — user_resource_name.go; PLUS: ConnectServiceHandler.GetUser — connect_services.go; mysql.DB.UpdateUser — store/db/mysql/user.go (calls d.GetUser).",
+    "why": "real fail shape (correctly failed): TWO misattributions — the generated GetUser wrapper and the mysql-driver d.GetUser distractor (Driver.GetUser member grain, not a Store.GetUser call site) — exceeding the one-misattribution allowance.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q21",
+    "kind": "incorrect",
+    "answer": "Store.GetUser callers: user_service.go (GetUser handler), user_service.go (UpdateUser), user_service.go (DeleteUser), auth_service.go (SignIn), test helpers in store/test.",
+    "why": "misses most of the roster AND misattributes: the user_service handlers do NOT call Store.GetUser directly — they route through ResolveUserByName (user_resource_name.go:54); test helpers are not production sites. Under 9-of-12 with multiple misattributions.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q21",
+    "kind": "partial",
+    "answer": "auth_service.go:56 · auth_service_session.go:251 · auth_service_sso.go:90,:161 · instance_service.go:334 · user_resource_name.go:54 · authenticator.go:87,:159 · rss/rss.go:126 · email.go:60,68 — plus the mysql driver's internal d.GetUser call in store/db/mysql/user.go.",
+    "why": "PASSES (borderline): ten real sites (\u003e=9 met; fileserver and user_setting missing) with exactly ONE misattribution (the mysql distractor) — inside the rubric's explicit allowance of at most one.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q21",
+    "kind": "partial",
+    "answer": "SignIn (auth_service.go) · SSO login (auth_service_sso.go, 2) · authenticator.go (2) · rss.go · email.go (2)",
+    "why": "FAILS: eight sites at best (counting the doubles), below the \u003e=9 threshold — session fetch, instance setup, ResolveUserByName, fileserver, and the PAT lookup are all missing. Clean but incomplete.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q22",
+    "kind": "correct",
+    "answer": "DispatchMemoCreatedWebhook — server/router/api/v1/memo_service_webhooks.go; delivery via internal/webhook (PostAsync); HMAC-SHA256 with each webhook's signing secret.",
+    "why": "verified: all three slots in gold form.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q22",
+    "kind": "correct",
+    "answer": "Dispatcher: DispatchMemoCreatedWebhook (memo_service_webhooks.go:15, called from the CreateMemo handler at memo_service.go:157) → dispatchMemoRelatedWebhook builds the payload per user webhook → delivery by the internal/webhook package (PostAsync enqueues, Post delivers). Signing: HMAC per the Standard Webhooks scheme (SHA-256) using each webhook's SigningSecret.",
+    "why": "verified: full-chain form — helper correctly positioned as delegation target, call-site extra, S6-accepted signing wording.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q22",
+    "kind": "incorrect",
+    "answer": "DispatchMemoCreatedWebhook — server/router/api/v1/memo_service.go:157; internal/webhook; HMAC-SHA256",
+    "why": "real banked fail (correctly failed): :157 is where the handler CALLS the dispatcher — the dispatcher itself lives in memo_service_webhooks.go. The file slot asks where the dispatch function is.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q22",
+    "kind": "incorrect",
+    "answer": "dispatchWebhooksTx — server/router/api/v1/memo_service.go; internal/webhook; HMAC-SHA256 signing",
+    "why": "real banked fail (correctly failed): no dispatchWebhooksTx exists — an invented function name in the wrong file.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q22",
+    "kind": "incorrect",
+    "answer": "DispatchMemoCreatedWebhook — memo_service_webhooks.go; delivery by server/webhook; signed with a bearer token in the Authorization header.",
+    "why": "two slots wrong: the delivery package is internal/webhook (no server/webhook exists), and signing is HMAC-SHA256 over the payload with the per-webhook secret — not bearer auth.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q22",
+    "kind": "partial",
+    "answer": "dispatchMemoRelatedWebhook — server/router/api/v1/memo_service_webhooks.go:48; internal/webhook; HMAC-SHA256.",
+    "why": "FAILS (judge precedent): names ONLY the internal shared helper — the function the HANDLER calls is DispatchMemoCreatedWebhook (:15); right file and other slots cannot rescue the wrong dispatcher identity.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q23",
+    "kind": "correct",
+    "answer": "SQL schema: store/migration/sqlite/LATEST.sql:33 (CREATE TABLE memo)\nGo store model: store/memo.go:35 (type Memo struct)\nAPI proto message: proto/api/v1/memo_service.proto:198 (message Memo)\ngenerated frontend types: web/src/types/proto/api/v1/memo_service_pb.ts:79",
+    "why": "verified: all four layers with anchors — the gold form.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q23",
+    "kind": "correct",
+    "answer": "sql: store/migration/mysql/LATEST.sql (memo table)\nstore model: store/memo.go\napi proto: proto/gen/api/v1/memo_service.pb.go (message Memo; source proto/api/v1/memo_service.proto)\nfrontend: web/src/types/proto/api/v1/memo_service_pb.ts",
+    "why": "verified: mysql-dialect schema row (the memo table is defined in every dialect's LATEST.sql — dialect-neutral per the flagged dispute) and an S3-accepted generated rendering on the proto row with the source named.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q23",
+    "kind": "incorrect",
+    "answer": "sql: store/db/sqlite/memo.go\nstore model: store/memo.go\napi proto: proto/api/v1/memo_service.proto\nfrontend: web/src/types/proto/api/v1/memo_service_pb.ts",
+    "why": "SQL-layer row wrong: store/db/sqlite/memo.go is the driver CODE that queries the table — the schema is defined in the migration file (store/migration/*/LATEST.sql).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q23",
+    "kind": "incorrect",
+    "answer": "sql: store/migration/sqlite/LATEST.sql\nstore model: proto/gen/store/memo.pb.go\napi proto: proto/api/v1/memo_service.proto\nfrontend: web/src/types/proto/api/v1/memo_service_pb.ts",
+    "why": "store-model row wrong: proto/gen/store/memo.pb.go is the generated PAYLOAD wire type — the Go store model is the Memo struct in store/memo.go (:35), which embeds the payload.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q23",
+    "kind": "partial",
+    "answer": "SQL: any dialect's LATEST.sql under store/migration/ · Go model: store/memo.go · proto: memo_service.proto · frontend: the generated memo_service types under web/src/types/proto.",
+    "why": "PASSES (borderline): all four layers identified; paths abbreviated but each resolves uniquely (memo_service.proto → proto/api/v1/; the frontend types dir has one memo_service file). Abbreviation = missing_minor.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q24",
+    "kind": "correct",
+    "answer": "web/src/hooks/useMemoQueries.ts:178 (useCreateMemo)\nweb/src/connect.ts:197 (memoServiceClient)\nproto/api/v1/memo_service.proto:21 (rpc CreateMemo)\nserver/router/api/v1/memo_service.go:70 (APIV1Service.CreateMemo)\nstore/memo.go:109 (Store.CreateMemo)\nstore/db/sqlite/memo.go:16 (INSERT)",
+    "why": "verified: the primary six-hop chain with anchors.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q24",
+    "kind": "correct",
+    "answer": "web/src/components/MemoEditor/hooks/useMemoSave.ts\nweb/src/components/MemoEditor/services/memoService.ts (memoServiceClient.createMemo at :120)\nproto/api/v1/memo_service.proto (CreateMemo)\nserver/router/api/v1/memo_service.go\nstore/memo.go\nstore/db/postgres/memo.go",
+    "why": "verified: the pilot-amended MemoEditor chain — source-verified equal per the 07-18 amendment; postgres dialect variant fine.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q24",
+    "kind": "incorrect",
+    "answer": "web/src/hooks/useMemoQueries.ts\nweb/src/connect.ts\nproto/api/v1/memo_service.proto\nserver/router/api/v1/memo_service.go\nstore/driver.go\nstore/db/sqlite/memo.go",
+    "why": "real banked fail (the dominant class, correctly failed): store/driver.go is the INTERFACE — the store-method hop is Store.CreateMemo in store/memo.go (:109). Same interface-for-implementation substitution as q12's fail class.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q24",
+    "kind": "incorrect",
+    "answer": "web/src/hooks/useMemoQueries.ts\nweb/src/connect.ts\nproto/api/v1/memo_service.proto\nserver/router/api/v1/memo_service.go\nstore/db/sqlite/memo.go",
+    "why": "missing hop: five lines for a six-hop chain — the store-method file (store/memo.go) is absent entirely.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q24",
+    "kind": "partial",
+    "answer": "useCreateMemo (web/src/hooks/useMemoQueries.ts) → memoServiceClient (web/src/connect.ts) → CreateMemo RPC (memo_service.connect.go rendering) → APIV1Service.CreateMemo (server/router/api/v1/memo_service.go) → Store.CreateMemo (store/memo.go) → mysql INSERT (store/db/mysql/memo.go)",
+    "why": "PASSES: all six hops in arrow form, S3-accepted generated rendering on the rpc hop, mysql dialect variant — a valid basin member in a different structure.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q25",
+    "kind": "correct",
+    "answer": "CEL-like filter expressions; engine in internal/filter/; each dialect's ListMemos renders the parsed filter into dialect-specific WHERE clauses.",
+    "why": "verified: the gold form — engine family, package location, per-dialect rendering mechanism.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q25",
+    "kind": "correct",
+    "answer": "CEL (Common Expression Language) via github.com/google/cel-go — internal/filter/engine.go (with render.go/schema.go/parser.go). Mechanism: Engine.Compile parses the filter into an AST/condition tree, and each dialect's ListMemos implementation renders it to that dialect's SQL WHERE clause via filter.AppendConditions with the dialect parameter.",
+    "why": "verified: the detailed form — library named, files enumerated, two-stage mechanism with the dialect-parameter detail.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q25",
+    "kind": "incorrect",
+    "answer": "The filter is a SQL WHERE fragment validated by a sanitizer in server/router/api/v1/memo_service_query.go and passed through to the database.",
+    "why": "wrong on all three parts: the filter is a CEL expression, the engine lives in internal/filter/, and it is COMPILED and re-rendered per dialect — never passed through as SQL. memo_service_query.go handles order_by parsing, not filters.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q25",
+    "kind": "partial",
+    "answer": "A CEL engine in internal/filter parses the expression.",
+    "why": "FAILS: engine and location right but the third asked part — how the filter becomes SQL for each dialect — is absent, and the question names it explicitly.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q26",
+    "kind": "correct",
+    "answer": "memo_relation, attachment, memo",
+    "why": "verified: the three tables the store's delete path touches (relations both directions, attachments, then the memo row — store/memo.go:140-159). Order free.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q26",
+    "kind": "correct",
+    "answer": "memo, memo_relation, attachment — plus memo_share, which goes by the database's FK ON DELETE CASCADE (the schema's only cascade rule, sqlite LATEST.sql:108) rather than explicit code.",
+    "why": "verified: the amended full form — memo_share included WITH its DB-cascade mechanism correctly attributed (pilot amendment #3).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q26",
+    "kind": "incorrect",
+    "answer": "memo, memo_relation, attachment, reaction",
+    "why": "S6 explicit fail: DeleteMemo does NOT delete reactions — it only reads them for the payload. This is the observed real misattribution the ruling names.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q26",
+    "kind": "incorrect",
+    "answer": "Only the memo table — related records are cleaned up by background jobs.",
+    "why": "double fabrication: the store explicitly deletes memo_relation and attachment rows first (store/memo.go:140-159), and no cleanup background job exists (the scheduler is dead code).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q26",
+    "kind": "partial",
+    "answer": "memo and memo_relation.",
+    "why": "FAILS: attachment rows are also explicitly deleted before the memo (store/memo.go) — two of three required tables is incomplete.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q27",
+    "kind": "correct",
+    "answer": "Go embed (//go:embed dist/*) with SPA-fallback middleware — server/router/frontend/frontend.go",
+    "why": "verified: the gold form — compile-time embedding of the dist build, served with SPA fallback from frontend.go (:20-21 directive).",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q27",
+    "kind": "correct",
+    "answer": "The compiled frontend is embedded into the Go binary via the //go:embed dist/* directive (embed.FS) and served by Echo static middleware with an SPA fallback — wired in server/router/frontend/frontend.go:20-57.",
+    "why": "verified: mechanism spelled through the serving stack — same answer, richer grain.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q27",
+    "kind": "incorrect",
+    "answer": "In production the frontend is served by nginx from the web/dist directory, configured in the deployment manifests; the Go server only serves the API.",
+    "why": "fabrication: the Go binary itself serves the frontend from the embedded FS (frontend.go) — no nginx layer exists in this codebase and the server is not API-only.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q27",
+    "kind": "partial",
+    "answer": "The dist build is compiled into the server binary and served by the frontend router package.",
+    "why": "PASSES (borderline): mechanism (compile-time embedding) and location (the frontend router package = server/router/frontend/) both identified descriptively; the go:embed name and exact file are missing_minor.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q28",
+    "kind": "correct",
+    "answer": "The server starts exactly one background runner: s3presign — driven by its own 12-hour time.Ticker plus an immediate RunOnce at boot (started in startBackgroundRunners, server/server.go:153-174). Explicitly NOT used: internal/scheduler — a complete cron framework with zero imports from server code. And memopayload, despite living in server/runner/, is not a started runner — handlers call RebuildMemoPayload inline (memo_service.go:108).",
+    "why": "verified: s3presign-only with both traps explicitly disarmed — the full-credit shape.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q28",
+    "kind": "correct",
+    "answer": "s3presign runner — 12h ticker (server/runner/s3presign/runner.go:27), started at server/server.go:162-171. That is the only server-started runner. Unused infrastructure: the internal/scheduler cron package is never imported by the server. (Import-time extras, labeled as such: the internal/webhook package starts 4 delivery goroutines in init(), and each cache starts a cleanup ticker — neither is server-started.)",
+    "why": "verified: the S5-compliant extras form — init-time goroutines included WITH the import-time/not-server-started label, both traps handled.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q28",
+    "kind": "incorrect",
+    "answer": "The server starts two runners: s3presign (12h ticker) and memopayload (rebuilds memo payloads on a periodic schedule), both from startBackgroundRunners.",
+    "why": "trap (b) taken: startBackgroundRunners starts ONLY s3presign — memopayload.Runner is never started anywhere; its RebuildMemoPayload function is called inline per-request. The runner/ directory location is the bait.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q28",
+    "kind": "incorrect",
+    "answer": "Background jobs are registered with the internal/scheduler cron framework at startup; the s3presign refresh runs as a scheduled cron job every 12 hours.",
+    "why": "trap (a) taken: internal/scheduler has zero imports from server code — nothing registers jobs with it; s3presign runs on a plain time.Ticker goroutine, not cron.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q28",
+    "kind": "partial",
+    "answer": "Runners: s3presign — 12h ticker; webhook delivery workers — 4 goroutines; cache cleanup — 5-minute ticker.",
+    "why": "FAILS per S5: the webhook goroutines (init-time) and cache tickers are listed as server-started runners WITHOUT the import-time label — the unlabeled over-inclusion the honesty trap defines. Labeled, the same content passes.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q28",
+    "kind": "partial",
+    "answer": "Only the s3presign runner is started by the server, on a 12-hour ticker.",
+    "why": "PASSES (borderline): s3presign-only is correct and the trap-avoidance is implicit in 'only' — but full credit requires at least one trap avoided EXPLICITLY (naming the unused scheduler or the inline memopayload). Ruling this minimal form pass-side on the 'only' exclusivity; answers below this (no exclusivity claim) fail.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q29",
+    "kind": "correct",
+    "answer": "web/src/connect.ts; JWT access + refresh tokens; server/auth",
+    "why": "verified: the minimal three-slot gold form.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q29",
+    "kind": "correct",
+    "answer": "Interceptor: web/src/connect.ts:156-178 (authInterceptor). Tokens: JWT access tokens (short-lived, Authorization: Bearer), JWT refresh tokens (long-lived, cookie), plus personal access tokens (PAT). Validated by the server/auth package (Authenticator).",
+    "why": "verified: anchored form with the S6-accepted PAT extra and token transport details.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q29",
+    "kind": "incorrect",
+    "answer": "Auth is handled by a session cookie set at login; each hook checks the cookie before calling the API; the backend validates sessions in server/router/api/v1.",
+    "why": "wrong model on all three slots: auth rides an interceptor in connect.ts attaching JWT bearer tokens (with refresh flow), and token validation lives in server/auth — not per-hook checks, not handler-package validation.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q29",
+    "kind": "partial",
+    "answer": "The auth interceptor in web/src/connect.ts attaches the access token and refreshes it on 401; tokens are validated by the backend.",
+    "why": "FAILS (borderline): interceptor slot right and both token kinds implied, but the third asked slot — WHICH backend package validates (server/auth) — is answered only as 'the backend'. The question names the slot explicitly.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q30",
+    "kind": "correct",
+    "answer": "created: DispatchMemoCreatedWebhook\nupdated: DispatchMemoUpdatedWebhook\ndeleted: DispatchMemoDeletedWebhook\ncomment created: DispatchMemoCommentCreatedWebhook\nAll in server/router/api/v1/memo_service_webhooks.go; all converge on internal/webhook's PostAsync for delivery.",
+    "why": "verified: all four events with exact dispatcher names and the PostAsync convergence.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q30",
+    "kind": "correct",
+    "answer": "memos.memo.created → DispatchMemoCreatedWebhook; memos.memo.updated → DispatchMemoUpdatedWebhook; memos.memo.deleted → DispatchMemoDeletedWebhook; memos.memo.comment.created → DispatchMemoCommentCreatedWebhook (memo_service_webhooks.go). The three memo-event dispatchers share dispatchMemoRelatedWebhook; the comment dispatcher enqueues directly — every path converges at webhook.PostAsync (internal/webhook/webhook.go:184).",
+    "why": "verified: activity-string form with the internal topology correctly described — including why PostAsync (not the shared helper) is the true convergence.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q30",
+    "kind": "incorrect",
+    "answer": "created: OnMemoCreated; updated: OnMemoUpdated; deleted: OnMemoDeleted — hooks in server/router/api/v1/webhooks.go, delivered by the events package.",
+    "why": "invented names and files: the dispatchers are DispatchMemo*Webhook in memo_service_webhooks.go; no webhooks.go, no events package exists.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q30",
+    "kind": "incorrect",
+    "answer": "created/updated/deleted: DispatchMemo{Created,Updated,Deleted}Webhook; comment: DispatchMemoCommentCreatedWebhook; all four converge in dispatchMemoRelatedWebhook before delivery.",
+    "why": "wrong convergence, source-verified: DispatchMemoCommentCreatedWebhook calls webhook.PostAsync directly (memo_service_webhooks.go:43) and never passes through dispatchMemoRelatedWebhook — the function where ALL paths converge is internal/webhook's PostAsync. Same structural fact as battery-hard h06.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  },
+  {
+    "qid": "q30",
+    "kind": "partial",
+    "answer": "created: DispatchMemoCreatedWebhook; updated: DispatchMemoUpdatedWebhook; deleted: DispatchMemoDeletedWebhook — all in memo_service_webhooks.go, converging on webhook.PostAsync.",
+    "why": "PASSES (judge precedent): three of four with the comment event omitted — the gold's own '?' marks it optional; dispatchers and convergence exact.",
+    "adjudicated_by": "memos-agent",
+    "adjudicated_at": "2026-08-05T04:15:08Z"
+  }
+]

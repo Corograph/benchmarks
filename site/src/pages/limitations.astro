@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro'
+import { FIGURES } from '../lib/figures'
+import { loadRuns, loadManifest, latestEpoch } from '../lib/data'
+import { armInfo, armOrder, modelLabel, modelOrder, EXAMS, EXAM_LABEL } from '../lib/roster'
+const epoch = latestEpoch()
+const manifest = loadManifest(epoch)
+const runs = loadRuns(epoch)
+const byArm = [...new Set(runs.map(r => r.arm))].sort(armOrder).map(a => {
+  const rs = runs.filter(r => r.arm === a)
+  const dnf = rs.filter(r => !r.validity_ok)
+  const reasons = [...new Set(dnf.map(r => r.validity_reason))].join(', ')
+  return { arm: armInfo(a), runs: rs.length, dnf: dnf.length, reasons }
+})
+// did-not-finish by model × protocol (every DNF in the epoch, wherever it sits)
+const cell = (m: string, e: string) => {
+  const rs = runs.filter(r => r.model === m && r.exam === e)
+  return { runs: rs.length, dnf: rs.filter(r => !r.validity_ok).length }
+}
+const dnfModels = [...new Set(runs.filter(r => !r.validity_ok).map(r => r.model))].sort(modelOrder)
+const fable = cell('claude-fable-5', 'ZeroShotExam')
+const fableTA = runs.filter(r => r.model === 'claude-fable-5' && r.arm.startsWith('cg-ask')).length
+const haikuHE = cell('claude-haiku-4-5', 'HumanExam')
+const haikuHEta = runs.filter(r => r.model === 'claude-haiku-4-5' && r.exam === 'HumanExam' && r.arm.startsWith('cg-ask'))
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+---
+<Base title="Limitations">
+  <div class="prose">
+  <div class="kicker">Limitations and disclosures</div>
+  <h1>What this benchmark does not show, and what it shows with caveats</h1>
+  <p class="lede">Everything below is also stated where it applies; this page collects it so nothing has to be found.</p>
+
+  <h2>Scope</h2>
+  <p>One repository under test, at one commit, with two question batteries authored by the benchmark's owner. The questions are about code structure and behaviour (endpoints, schema, types, call paths, impact, cross-stack tracing, absence proofs, false premises); they are not a coding task benchmark and say nothing about editing or generating code.</p>
+  <p>One Corograph instrument freeze per epoch. The comparison group is measured as shipped, prompt assets and all; Claude Code cannot be forced to use an installed tool, so what is measured for the indexing tools is organic adoption. That is the measurand, not a limitation of the measurement.</p>
+
+  <h2>Execution asymmetries</h2>
+  <p>The Corograph arm executed on the host through its gateway; the comparison group executed in containers on the same machine. Accuracy, tokens, turns and tool counts are location-independent; wall-clock time is not, and Figure 10 is published for completeness rather than as a claim. Runs executed in parallel lanes shared the host; per-lane contention is not modelled.</p>
+  <p>Cursor Agent's model traffic transits Cursor's backend, and Codex runs inside its own harness loop; both are measured as their vendors ship them. Their token figures are the harness's own per-call usage with the derivation named in each run record.</p>
+
+  <h2>Tokens and cost</h2>
+  <p>Raw token counts are never pooled across vendors, because tokenizers differ; figures split by model whenever a selection spans vendors. Cost is the vendor-reported figure where the harness reported one (Claude Code's own result envelope) and otherwise an estimate from the published rate tables (<code>epochs/…/summary/rate-tables.json</code>) over the run's four token columns — list prices, so an arm on a subscription plan may pay less in practice; every run row names its <code>cost_basis</code>, and a model with no rate row has no cost and never enters a cost mean. Codex reports no cache-write split, so its estimate charges written tokens at the input rate, a disclosed floor.</p>
+
+  <h2>Scoring</h2>
+  <p>Tier T1 is a mechanical token-subset match that can only pass an answer. Tier T2 is an LLM judge under a fixed prompt with per-question exemplars, one candidate per call, whose reason is published beside every verdict; a verdict whose reason contradicts it is retried once and, if still contradictory, marked <code>adjudicate</code> and counted as a fail. The judge is an LLM and can be wrong; the per-question answers and verdicts are published so that any reader can re-grade. Every verdict in the epoch sits under one scorer era.</p>
+
+  <h2>Did-not-finish runs</h2>
+  <p>A run that did not complete every question is published with <code>validity.ok = false</code> and no score. It never enters a mean. The counts per arm in this epoch:</p>
+  <table>
+    <thead><tr><th>arm</th><th class="num">runs</th><th class="num">did not finish</th><th>reasons</th></tr></thead>
+    <tbody>
+      {byArm.map(r => <tr><td><span class="arm-name"><span class="swatch" style={`background:${r.arm.color}`}></span>{r.arm.short}</span></td><td class="num">{r.runs}</td><td class="num">{r.dnf}</td><td class="muted">{r.reasons || '—'}</td></tr>)}
+    </tbody>
+  </table>
+  <p style="margin-top:10px">A partial exam is most often a single question that never completed in a per-question protocol; the run's <code>validity.detail</code> names it. By model and protocol:</p>
+  <table>
+    <thead><tr><th>model</th>{EXAMS.map(e => <th class="num">{EXAM_LABEL[e]} (dnf / runs)</th>)}</tr></thead>
+    <tbody>
+      {dnfModels.map(m => <tr><td>{modelLabel(m)}</td>{EXAMS.map(e => { const c = cell(m, e); return <td class="num">{c.runs ? `${c.dnf} / ${c.runs}` : '—'}</td> })}</tr>)}
+    </tbody>
+  </table>
+
+  <h2>Model-specific caveats</h2>
+  <p><b>Fable 5 refused many questions.</b> At Fable 5 the model declined to answer a large share of the per-question prompts — plain questions about a public codebase's structure, nothing touching security — so those runs did not finish and carry no score: {fable.dnf} of {fable.runs} ZeroShot runs at Fable 5 are did-not-finish across the arms that ran it. Fable 5 is therefore a thin roster in this epoch ({fableTA} Corograph runs in total) and its columns should be read with their n; it is excluded from nothing, but it decides nothing either.</p>
+  <p><b>Haiku 4.5 and the whole-battery protocol.</b> HumanExam presents the entire battery in one prompt, and at Haiku 4.5's 200K-token context window the accumulated tool results of a full battery can exceed the window. {haikuHE.dnf} of {haikuHE.runs} HumanExam runs at Haiku 4.5 did not finish for that reason{haikuHEta.length ? ` (all ${haikuHEta.filter(r => !r.validity_ok).length} on the Corograph arm, whose index results are large)` : ''}. The per-question protocols do not have this exposure and are the ones to read at Haiku 4.5.</p>
+  <p><b>Opus 4.8 in the ZeroShot protocol.</b> The comparison group's ZeroShot runs at Opus 4.8 stop after ten valid repetitions per arm with twenty did-not-finish runs each; the run records carry the failing question in <code>validity.detail</code>. Those runs are published unscored like every other did-not-finish run and never enter a mean.</p>
+
+  <h2>Capture and provenance</h2>
+  <p>Capture gaps are disclosed per run in <code>run.json</code> and are never silently filled. Runs whose units were resumed across hosts or image builds list every vintage. The capture host's name appears in provenance; home directories are normalised; nothing else about the operators' machines is published.</p>
+
+  <h2>What is withheld</h2>
+  <p>The text of the queries the Corograph agent sends to its codebase index and the raw result envelopes, replaced in transcripts by the product's own display sentence with latency and result size; and the internal code names of Corograph components. Comparison-group transcripts are verbatim. The full policy is <code>redaction/POLICY.md</code> in the repository.</p>
+
+  <h2>Per-figure disclosures</h2>
+  {FIGURES.filter(f => f.disclosures?.length).map(f => (
+    <>
+      <h3><a href={`${base}/results/${f.slug}/`}>Figure {f.number} — {f.title}</a></h3>
+      {f.disclosures!.map(d => <p class="disc" style="border-left:3px solid var(--grid);padding-left:12px;color:var(--muted);font-size:13.5px">{d}</p>)}
+    </>
+  ))}
+  </div>
+</Base>

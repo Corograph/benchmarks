@@ -1,0 +1,183 @@
+---
+// BENCHMARK RESULTS — the home page and the scorecard. One verdict per
+// measure × comparator, like for like over the models both arms ran, each
+// cell linking to the figure it summarises. The macro of the site:
+// Results → Overview → Procedure → Comparisons → Figures.
+import Base from '../layouts/Base.astro'
+import { loadRuns, loadManifest, latestEpoch, epochName } from '../lib/data'
+import { buildScorecard, headlines, type Verdict } from '../lib/scorecard'
+import { COMPARISONS } from '../lib/comparisons'
+import EarlyAccessCTA from '../components/EarlyAccessCTA.astro'
+const epoch = latestEpoch()
+const manifest = loadManifest(epoch)
+const runs = loadRuns(epoch)
+const sc = buildScorecard(runs)
+const heads = headlines(sc)
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const MARK: Record<Verdict, string> = { win: '✓', loss: '✗', tie: '≈', none: '—' }
+const WORD: Record<Verdict, string> = { win: 'Corograph better', loss: 'Corograph worse', tie: 'within noise', none: 'not comparable' }
+const total = (id: string) => { const t = sc.tally[id]; return t.win + t.tie + t.loss }
+// gap-strip geometry: a point's position on the card's zoomed axis, in %
+const pos = (v: number, lo: number, hi: number) => Math.max(0, Math.min(100, ((v - lo) / (hi - lo)) * 100))
+// the scope line: questions judged across the valid, scored runs (score + fails —
+// the same count the scorecard cells are built from)
+const scored = runs.filter(r => r.validity_ok && r.score != null)
+const questionsJudged = scored.reduce((a, r) => a + (r.score ?? 0) + (r.fails ?? 0), 0)
+const kQuestions = `${Math.floor(questionsJudged / 1000)}K`
+---
+<Base title="Benchmark Results" description="How Corograph did against every comparator on every measure, like for like at shared models, in one table.">
+  <div class="prose">
+    <div class="kicker">Benchmark results · {epochName(manifest.epoch.id)} · public proof package</div>
+    <h1 class="home-title">Better Context, Better Results</h1>
+    <p class="home-subtitle">How Corograph Compares to Industry Leaders</p>
+    <dl class="home-facts">
+      <dt>Who</dt>
+      <dd><a href="https://metaphori.ai" target="_blank" rel="noopener">Metaphori, Inc.</a>'s <a href="https://www.corograph.com" target="_blank" rel="noopener">Corograph</a> is a codebase intelligence system with LLM-optimized tooling for LLM coding agents. This is our own benchmark: we built the tool, wrote the questions and ran every arm.</dd>
+      <dt>Hypothesis</dt>
+      <dd>LLM coding agents are already capable. Can they perform better if their context is better engineered?</dd>
+      <dt>How</dt>
+      <dd>We built a benchmarking tool to execute and compare apples to apples: a battery of questions presented in three protocols, across tiers of frontier models, with the vendor coding harnesses (Claude Code, Codex, Cursor) and the popular codebase indexing tools, measuring accuracy, variability and token usage.</dd>
+      <dt>Scope</dt>
+      <dd>Over {kQuestions} questions judged mechanically and, where necessary, by a heavily guided LLM judge. Every transcript, answer and verdict is in the <a href="https://github.com/Corograph/benchmarks" target="_blank" rel="noopener">GitHub repository</a>.</dd>
+    </dl>
+  </div>
+
+  <div class="prose">
+    <h2 class="topline">Topline results</h2>
+    <p class="topline-sub">Corograph against every comparator, at the models each of them ran. Open Details for the per-comparator ledger.</p>
+  </div>
+
+  <div class="cards">
+    {heads.map(h => (
+      <div class="card">
+        <span class="card-head">
+          <span class="card-label"><span class="card-cat">{h.category}</span> · {h.label} · {h.direction}</span>
+          <span class="card-headline">{h.headline}</span>
+        </span>
+        <details class="card-details" data-card={h.label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}>
+          <summary><span class="rule"></span><span class="lbl">Details<svg class="caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg></span><span class="rule"></span></summary>
+          <span class="card-sub">{h.sub}</span>
+        <span class="card-ledger">
+          <span class="card-axis"><span>comparator</span><span>{h.axis.loLabel} — {h.axis.hiLabel}</span></span>
+          {h.rows.map(r => {
+            const a = r.ta != null ? pos(r.ta, h.axis.lo, h.axis.hi) : null
+            const b = r.cmp != null ? pos(r.cmp, h.axis.lo, h.axis.hi) : null
+            const sl = r.spanLo != null ? pos(r.spanLo, h.axis.lo, h.axis.hi) : null
+            const sh = r.spanHi != null ? pos(r.spanHi, h.axis.lo, h.axis.hi) : null
+            const far = b ?? sh
+            const gl = a != null && far != null ? Math.min(a, far) : null
+            const gw = a != null && far != null ? Math.abs(far - a) : null
+            return (
+              <span class={'card-row v-' + r.verdict}>
+                <span class="card-line">
+                  <span class="card-mark" aria-label={WORD[r.verdict]}>{MARK[r.verdict]}</span>
+                  <span class="card-name">{r.name}<span class="card-detail">{r.detail}</span></span>
+                  <span class="card-delta">{r.delta}</span>
+                </span>
+                {a != null && (
+                  <span class="card-strip" aria-hidden="true">
+                    <i class="track"></i>
+                    {gl != null && <i class="gap" style={`left:${gl}%;width:${gw}%`}></i>}
+                    {sl != null && sh != null && <i class="span" style={`left:${sl}%;width:${sh - sl}%`}></i>}
+                    {b != null && <i class="dot cmp" style={`left:${b}%`}></i>}
+                    <i class="dot cg" style={`left:${a}%`}></i>
+                  </span>
+                )}
+              </span>
+            )
+          })}
+        </span>
+        <span class="card-legend"><span><i class="dot cg"></i>Corograph</span><span><i class="dot cmp"></i>comparator</span></span>
+        </details>
+        <span class="card-foot">
+          <span class="card-tally">{h.tally}</span>
+          <a class="card-go" href={`${base}/results/${h.figure}/`}>Go to Figure {h.number} →</a>
+        </span>
+      </div>
+    ))}
+  </div>
+
+  <script is:inline>
+    // the six Details fold together (owner 2026-09-14): opening or closing one
+    // opens or closes all — the ledger is one view, not six
+    ;(function () {
+      var all = Array.prototype.slice.call(document.querySelectorAll('details.card-details'))
+      var syncing = false
+      all.forEach(function (d) {
+        d.addEventListener('toggle', function () {
+          if (syncing) return
+          syncing = true
+          all.forEach(function (o) { if (o !== d) o.open = d.open })
+          syncing = false
+          // the one event the "people don't read" design needs: did anyone open the ledger
+          // (fires once per open, naming the card that was clicked; closes are not events)
+          if (d.open) { try { if (window.umami && typeof window.umami.track === 'function') window.umami.track('details_open', { card: d.dataset.card, page_slug: 'home' }) } catch (e) {} }
+        })
+      })
+    })()
+  </script>
+
+  <div class="prose">
+    <p class="muted" style="font-size:13px;margin:18px 0 0">
+      The full scorecard: one verdict per measure and comparator. Every cell compares Corograph and the comparator over the models <em>both</em> ran,
+      pooled with equal weight per protocol × battery × model, on the ZeroShot and MultiTurn protocols over both batteries.
+      Higher is better for accuracy and reliability; lower is better for everything else. Each row links to the figure behind it.
+    </p>
+  </div>
+  <div class="scorecard-wrap">
+    <table class="scorecard">
+      <thead>
+        <tr>
+          <th class="measure">measure</th>
+          {sc.comparators.map(c => <th>vs {c.short}</th>)}
+          <th class="fig">figure</th>
+        </tr>
+      </thead>
+      <tbody>
+        {sc.rows.map(r => (
+          <tr>
+            <td class="measure">
+              <b>{r.fig.short}</b>
+              <span class="sub">{r.fig.measure.label} · {r.fig.measure.better === 'high' ? 'higher is better' : 'lower is better'}{r.fig.disclosures?.length ? <> · <a href={`${base}/results/${r.fig.slug}/#disclosures`}>disclosure</a></> : null}</span>
+            </td>
+            {r.cells.map(c => (
+              <td class={'cell v-' + c.verdict} title={c.detail}>
+                <span class="mark" aria-label={WORD[c.verdict]}>{MARK[c.verdict]}</span>
+                <span class="head">{c.headline}</span>
+                <span class="sub">{c.arm.id === 'best-indexer' ? c.arm.short.replace('Best indexing tool: ', '') + ' · ' : ''}{c.ta == null && c.perModel ? `${c.models.length} shared models, per model` : c.detail}</span>
+              </td>
+            ))}
+            <td class="fig"><a href={`${base}/results/${r.fig.slug}/`}>Figure {r.fig.number} →</a></td>
+          </tr>
+        ))}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td class="measure"><b>Tally</b><span class="sub">measures where Corograph is better · within noise · worse</span></td>
+          {sc.comparators.map(c => { const t = sc.tally[c.id]; return (
+            <td class="cell tally"><span class="head">{t.win} of {total(c.id)}</span><span class="sub">{t.win} better · {t.tie} within noise · {t.loss} worse</span></td>
+          ) })}
+          <td class="fig"></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="prose">
+    <p class="muted" style="font-size:12.5px;margin-top:10px">
+      ✓ Corograph better · ≈ within noise (under 1 point of accuracy, or within 5 % on a ratio) · ✗ Corograph worse. Raw token counts are never pooled
+      across vendors: where the shared roster spans Anthropic and OpenAI models the cell compares per model and reports the range of ratios;
+      hover a cell for the per-model numbers. "Best indexing tool" is the strongest of the five on that row, named in the cell.
+      {sc.slice}.
+    </p>
+
+    <EarlyAccessCTA variant="inline" page="home" />
+
+    <h2>Next level down</h2>
+    <p>The four comparison pages hold the figures for one group of arms each, with the same controls as the figure pages:</p>
+    <ul>
+      {COMPARISONS.map(c => <li><a href={`${base}/compare/${c.slug}/`}>{c.title}</a> — {c.intro[0]}</li>)}
+    </ul>
+    <p><a href={`${base}/procedure/`}>Benchmark Procedure</a> states what was measured and how; the <a href={`${base}/limitations/`}>Limitations</a> page collects every caveat, including the Fable 5 refusals, the Haiku 4.5 context window, and the host-versus-container asymmetry that makes wall time a disclosure rather than a claim; <a href={`${base}/about/`}>About this site</a> says who ran it and where the product and the company live.</p>
+  </div>
+</Base>

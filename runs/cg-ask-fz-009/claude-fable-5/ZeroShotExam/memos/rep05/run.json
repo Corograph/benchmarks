@@ -1,0 +1,235 @@
+{
+  "economics": {
+    "completed_at": "2026-08-07T04:45:38Z",
+    "cost_basis": "not_reported",
+    "cost_reported_usd": null,
+    "duration_ms": null,
+    "history_replay_delta": null,
+    "llm_calls_main_thread": 6,
+    "llm_calls_recorded": 0,
+    "main_turns": null,
+    "per_question": [
+      {
+        "cost_reported": null,
+        "duration_ms": 11706,
+        "main_turns": 2,
+        "qid": "q01",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 14134,
+        "tokens_cache_write": 11727,
+        "tokens_input": 4,
+        "tokens_output": 359
+      },
+      {
+        "cost_reported": null,
+        "duration_ms": 10247,
+        "main_turns": 2,
+        "qid": "q02",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 14108,
+        "tokens_cache_write": 193,
+        "tokens_input": 4,
+        "tokens_output": 166
+      },
+      {
+        "cost_reported": null,
+        "duration_ms": 11072,
+        "main_turns": 2,
+        "qid": "q03",
+        "separable": true,
+        "subagent_threads": 0,
+        "subagent_turns": 0,
+        "tokens_cache_read": 14126,
+        "tokens_cache_write": 2257,
+        "tokens_input": 4,
+        "tokens_output": 295
+      }
+    ],
+    "rate_table_version": null,
+    "started_at": "2026-08-07T04:43:26Z",
+    "token_source": "ledger_all_calls",
+    "tokens_cache_read": 42368,
+    "tokens_cache_write": 14177,
+    "tokens_input": 12,
+    "tokens_output": 820,
+    "tool_calls": {
+      "by_class": {
+        "product_builtin": 1,
+        "product_semantic": 3
+      },
+      "by_tool": {
+        "corograph_query": 3,
+        "grep_content": 1
+      },
+      "total": 4
+    }
+  },
+  "files": {
+    "answers/q01.md": "182bffbe83e537c5db75363d35dfeaa9a658e2aa63153ac0028c759f951df6a6",
+    "answers/q02.md": "00a2594b70b07d20a1d47448f5e606b7323a6ffe823ed6f4a20a4441baa2a925",
+    "answers/q03.md": "67a8bc775347616958fc1bc822b5d7f98d819d2c7de3fa11e4e75359636fff58",
+    "transcript/q01.jsonl": "c3bfae7910028c7a2eb54810caaf7d0a16f8ab2283faebb4094e199331ebe34b",
+    "transcript/q02.jsonl": "18d40a8bad8ed9d2a73946f712bf2ac1eae7e34be04ed2b21e0319bb185a0f47",
+    "transcript/q03.jsonl": "1a7f40c3835c0ec95c496800cb6447f2da5607c3e88304e162e8f6e95e684075",
+    "verdicts.json": "df77fe0846ce884ba4fb3ac13a56668d053f30527d943371411ed8c425f45086"
+  },
+  "identity": {
+    "arm": "cg-ask-fz-009",
+    "arm_label": "Corograph Ask (Ask) @ fz-009",
+    "battery": "memos",
+    "commit_sha": "2d01420c23372d5708904ec78e03485edb44d49b",
+    "denominator": 30,
+    "exam": "ZeroShotExam",
+    "exam_epoch": 4,
+    "family": "product",
+    "model": "claude-fable-5",
+    "rep": 5,
+    "repo": "memos",
+    "repo_public": "usememos-memos",
+    "run_key": "ef773dfc921e2e957e945faf5ffc8679|cg-ask-fz-009|claude-fable-5|ZeroShotExam|33ee333a178d3d40bd6a3f99f45d4162|5",
+    "side": "corograph"
+  },
+  "provenance": {
+    "captured_first": "2026-08-07T04:43:26Z",
+    "captured_last": "2026-08-07T04:45:38Z",
+    "cell_records": 3,
+    "exam_queue": "exq-20260807-042424-bd4619",
+    "examiner_version_live": {
+      "Corograph": {
+        "engine_version": "0.11.8",
+        "module": "v0.11.8",
+        "replace": "../ta-indexer/pkg/Corograph",
+        "surface_content_hash": "dc074c6eb47fc8f6",
+        "surface_min_engine": "0.11.8",
+        "surface_source": "embedded",
+        "surface_version": "2.4.2"
+      },
+      "examiner": {
+        "commit": "994aec27df526222bc53da219a819e2d1c083a37",
+        "go": "go1.26.1",
+        "version": "0.1.13"
+      },
+      "indexer": {
+        "ir_meta_version": "1.0",
+        "ir_schema_version": "1.0",
+        "module": "v1.4.74",
+        "replace": "../ta-indexer",
+        "version": "1.4.74"
+      },
+      "modules": {
+        "connectrpc.com/connect": "v1.19.1",
+        "github.com/Corograph/ta-dev": "v0.0.0 =\u003e ../ta-dev",
+        "github.com/Corograph/ta-indexer": "v1.4.74 =\u003e ../ta-indexer",
+        "github.com/Corograph/ta-indexer/pkg/Corograph": "v0.11.8 =\u003e ../ta-indexer/pkg/Corograph",
+        "github.com/Corograph/ta-proto": "v0.0.7 =\u003e ../ta-proto",
+        "github.com/google/uuid": "v1.6.0",
+        "github.com/scip-code/scip/bindings/go/scip": "v0.7.1",
+        "github.com/sourcegraph/beaut": "v0.0.0-20240611013027-627e4c25335a",
+        "golang.org/x/mod": "v0.35.0",
+        "golang.org/x/net": "v0.53.0",
+        "golang.org/x/sync": "v0.20.0",
+        "golang.org/x/text": "v0.36.0",
+        "golang.org/x/tools": "v0.44.0",
+        "google.golang.org/protobuf": "v1.36.11"
+      },
+      "ta_dev": {
+        "module": "v0.0.0",
+        "replace": "../ta-dev",
+        "version": "0.4.17"
+      },
+      "ta_proto": {
+        "module": "v0.0.7",
+        "replace": "../ta-proto"
+      }
+    },
+    "freeze_id": "fz-009",
+    "gateway_launch_folder": "gateway-0.9.57",
+    "hostname": "Mini-M4-48GB",
+    "record_shape": "gateway_ledger",
+    "surface_dirs": "AGENT-Surface=0.9.54--rev02 · DEV-Surface=0.4.17 · Corograph-Surface=Corograph-v0.11.x-surface-v2.4.2",
+    "tuple": "idx-1.4.74-Corograph-0.11.8-dev-0.4.17",
+    "units": 3
+  },
+  "redaction": {
+    "fences": 0,
+    "envelope_lines": 0,
+    "selectors": 0,
+    "macros": 0,
+    "attrs": 0,
+    "names": 3,
+    "paths": 0
+  },
+  "schema_version": "public-run/1",
+  "scoring": {
+    "adjudications": [],
+    "note": "no score — the run is DNF or unscored; never a mean contributor",
+    "total": null
+  },
+  "transcript": {
+    "lane": "gateway",
+    "source": "tree",
+    "units": [
+      {
+        "chars_source": "result_chars",
+        "path": "transcript/q01.jsonl",
+        "query_calls": 1,
+        "redaction": {
+          "fences": 0,
+          "envelope_lines": 0,
+          "selectors": 0,
+          "macros": 0,
+          "attrs": 0,
+          "names": 1,
+          "paths": 0
+        },
+        "tool_calls": 2,
+        "turns": 1,
+        "unit": "q01"
+      },
+      {
+        "chars_source": "result_chars",
+        "path": "transcript/q02.jsonl",
+        "query_calls": 1,
+        "redaction": {
+          "fences": 0,
+          "envelope_lines": 0,
+          "selectors": 0,
+          "macros": 0,
+          "attrs": 0,
+          "names": 1,
+          "paths": 0
+        },
+        "tool_calls": 1,
+        "turns": 1,
+        "unit": "q02"
+      },
+      {
+        "chars_source": "result_chars",
+        "path": "transcript/q03.jsonl",
+        "query_calls": 1,
+        "redaction": {
+          "fences": 0,
+          "envelope_lines": 0,
+          "selectors": 0,
+          "macros": 0,
+          "attrs": 0,
+          "names": 1,
+          "paths": 0
+        },
+        "tool_calls": 1,
+        "turns": 1,
+        "unit": "q03"
+      }
+    ]
+  },
+  "validity": {
+    "detail": "missing/failed: q04,q05,q06,q07,q08,q09,q10,q11,q12,q13,q14,q15,q16,q17,q18,q19,q20,q21,q22,q23,q24,q25,q26,q27,q28,q29,q30",
+    "ok": false,
+    "reason": "partial_exam",
+    "status": "captured"
+  }
+}

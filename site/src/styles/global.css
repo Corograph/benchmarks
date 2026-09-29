@@ -1,0 +1,373 @@
+/* The report's chrome. The theme follows the OS by default (figures paste into light
+   documents); dark is a toggle. Data colors (the arms) never change with
+   the theme — only chrome does. */
+:root {
+  --surface: #fcfcfb;
+  --surface-2: #f3f3f0;
+  --ink: #1a1b26;
+  --muted: #5b5f73;
+  --faint: #8a8f9c;
+  --grid: #e6e7ec;
+  --baseline: #c9ccd8;
+  --accent: #2b5fbf;
+  --stack-incorrect: #6b4a50;
+  --stack-dnf: #2a2a2e;
+  --card: #fbfaf7;           /* headline cards: paper, per the design handoff */
+  /* Corograph BLUE (owner 2026-09-14): the arm's data color (#3987e5, the dashed
+     reference line in every figure) carries the results page too — headline, Corograph dot,
+     the "+N points" / "N× less" deltas, the wins. --cg = the dot (theme-invariant, a
+     data color); --cg-text = the same hue at reading contrast on each ground. */
+  --cg: #3987e5;
+  --cg-text: #2468cf;
+  /* the ledger's blue — the same hue at roughly half the chroma so the deltas and
+     the dot sit under the headline instead of competing with it */
+  --cg-soft: color-mix(in oklch, var(--cg-text) 50%, #6b7080);
+  --cg-dot: color-mix(in oklch, var(--cg) 50%, #8a8f9c);
+  --ahead: var(--cg-soft);   /* Corograph ahead — was the handoff's green */
+  --behind: #9a3b2f;         /* Corograph behind */
+  --cat: #7a4fb0;            /* the card's category word (Accuracy · Reliability · Efficiency · Consistency): mauve, the blue's contrast */
+  --nav-w: 248px;
+  --brand: Anta, "Source Serif 4", Georgia, serif;   /* the Corograph wordmark (corograph.com) */
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+:root[data-theme="dark"] {
+  --surface: #161826;
+  --surface-2: #1f2131;
+  --ink: #e4e7f5;
+  --muted: #9397ab;
+  --faint: #6c7086;
+  --grid: #292b31;
+  --baseline: #3f424d;
+  --accent: #7cb0ff;
+  --stack-incorrect: #4a3438;
+  --stack-dnf: #222222;
+  --card: #1c1e2c;
+  --cg: #3987e5;
+  --cg-text: #7db4ff;
+  --cg-soft: color-mix(in oklch, var(--cg-text) 50%, #9397ab);
+  --cg-dot: color-mix(in oklch, var(--cg) 50%, #8a8f9c);
+  --ahead: var(--cg-soft);
+  --behind: #e8907e;
+  --cat: #c9a5f2;
+}
+* { box-sizing: border-box; }
+html { background: var(--surface); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+body { margin: 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+h1 { font-size: 30px; margin: 0 0 8px; }
+h2 { font-size: 21px; margin: 40px 0 10px; }
+h3 { font-size: 16px; margin: 26px 0 6px; }
+p { margin: 0 0 12px; max-width: 78ch; }
+code { font-family: var(--mono); font-size: 0.9em; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
+pre { background: var(--surface-2); padding: 12px 14px; border-radius: 6px; overflow: auto; font-size: 12.5px; line-height: 1.45; }
+pre code { background: none; padding: 0; }
+table { border-collapse: collapse; font-size: 12.5px; width: 100%; }
+th, td { text-align: left; padding: 5px 9px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.swatch { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+/* swatch + arm name never break apart: an inline-block is an atomic inline, so a line may otherwise wrap right after it */
+.arm-name { white-space: nowrap; }
+
+/* the home title: the motto large, the comparison line as a subtitle a shade under it */
+.home-title { font-size: 38px; margin: 0 0 4px; }
+.home-subtitle { font-family: var(--serif); font-weight: 500; font-size: 25px; line-height: 1.25; letter-spacing: -0.008em; color: color-mix(in srgb, var(--ink) 92%, var(--muted)); margin: 0 0 14px; max-width: none; }
+@media (max-width: 900px) { .home-title { font-size: 30px; } .home-subtitle { font-size: 20px; } }
+/* Who · Hypothesis · How · Scope — the four lines that frame the results */
+.home-facts { display: grid; grid-template-columns: max-content 1fr; gap: 8px 18px; margin: 16px 0 6px; max-width: 900px; font-size: 15px; line-height: 1.5; }
+.home-facts dt { font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cat); padding-top: 4px; }
+.home-facts dd { margin: 0; color: var(--ink); }
+@media (max-width: 600px) { .home-facts { grid-template-columns: 1fr; gap: 2px 0; } .home-facts dd { margin-bottom: 8px; } }
+
+/* shell */
+.shell { display: grid; grid-template-columns: var(--nav-w) 1fr; min-height: 100vh; }
+.nav { position: sticky; top: 0; height: 100vh; overflow: auto; border-right: 1px solid var(--grid); padding: 22px 18px; background: var(--surface); }
+/* nav scrollbar, uniform across browsers: a thin gutter is always reserved (no layout shift), the
+   thumb is transparent at rest and tinted only while the nav is scrolling (.scrolling is set by a
+   scroll listener and cleared 900ms after the last scroll). Standard properties for Firefox and
+   Chrome 121+ (which then ignore the -webkit- rules); the -webkit- rules cover Safari. */
+.nav { scrollbar-width: thin; scrollbar-color: transparent transparent; transition: scrollbar-color 0.3s; }
+.nav.scrolling { scrollbar-color: color-mix(in srgb, var(--faint) 55%, transparent) transparent; }
+.nav::-webkit-scrollbar { width: 8px; }
+.nav::-webkit-scrollbar-track { background: transparent; }
+.nav::-webkit-scrollbar-thumb { background: transparent; border-radius: 4px; }
+.nav.scrolling::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--faint) 55%, transparent); }
+/* the wordmark, in the product's Anta (corograph.com): the name in ink, the
+   kicker in the Corograph blue at the product site's letter-spacing */
+.nav a.brand { display: flex; flex-direction: column; gap: 3px; padding: 0; margin: 0 0 6px; color: var(--ink); background: none; }
+.nav a.brand:hover { text-decoration: none; }
+.brand-word { font-family: var(--brand); font-size: 26px; letter-spacing: 0.02em; line-height: 1.05; }
+.brand-kicker { font-family: var(--brand); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cg-text); }
+.anta { font-family: var(--brand); letter-spacing: 0.03em; }
+.mword { font-family: var(--sans); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.92em; }
+.mlogo { display: none; width: 16px; height: 16px; vertical-align: -3px; }
+.mlogo-light { display: inline-block; }
+:root[data-theme="dark"] .mlogo-light { display: none; }
+:root[data-theme="dark"] .mlogo-dark { display: inline-block; }
+.brand-sub { font-size: 11px; color: var(--muted); margin-bottom: 18px; }
+.nav h4 { font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); margin: 18px 0 6px; font-weight: 600; }
+.nav a { display: block; padding: 4px 8px; margin: 1px -8px; border-radius: 5px; color: var(--ink); font-size: 13.5px; }
+.nav a.on { background: var(--surface-2); font-weight: 600; }
+.nav a .fig-no { color: var(--faint); font-size: 11px; width: 26px; display: inline-block; }
+.nav .subnav { margin: 2px 0 6px 10px; padding-left: 8px; border-left: 1px solid var(--grid); }
+.nav .subnav a.sub { font-size: 12.5px; color: var(--muted); padding: 3px 8px; }
+.nav .subnav a.sub.on { color: var(--ink); background: var(--surface-2); font-weight: 600; }
+.cmp-figure h2 { scroll-margin-top: 16px; }
+.nav-foot { margin-top: 24px; font-size: 11.5px; color: var(--muted); }
+/* early-access handoff — one destination (corograph.com/early-access), three placements */
+.nav a.cta-nav { margin: 8px -8px 4px; padding: 6px 10px; color: #fff; background: var(--cg); font-weight: 600; border-radius: 6px; text-align: center; }
+.nav a.cta-nav:hover { text-decoration: none; filter: brightness(1.08); }
+.cta { --cta-bg: color-mix(in srgb, var(--cg) 7%, var(--surface)); }
+.cta-inline { max-width: 1180px; margin: 28px 0 8px; padding: 22px 26px; background: var(--cta-bg); border-left: 3px solid var(--cg); border-radius: 0 8px 8px 0; }
+.cta-kicker { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cg-text, var(--accent)); font-weight: 700; margin-bottom: 6px; }
+.cta-head { font-family: var(--serif); font-size: 21px; font-weight: 600; line-height: 1.25; margin: 0 0 6px; }
+.cta-body { font-size: 14.5px; color: var(--muted); max-width: 70ch; margin: 0 0 14px; }
+.cta-btn { display: inline-block; padding: 8px 16px; border-radius: 6px; background: var(--cg); color: #fff; font-weight: 600; font-size: 14px; text-decoration: none; }
+.cta-btn:hover { text-decoration: none; filter: brightness(1.08); }
+.cta-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; max-width: 1180px; margin: 56px 0 0; padding: 20px 26px; background: var(--cta-bg); border-top: 1px solid var(--grid); border-radius: 8px; }
+.cta-footer .cta-head { font-size: 17px; margin: 0 0 3px; display: block; }
+.cta-footer .cta-body { margin: 0; display: block; font-size: 13.5px; }
+@media (max-width: 600px) { .cta-footer { padding: 18px; } .cta-inline { padding: 18px; } }
+/* the way to the product and the company: two brand links under the nav */
+.nav-brands { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--grid); }
+.nav .nav-brands a { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; margin: 0 -8px; font-size: 13px; color: var(--ink); }
+.nav .nav-brands .ext { color: var(--faint); font-size: 11px; }
+
+/* About: the two brand cards */
+.about .brand-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin: 22px 0 8px; max-width: 900px; }
+.about .brand-card { display: flex; flex-direction: column; gap: 8px; padding: 22px 24px; background: var(--card); border-top: 3px solid var(--cg); color: var(--ink); border-radius: 0 0 8px 8px; }
+.about .brand-card:hover { text-decoration: none; box-shadow: 0 0 0 1px color-mix(in srgb, var(--cg) 45%, transparent); }
+.about .bc-word { font-size: 24px; line-height: 1.1; }
+.about .bc-logo { display: inline-flex; align-items: center; gap: 10px; }
+.about .bc-logo .mlogo { width: 28px; height: 28px; vertical-align: 0; }
+.about .bc-logo .bc-word { font-size: 20px; }
+.about .bc-kicker { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cg-text); }
+.about .bc-kicker:not(.anta) { letter-spacing: 0.02em; text-transform: none; font-size: 13px; font-style: italic; color: var(--muted); }
+.about .bc-body { font-size: 14px; line-height: 1.5; color: var(--muted); }
+.about .bc-link { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-top: 4px; }
+/* floating theme switch, top right: cycles light → dark → system; the icon is the mode */
+.theme-fab { position: fixed; top: 14px; right: 16px; z-index: 50; width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; color: var(--muted); background: var(--surface); border: 1px solid var(--grid); border-radius: 50%; cursor: pointer; padding: 0; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
+.theme-fab:hover { color: var(--ink); background: var(--surface-2); }
+.theme-fab .ico { display: none; }
+:root[data-theme-mode="light"] .theme-fab .ico-light { display: block; }
+:root[data-theme-mode="dark"] .theme-fab .ico-dark { display: block; }
+:root[data-theme-mode="system"] .theme-fab .ico-system { display: block; }
+:root:not([data-theme-mode]) .theme-fab .ico-system { display: block; }
+/* The main column is full width (minus the nav); PROSE is held to a reading
+   column, FIGURES stretch to the full width so a wide chart shrinks into the
+   panel instead of scrolling. */
+.main { padding: 36px 48px 80px; min-width: 0; }
+.prose { max-width: 1180px; }
+.figure { width: 100%; }
+.kicker { font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.lede { font-size: 17px; color: var(--ink); max-width: 72ch; }
+/* the comparison roster: what each arm is made of + valid runs per model */
+table.roster { margin: 18px 0 6px; max-width: 980px; }
+table.roster td.muted { color: var(--faint, var(--muted)); }
+.roster-note { font-size: 13px; max-width: 90ch; }
+
+/* figure block */
+.figure { margin: 18px 0 8px; }
+/* a chart that cannot fit its panel SCROLLS at its true size (never scales down —
+   a scaled chart on a phone is unreadable labels floating in whitespace) */
+.chart-wrap svg { display: block; max-width: none; }
+/* one control per line: protocols · battery · model · columns */
+.controls { display: flex; flex-direction: column; gap: 5px; padding: 10px 0 12px; border-top: 1px solid var(--grid); border-bottom: 1px solid var(--grid); margin-bottom: 8px; }
+.seg { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+.seg-name { font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); width: 82px; flex: 0 0 82px; }
+.seg-help { margin: 2px 0 0 82px; font-size: 12px; color: var(--muted); max-width: 90ch; line-height: 1.45; }
+.seg-help b { color: var(--ink); font-weight: 600; }
+.seg-nudge { margin: 4px 0 0 82px; font-size: 12.5px; color: var(--ink); background: var(--surface-2); border: 1px solid var(--grid); border-left: 3px solid var(--accent); border-radius: 6px; padding: 6px 10px; max-width: 90ch; }
+.seg-nudge button { font: inherit; font-size: 12.5px; font-weight: 600; color: var(--accent); background: none; border: none; padding: 0 4px; cursor: pointer; text-decoration: underline; }
+.seg-btn { font: inherit; font-size: 12px; color: var(--muted); background: none; border: 1px solid transparent; border-radius: 5px; padding: 2px 8px; cursor: pointer; }
+.seg-btn.on { background: var(--surface-2); color: var(--ink); border-color: var(--grid); font-weight: 600; }
+.seg-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.chart-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 6px 0 2px; }
+.chart-title { font-family: var(--serif); font-size: 18px; font-weight: 600; }
+.chart-better { font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.chart-slice { font-size: 12px; color: var(--muted); }
+/* the share control: the square-and-arrow glyph at the end of the chart head; copies a link carrying the figure's controls */
+.share-btn { display: inline-flex; align-items: center; gap: 5px; align-self: center; font: inherit; font-size: 11.5px; color: var(--muted); background: none; border: 1px solid transparent; border-radius: 5px; padding: 2px 6px; cursor: pointer; }
+.share-btn:hover { color: var(--ink); border-color: var(--grid); background: var(--surface-2); }
+.share-btn svg { width: 15px; height: 15px; display: block; }
+.share-msg { font-size: 11.5px; color: var(--accent); align-self: center; }
+.chart-wrap { position: relative; overflow-x: auto; }
+.chart-tip { position: absolute; pointer-events: none; background: var(--surface); box-shadow: 0 0 0 1px var(--baseline), 0 4px 14px rgba(0,0,0,0.12); border-radius: 6px; padding: 6px 9px; font-size: 11.5px; z-index: 10; white-space: nowrap; }
+.tip-head { font-weight: 600; }
+.tip-line { color: var(--muted); }
+.chart-note { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
+.caption { font-size: 14px; color: var(--ink); max-width: 84ch; margin: 10px 0 0; }
+.caption b { font-family: var(--serif); }
+.explain p { max-width: 84ch; }
+.explain .disc { border-left: 3px solid var(--grid); padding-left: 12px; color: var(--muted); font-size: 13.5px; }
+details.data { margin-top: 14px; }
+details.data summary { cursor: pointer; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+/* first place in a data table: a faint tint of the arm's own colour (--first, set per row) on the
+   winning row; the arm + role cells that span a split group join in only when the arm is first at
+   every model in the group (tr.first-all), so a partial winner never tints the whole block */
+details.data tr.first > td:not([rowspan]),
+details.data tr.first-all > td[rowspan] { background: color-mix(in srgb, var(--first) 9%, transparent); }
+.table-actions { margin: 4px 0 8px; display: flex; gap: 8px; }
+.table-actions button { font: inherit; font-size: 11.5px; color: var(--muted); background: none; border: 1px solid var(--grid); border-radius: 5px; padding: 2px 8px; cursor: pointer; }
+
+/* summary */
+.key { border: 1px solid var(--grid); border-radius: 8px; padding: 16px 20px; margin: 22px 0; background: var(--surface-2); }
+.key h3 { margin: 0 0 8px; }
+.key ol { margin: 0; padding-left: 20px; }
+.key li { margin-bottom: 6px; max-width: 84ch; }
+/* the headline cards on the Results page — the design handoff's editorial
+   ledger (2026-09-11): top rule, mono label, serif range statement, one ledger
+   row per comparator with a mono delta, tally + figure link. Green =
+   Corograph ahead, grey ≈ = within noise. (The handoff's faint figure
+   numeral was dropped — owner: distracting.) */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 24px 0 10px; max-width: 1180px; }
+.card { position: relative; display: flex; flex-direction: column; gap: 16px; padding: 22px 24px 20px; background: var(--card); border-top: 3px solid var(--cg); color: var(--ink); overflow: hidden; }
+.card-head { position: relative; display: flex; flex-direction: column; gap: 8px; }
+.card-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.card-cat { color: var(--cat); font-weight: 700; }
+.card-headline { font-family: var(--serif); font-size: 34px; line-height: 1.08; letter-spacing: -0.01em; font-weight: 500; color: var(--cg-text); text-wrap: pretty; }
+.card-sub { font-size: 14px; line-height: 1.45; color: var(--muted); text-wrap: pretty; }
+/* the ledger folds behind a "——— Details ⌄ ———" line (owner 2026-09-14): the high
+   level stays quiet, the per-comparator rows open on demand — native <details>,
+   so it works with no script and on every phone */
+.card-details { display: flex; flex-direction: column; gap: 0; }
+.card-details > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cg-soft); user-select: none; }
+.card-details > summary::-webkit-details-marker { display: none; }
+.card-details > summary .rule { flex: 1; height: 1px; background: color-mix(in srgb, var(--cg) 30%, var(--grid)); }
+.card-details > summary .lbl { display: inline-flex; align-items: center; gap: 5px; }
+.card-details > summary .caret { transition: transform 140ms ease; }
+.card-details > summary:hover { color: var(--cg-text); }
+.card-details > summary:hover .rule { background: color-mix(in srgb, var(--cg) 60%, var(--grid)); }
+.card-details[open] > summary .caret { transform: rotate(180deg); }
+.card-details[open] > summary { margin-bottom: 6px; }
+.card-details .card-sub { display: block; margin: 4px 0 12px; font-size: 13.5px; }
+/* the section header between the framing lines and the cards */
+.topline { margin: 30px 0 2px; font-size: 24px; }
+.topline-sub { color: var(--muted); font-size: 14px; margin: 0; }
+.cards { margin-top: 16px; }
+.card-details .card-legend { justify-content: center; font-size: 12px; color: var(--muted); padding-top: 10px; }
+.card-ledger { position: relative; display: flex; flex-direction: column; border-top: 1px solid var(--ink); }
+.card-axis { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 6px 0 2px; }
+.card-row { display: flex; flex-direction: column; gap: 7px; padding: 10px 0; border-bottom: 1px solid var(--grid); font-size: 14px; }
+.card-line { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; }
+/* the gap strip: a thin track, the comparator (grey) and Corograph (green) dots, the gap bar between */
+.card-strip { position: relative; display: block; height: 12px; margin-left: 28px; }
+.card-strip .track { position: absolute; left: 0; right: 0; top: 5px; height: 2px; background: var(--grid); }
+.card-strip .gap { position: absolute; top: 4px; height: 4px; background: color-mix(in srgb, var(--cg-dot) 38%, transparent); }
+.card-strip .span { position: absolute; top: 3px; height: 6px; background: color-mix(in srgb, var(--muted) 25%, transparent); border-radius: 3px; }
+.card-strip .dot, .card-legend .dot { position: absolute; top: 1px; width: 10px; height: 10px; border-radius: 50%; transform: translateX(-50%); }
+.card-strip .dot.cmp { background: var(--baseline); }
+.card-strip .dot.cg { top: 0; width: 12px; height: 12px; background: var(--cg-dot); box-shadow: 0 0 0 2px var(--card); }
+.card-legend { display: flex; gap: 12px; justify-content: center; }
+.card-legend > span { display: inline-flex; align-items: center; gap: 5px; }
+.card-legend .dot { position: static; transform: none; width: 9px; height: 9px; display: inline-block; }
+.card-legend .dot.cg { background: var(--cg-dot); }
+.card-legend .dot.cmp { background: var(--baseline); width: 8px; height: 8px; }
+.card-mark { font-weight: 700; color: var(--muted); }
+.card-row.v-win .card-mark, .card-row.v-win .card-delta { color: var(--ahead); }
+.card-row.v-loss .card-mark, .card-row.v-loss .card-delta { color: var(--behind); }
+.card-name { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.card-detail { font-size: 12px; color: var(--muted); }
+.card-delta { font-family: var(--mono); font-size: 16px; font-weight: 700; white-space: nowrap; color: var(--muted); }
+/* footer: legend / performance tally / the ONE link — stacked and centered (owner 2026-09-14);
+   the card itself is not a link, only the "Go to Figure" line is */
+.card-foot { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: auto; padding-top: 4px; font-size: 12px; color: var(--muted); text-align: center; }
+.card-tally { font-family: var(--mono); white-space: nowrap; }
+.card-go { font-family: var(--mono); font-size: 12.5px; font-weight: 600; color: var(--cg-text); border: 1px solid color-mix(in srgb, var(--cg) 40%, transparent); border-radius: 6px; padding: 5px 12px; margin-top: 2px; }
+.card-go:hover { text-decoration: none; background: color-mix(in srgb, var(--cg) 10%, transparent); border-color: var(--cg); }
+/* the scorecard's win/loss colours follow the cards */
+.scorecard td.v-win { border-left-color: var(--ahead); background: color-mix(in srgb, var(--ahead) 8%, transparent); }
+.scorecard td.v-win .mark { color: var(--ahead); }
+.scorecard td.v-loss { border-left-color: var(--behind); background: color-mix(in srgb, var(--behind) 8%, transparent); }
+.scorecard td.v-loss .mark { color: var(--behind); }
+/* the Results scorecard */
+.scorecard-wrap { overflow-x: auto; margin: 18px 0 6px; }
+.scorecard { border-collapse: separate; border-spacing: 0; font-size: 13px; min-width: 900px; }
+.scorecard th, .scorecard td { border-bottom: 1px solid var(--grid); padding: 10px 12px; vertical-align: top; }
+.scorecard thead th { position: sticky; top: 0; background: var(--surface); }
+.scorecard td.measure, .scorecard th.measure { min-width: 190px; }
+.scorecard td.measure b { font-family: var(--serif); font-size: 15px; }
+.scorecard .sub { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+.scorecard td.cell { min-width: 170px; border-left: 3px solid transparent; }
+.scorecard td.cell .mark { display: inline-block; width: 18px; font-weight: 700; }
+.scorecard td.cell .head { font-weight: 600; color: var(--ink); }
+.scorecard td.v-tie { border-left-color: var(--baseline); }
+.scorecard td.v-tie .mark { color: var(--muted); }
+.scorecard td.v-none .head { color: var(--faint); font-weight: 400; }
+.scorecard tfoot td { border-top: 2px solid var(--baseline); border-bottom: none; background: var(--surface-2); }
+.scorecard td.fig { white-space: nowrap; }
+/* the GitHub call-out on the Benchmark Procedure page */
+.repo-callout { display: flex; align-items: center; gap: 16px; margin: 18px 0 6px; padding: 14px 18px; border: 1px solid var(--grid); border-radius: 10px; color: var(--ink); background: var(--surface-2); max-width: 1180px; }
+.repo-callout:hover { text-decoration: none; border-color: var(--accent); }
+.repo-callout svg { flex: 0 0 auto; color: var(--ink); }
+.repo-callout .rc-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.repo-callout .rc-title { font-family: var(--serif); font-weight: 600; font-size: 16px; }
+.repo-callout .rc-sub { font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+.repo-callout .rc-arrow { margin-left: auto; color: var(--accent); font-size: 18px; flex: 0 0 auto; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 18px 0 8px; }
+.tile { border: 1px solid var(--grid); border-radius: 8px; padding: 12px 14px; }
+.tile .v { font-family: var(--serif); font-size: 26px; font-weight: 600; letter-spacing: -0.02em; }
+.tile .l { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+.fig-link { display: block; border: 1px solid var(--grid); border-radius: 8px; padding: 12px 14px; color: var(--ink); }
+.fig-link:hover { text-decoration: none; background: var(--surface-2); }
+.fig-link .n { color: var(--faint); font-size: 11px; }
+.fig-link .t { font-family: var(--serif); font-weight: 600; font-size: 15px; display: block; }
+.fig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; margin: 12px 0; }
+.cmp-figure { margin-top: 28px; padding-top: 8px; border-top: 1px solid var(--grid); }
+.fig-no-inline { color: var(--faint); font-size: 12px; font-family: var(--sans); font-weight: 500; letter-spacing: 0.04em; margin-right: 8px; }
+/* the essay reads at book width, in the serif, a touch larger */
+/* the essay: a reading column CENTERED in the content area (owner 2026-09-14 — on a
+   wide monitor a left-pinned text column sat awkwardly far left) */
+.essay { max-width: 76ch; margin: 0 auto; }
+.essay .md { font-family: var(--serif); font-size: 17px; line-height: 1.6; }
+.essay .md h1 { font-size: 34px; margin: 6px 0 18px; }
+.essay .md h2 { font-size: 23px; margin-top: 40px; }
+.essay .md p { max-width: none; margin-bottom: 16px; }
+.essay .md code, .essay .md pre { font-family: var(--mono); }
+.essay .md ul { padding-left: 22px; }
+.essay .md li { margin-bottom: 4px; }
+/* pull-quotes: the argument's spine, set to stand out — Corograph blue rule,
+   larger italic serif in ink, on a faint blue ground */
+.essay .md blockquote { margin: 26px 0; padding: 14px 22px; border-left: 4px solid var(--cg); background: color-mix(in srgb, var(--cg) 7%, transparent); border-radius: 0 8px 8px 0; color: var(--ink); }
+.essay .md blockquote p { margin: 0; font-size: 21px; line-height: 1.35; font-style: italic; letter-spacing: -0.005em; text-wrap: pretty; }
+.essay .md blockquote p + p { margin-top: 10px; }
+.md h1 { font-size: 26px; }
+.md h2 { font-size: 19px; }
+.md table { font-size: 12px; margin: 10px 0 18px; }
+.md pre { font-size: 11.5px; }
+/* the hamburger (phones + narrow tablets): the nav becomes a one-line bar — wordmark
+   left, Menu right of it, the theme button in its fixed corner — and the whole
+   menu folds behind the button so the page's content is the first thing seen */
+.nav-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.nav-toggle { display: none; }
+@media (max-width: 900px) {
+  .shell { grid-template-columns: 1fr; }
+  .nav { position: sticky; top: 0; z-index: 40; height: auto; overflow: visible; border-right: none; border-bottom: 1px solid var(--grid); padding: 20px 18px 14px; }
+  /* one line: the Corograph word, the Menu button and the theme button share a
+     centre line (nav padding 12 + half the 23px word line ≈ 23.5px from the top);
+     BENCHMARKS hangs under the word */
+  .nav-head { align-items: flex-start; padding-right: 48px; }   /* room for the theme button */
+  .brand-word { font-size: 22px; line-height: 23px; }
+  .nav-toggle { display: inline-flex; align-items: center; gap: 6px; height: 34px; margin-top: -5.5px; font: inherit; font-size: 13px; font-weight: 600; color: var(--ink); background: var(--surface-2); border: 1px solid var(--grid); border-radius: 7px; padding: 0 10px; cursor: pointer; }
+  .theme-fab { top: 14.5px; right: 16px; }   /* nav padding-top 20 + 11.5 − 17 */
+  .nav-toggle .x { display: none; }
+  .nav.open .nav-toggle .bars { display: none; }
+  .nav.open .nav-toggle .x { display: block; }
+  .nav:not(.open) > :not(.nav-head) { display: none; }
+  .nav.open { max-height: 100vh; overflow: auto; }
+  .nav.open .brand-sub { margin-top: 8px; }
+  .main { padding: 20px 16px 60px; }
+  .seg-help, .seg-nudge { margin-left: 0; }
+  .card-headline { font-size: 30px; }
+  .card-line { grid-template-columns: 18px minmax(0, 1fr) auto; gap: 8px; }
+  .card-delta { font-size: 14px; }
+}
+@media (max-width: 420px) {
+  .card-line { grid-template-columns: 18px minmax(0, 1fr); }
+  .card-delta { grid-column: 2; justify-self: start; font-size: 14px; white-space: normal; }
+}
