@@ -28,11 +28,18 @@ const models = [...new Set(runs.map(r => r.model))].length
     <h2>Who ran it</h2>
     <p>
       This is Corograph's own benchmark. It was designed, run, scored and published by Jasdeep Jaitla, the founder of
-      Metaphori, Inc., the company that builds Corograph. We built the tool under test, we wrote the questions, and we
-      ran every arm, including the comparison group. That is a conflict of interest, and the answer to it is the package
-      itself: nothing on this site is a summary of something you cannot open. The <a href={`${base}/procedure/`}>Procedure</a>
+      Metaphori, Inc., the company that builds Corograph. We built the tool under test and we ran every arm, including
+      the comparison group. That is a conflict of interest, and the answer to it is the package itself: nothing on this
+      site is a summary of something you cannot open. The <a href={`${base}/procedure/`}>Procedure</a>
       page states what was measured and how, the <a href={`${base}/limitations/`}>Limitations</a> page collects every
       caveat, and the <a href={`${base}/data/`}>Data</a> page points at the files and the export that made them.
+    </p>
+    <p>
+      We did not write the questions. Each battery was authored by a frontier model working as an agent over the pinned
+      repository with no access to Corograph, its index or its outputs; the gold answers were drafted by the same agent and
+      then verified against the checkout, with and without Corograph, with corrections recorded with file:line evidence
+      before the batteries were frozen. The full sequence, the review loop that produced the exemplars, and the dates are
+      in <a href={`${base}/method/#how-the-questions-and-the-grading-key-were-made`}>How the questions and the grading key were made</a>.
     </p>
     <p>
       The argument for <em>why</em> context is the thing to measure, and the story of how this benchmark came to exist,

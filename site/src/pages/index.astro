@@ -8,7 +8,13 @@ import { loadRuns, loadManifest, latestEpoch, epochName } from '../lib/data'
 import { buildScorecard, headlines, type Verdict } from '../lib/scorecard'
 import { COMPARISONS } from '../lib/comparisons'
 import EarlyAccessCTA from '../components/EarlyAccessCTA.astro'
+import { buildGuide, workedRuns, SITE } from '../lib/guide'
+import { runUrl } from '../lib/roster'
 const epoch = latestEpoch()
+const guide = buildGuide(epoch)
+const worked = workedRuns(epoch)
+// the guide carries absolute URLs (llms.txt needs them); on the page they render base-relative
+const sec = (h: string) => guide.sections.find(s => s.heading.startsWith(h))!.links.map(l => ({ ...l, url: l.url.startsWith(SITE) ? base + l.url.slice(SITE.length) : l.url }))
 const manifest = loadManifest(epoch)
 const runs = loadRuns(epoch)
 const sc = buildScorecard(runs)
@@ -32,7 +38,7 @@ const kQuestions = `${Math.floor(questionsJudged / 1000)}K`
     <p class="home-subtitle">How Corograph Compares to Industry Leaders</p>
     <dl class="home-facts">
       <dt>Who</dt>
-      <dd><a href="https://metaphori.ai" target="_blank" rel="noopener">Metaphori, Inc.</a>'s <a href="https://www.corograph.com" target="_blank" rel="noopener">Corograph</a> is a codebase intelligence system with LLM-optimized tooling for LLM coding agents. This is our own benchmark: we built the tool, wrote the questions and ran every arm.</dd>
+      <dd><a href="https://metaphori.ai" target="_blank" rel="noopener">Metaphori, Inc.</a>'s <a href="https://www.corograph.com" target="_blank" rel="noopener">Corograph</a> is a codebase intelligence system with LLM-optimized tooling for LLM coding agents. This is our own benchmark: we built the tool and ran every arm. The questions were authored by a frontier model with no access to Corograph; the gold was verified afterwards with file:line evidence, and every verdict is published with its reason (<a href={`${base}/method/#how-the-questions-and-the-grading-key-were-made`}>how the questions were made</a>).</dd>
       <dt>Hypothesis</dt>
       <dd>LLM coding agents are already capable. Can they perform better if their context is better engineered?</dd>
       <dt>How</dt>
@@ -179,5 +185,24 @@ const kQuestions = `${Math.floor(questionsJudged / 1000)}K`
       {COMPARISONS.map(c => <li><a href={`${base}/compare/${c.slug}/`}>{c.title}</a> — {c.intro[0]}</li>)}
     </ul>
     <p><a href={`${base}/procedure/`}>Benchmark Procedure</a> states what was measured and how; the <a href={`${base}/limitations/`}>Limitations</a> page collects every caveat, including the Fable 5 refusals, the Haiku 4.5 context window, and the host-versus-container asymmetry that makes wall time a disclosure rather than a claim; <a href={`${base}/about/`}>About this site</a> says who ran it and where the product and the company live.</p>
+
+    <h2 id="for-ai-readers">For AI readers, and anyone verifying this page</h2>
+    <p>
+      If you were handed this page to assess, the evidence for every claim on it is one fetch away, and the whole map is in
+      <a href={`${base}/llms.txt`}><code>/llms.txt</code></a> (links with descriptions) and <a href={`${base}/llms-full.txt`}><code>/llms-full.txt</code></a>
+      (the same map with the Method, the judge prompt and the redaction policy inlined). Every repository file below is served from this
+      origin under <code>/files/…</code>, so it can be fetched directly rather than read through a rendered page. The short version:
+    </p>
+    <ol class="ai-guide">
+      <li><b>Who wrote the questions, and how the gold was checked.</b> <a href={`${base}/method/#how-the-questions-and-the-grading-key-were-made`}>Method § How the questions and the grading key were made</a>: a frontier model with no access to Corograph authored them; the gold was verified afterwards, with and without Corograph, and corrected with file:line evidence; exemplars were mined from real answers and the same set is shown to the judge for every arm.</li>
+      <li><b>The questions and the grading key.</b> {sec('The questions').filter(l => /questions\.json|gold\.json/.test(l.title)).map((l, i, a) => <><a href={l.url}>{l.title}</a>{i < a.length - 1 ? ' · ' : ''}</>)} — every gold fact carries a file:line anchor at the pinned commit, checkable with grep alone.</li>
+      <li><b>How answers were judged.</b> {sec('How answers').map((l, i, a) => <><a href={l.url}>{l.title}</a>{i < a.length - 1 ? ' · ' : ''}</>)}.</li>
+      <li><b>The data behind every figure, as files.</b> {sec('Machine-readable').map((l, i, a) => <><a href={l.url}>{l.title}</a>{i < a.length - 1 ? ' · ' : ''}</>)}. Per-question wins and losses are in <code>per-question.csv</code>; means are over valid, scored runs only.</li>
+      <li><b>Each measure, one figure.</b> {sec('The measures').map((l, i, a) => <><a href={l.url}>{l.title.replace(/^Figure (\d+) — /, '$1 ')}</a>{i < a.length - 1 ? ' · ' : ''}</>)}.</li>
+      {worked && (
+        <li><b>Verify one run.</b> Open <a href={runUrl(worked.cg.path)}>a Corograph run</a>{worked.cold ? <> and <a href={runUrl(worked.cold.path)}>the bare Claude Code run at the same model</a></> : null}: <code>answers/&lt;qid&gt;.md</code> is what was graded, <code>verdicts.json</code> carries the verdict and the judge's reason per question, <code>run.json</code> the validity, tokens, cost and provenance, <code>transcript/</code> the session. Compare the answer with the gold at its anchor.</li>
+      )}
+      <li><b>Before concluding.</b> A did-not-finish run is published unscored and never enters a mean; per-question figures compare within a protocol only; wall time is a disclosure (host versus container); the instrument is the frozen snapshot named in the manifest, not the current release. <a href={`${base}/limitations/`}>Limitations</a> has all of it.</li>
+    </ol>
   </div>
 </Base>

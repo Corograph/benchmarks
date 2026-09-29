@@ -31,10 +31,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
   <p class="lede">Everything below is also stated where it applies; this page collects it so nothing has to be found.</p>
 
   <h2>Scope</h2>
-  <p>One repository under test, at one commit, with two question batteries authored by the benchmark's owner. The questions are about code structure and behaviour (endpoints, schema, types, call paths, impact, cross-stack tracing, absence proofs, false premises); they are not a coding task benchmark and say nothing about editing or generating code.</p>
+  <p>One repository under test, at one commit, with two question batteries. The batteries were authored by a frontier model with no access to Corograph and verified afterwards (<a href={`${base}/method/#how-the-questions-and-the-grading-key-were-made`}>how the questions were made</a>); the benchmark's owner approved and froze them, and selection of the final set is a judgment the owner made. The questions are about code structure and behaviour (endpoints, schema, types, call paths, impact, cross-stack tracing, absence proofs, false premises); they are not a coding task benchmark and say nothing about editing or generating code.</p>
   <p>One Corograph instrument freeze per epoch. The comparison group is measured as shipped, prompt assets and all; Claude Code cannot be forced to use an installed tool, so what is measured for the indexing tools is organic adoption. That is the measurand, not a limitation of the measurement.</p>
 
-  <h2>Execution asymmetries</h2>
+  <h2 id="execution-asymmetries">Execution asymmetries</h2>
   <p>The Corograph arm executed on the host through its gateway; the comparison group executed in containers on the same machine. Accuracy, tokens, turns and tool counts are location-independent; wall-clock time is not, and Figure 10 is published for completeness rather than as a claim. Runs executed in parallel lanes shared the host; per-lane contention is not modelled.</p>
   <p>Cursor Agent's model traffic transits Cursor's backend, and Codex runs inside its own harness loop; both are measured as their vendors ship them. Their token figures are the harness's own per-call usage with the derivation named in each run record.</p>
 
@@ -44,7 +44,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
   <h2>Scoring</h2>
   <p>Tier T1 is a mechanical token-subset match that can only pass an answer. Tier T2 is an LLM judge under a fixed prompt with per-question exemplars, one candidate per call, whose reason is published beside every verdict; a verdict whose reason contradicts it is retried once and, if still contradictory, marked <code>adjudicate</code> and counted as a fail. The judge is an LLM and can be wrong; the per-question answers and verdicts are published so that any reader can re-grade. Every verdict in the epoch sits under one scorer era.</p>
 
-  <h2>Did-not-finish runs</h2>
+  <h2 id="did-not-finish-runs">Did-not-finish runs</h2>
   <p>A run that did not complete every question is published with <code>validity.ok = false</code> and no score. It never enters a mean. The counts per arm in this epoch:</p>
   <table>
     <thead><tr><th>arm</th><th class="num">runs</th><th class="num">did not finish</th><th>reasons</th></tr></thead>

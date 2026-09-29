@@ -36,6 +36,7 @@ const ogImage = new URL(`${base}/og.png`, Astro.site).href
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <link rel="alternate" type="text/plain" href={`${base}/llms.txt`} title="llms.txt — the reader's guide to this site and its data" />
     {ANALYTICS.enabled && (
       <>
         <script defer src={ANALYTICS.scriptUrl} data-website-id={ANALYTICS.websiteId} data-auto-track="true" data-exclude-search="true"></script>

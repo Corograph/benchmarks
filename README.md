@@ -31,7 +31,7 @@ Epoch 004 — line-4 · instrument: Indexer v1.4.7 — Corograph v0.11.4 — Dev
 | exam × battery pairs | 6 |
 | files in the tree | 207235 |
 | scorer era | tabench-1.1 |
-| export tool | `tabench export public` 0.1.27 |
+| export tool | `tabench export public` 0.1.29 |
 
 ## What is being compared
 
@@ -107,8 +107,52 @@ model must reject). The grading key beside each battery holds:
 - `policies.json` — battery-wide scoring rules (for example: two path spellings of the same file are
   equivalent; line numbers are evidence, not scored content).
 - `exemplars.json` — graded anchor answers (correct / incorrect / partial, each with *why*) the judge
-  is calibrated against. An exemplar is never the answer under judgment.
-- `amendments.json` — the gold change ledger (empty when the key never changed).
+  is calibrated against. The same set is presented to the judge for every arm (see below).
+- `amendments.json` — the gold change ledger (empty when gold changes were recorded as revisions in
+  `gold.json` rather than as ledger rows).
+
+## How the questions and the grading key were made
+
+The questions were not written by Corograph's authors. Each battery was authored by a frontier model
+(Claude Fable 5) working as an agent over the pinned repository, with no access to Corograph, its
+index or its outputs, and no knowledge of what it captures. The agent first studied the codebase, then
+drafted questions to cover the ways developers actually ask about code: endpoints, schema, types, call
+paths, impact, cross-stack tracing, absence proofs and false premises. It ran headless sessions on
+Haiku 4.5, Sonnet 5 and Opus 4.8 to see the variety of answers each question produced before the set
+was fixed. The hard battery was iterated under an explicit brief: questions that are not answerable
+by matching the words of the question against the source, because developers don't always phrase
+prompts in the codebase's own identifiers, and these become more difficult for LLMs to get correct.
+
+The sequence, per battery: questions authored and approved → gold drafted by the same agent → gold
+verified against the pinned checkout by multiple agents, with and without Corograph, reading the
+source → corrections applied with file:line evidence → questions and gold frozen and hashed →
+evaluation. Corograph was used to *verify* gold after the questions existed; it never chose what was
+asked. Every gold fact carries a file:line anchor at the pinned commit, so any reader can check it
+with grep alone.
+
+- **`memos`** — the base battery (30 questions). Authored and owner-approved 2026-07-17; gold verified 2026-07-18 against the pinned checkout in an independent sweep: 24 of 30 verified as drafted, 6 corrected with file:line evidence (q11, q13, q16, q20, q21, q28); frozen and hashed 2026-07-18. A 2026-07-21 audit over ~500 scored answers reconfirmed every fact and changed only the scoring layer (policies S1–S6 and accepted variants).
+- **`memos-hard`** — the hard battery (20 questions) in the classes nameless-entry, absence-proof, multi-hop, collision, aggregation, dispatch, field-grain and reality-check (false premises the model must reject). Design rule: the question text may not contain the target entity's name, except in the collision class where the ambiguous name is the challenge. Authored and owner-approved 2026-07-20; gold verified 2026-07-20 against the pinned checkout with Corograph and the source; accepted variants ruled 2026-07-21; two amendments 2026-07-22.
+
+In the sweeps leading up to this epoch, every failed answer was reviewed through a command-line
+review loop: for one question at a time, the bench exports the full grading context
+plus every banked answer with its verdict; a reviewing agent with access to the repository classifies
+each failure as partially correct, hallucinated in part, or correct but shaped so that the mechanical
+tier or the judge missed it; corrections come back as gold revisions, battery policies, per-question
+facet guides and graded exemplars. Facts never changed in that loop; the scoring layer did, and every
+change is published (`gold.json` carries every revision). The loop ran several times until the key
+was stable; the key that resulted is the scorer era under which this whole epoch was judged.
+
+- **`memos`** — 146 graded exemplars (57 correct · 60 incorrect · 29 partial), each verified against the
+  repository and blessed by `memos-agent` on 2026-08-05; 3 questions carry a second gold revision;
+  15 exemplar texts recur verbatim in this epoch's published answer sheets (short exact-form answers).
+- **`memos-hard`** — 167 graded exemplars (67 correct · 59 incorrect · 41 partial), each verified against the
+  repository and blessed by `memos-agent` between 2026-08-05 and 2026-08-06; 3 questions carry a second gold revision;
+  no exemplar text recurs verbatim in this epoch's published answer sheets.
+
+Exemplars were selected from real banked answers across all arms, so an exemplar can coincide with an
+answer under judgment; the guarantee is symmetry, not exclusion: the same exemplar set, the same gold
+and the same policies are presented to the judge for every arm, in every call. Nothing in the key is
+arm-specific.
 
 ## The three exam protocols
 

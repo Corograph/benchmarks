@@ -2,7 +2,11 @@
 import Base from '../layouts/Base.astro'
 import { marked } from 'marked'
 import { loadReadme } from '../lib/data'
-const html = marked.parse(loadReadme(), { gfm: true }) as string
+import { headingId } from '../lib/guide'
+// headings carry GitHub-style ids so the README's sections are addressable
+// from the rest of the site and from llms.txt (#how-the-questions-and-the-grading-key-were-made)
+const html = (marked.parse(loadReadme(), { gfm: true }) as string)
+  .replace(/<h([1-6])>([\s\S]*?)<\/h\1>/g, (_m, d, inner) => `<h${d} id="${headingId(inner)}">${inner}</h${d}>`)
 ---
 <Base title="Method">
   <div class="prose">
